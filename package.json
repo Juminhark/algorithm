@@ -1,0 +1,23 @@
+{
+	"name": "algorithm",
+	"version": "1.0.0",
+	"description": "- 해쉬는 key-value 쌍으로 데이터를 저장하는 자료구조",
+	"main": "index.js",
+	"dependencies": {
+		"nodemon": "^2.0.4"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Juminhark/algorithm.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Juminhark/algorithm/issues"
+	},
+	"homepage": "https://github.com/Juminhark/algorithm#readme"
+}
