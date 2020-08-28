@@ -76,9 +76,6 @@ console.log(Math.pow(2, 2));
 console.log(Math.sqrt(4));
 ```
 
-- split('') : 나누기
-- slice("/") : 자르기
-
 - !isNaN(string) : string 이 숫자이면 true
 
 ```sh
@@ -88,5 +85,28 @@ console.log(!isNaN('s'));
 console.log(!isNaN('#'));
 ```
 
-- Array.prototype.push() : 넣기
-- Array.prototype.pop() : 빼기
+- arr.push() : 뒤에넣기
+- arr.pop() : 뒤에빼기
+
+- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 나누기
+- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 자르기
+- [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+- [arr.filter()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : callback 후 새로운 배열 생성
+
+- [arr.sort()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+
+```sh
+// - 오름차순
+answerMap.sort(function (a, b) {
+  return a - b;
+}
+
+- 내림차순
+answerMap.sort(function (a, b) {
+  return b - a;
+}
+```
+
+- Queue
+- BFS(Breadth First Search) : 너비 우선 탐색
+- DFS(Depth First Search) : 깊이 우선 탐색

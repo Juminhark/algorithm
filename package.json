@@ -4,6 +4,7 @@
 	"description": "- 해쉬는 key-value 쌍으로 데이터를 저장하는 자료구조",
 	"main": "index.js",
 	"dependencies": {
+		"fs": "0.0.1-security",
 		"nodemon": "^2.0.4"
 	},
 	"devDependencies": {},

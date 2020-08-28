@@ -63,12 +63,6 @@ const solution = (s) => {
 	return answer;
 };
 
-console.log(solution('aabbaccc'));
-console.log(solution('ababcdcdababcdcd'));
-console.log(solution('abcabcdede'));
-console.log(solution('abcabcabcabcdededededede'));
-console.log(solution('xababcdcdababcdcd'));
-
 // const solution = (s) => {
 // 	const range = [...Array(s.length)].map((_, i) => i + 1);
 // 	return Math.min(...range.map((i) => compress(s, i).length));
@@ -86,3 +80,9 @@ console.log(solution('xababcdcdababcdcd'));
 
 // const chunk = (s, n) =>
 // 	s.length <= n ? [s] : [s.slice(0, n), ...chunk(s.slice(n), n)];
+
+console.log(solution('aabbaccc'));
+console.log(solution('ababcdcdababcdcd'));
+console.log(solution('abcabcdede'));
+console.log(solution('abcabcabcabcdededededede'));
+console.log(solution('xababcdcdababcdcd'));
