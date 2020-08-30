@@ -1,6 +1,7 @@
 ## hash
 
 - 해쉬는 key-value 쌍으로 데이터를 저장하는 자료구조
+- 해시함수(hash function)는 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수입니다. 이 때 매핑 전 원래 데이터의 값을 키(key), 매핑 후 데이터의 값을 해시값(hash value), 매핑하는 과정을 해싱(hashing)이라고 합니다.
 
 ### 카카오
 
@@ -88,11 +89,12 @@ console.log(!isNaN('#'));
 - arr.push() : 뒤에넣기
 - arr.pop() : 뒤에빼기
 
-- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 나누기
-- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 자르기
+- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
+- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 복사본 반환
+- [arr.splice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열 요소 삭제, 교체, 새 요소 추가
 - [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
 - [arr.filter()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : callback 후 새로운 배열 생성
-
+- [arr.reduce()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
 - [arr.sort()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
 ```sh
@@ -107,6 +109,65 @@ answerMap.sort(function (a, b) {
 }
 ```
 
+- forEach, map
+
 - Queue
-- BFS(Breadth First Search) : 너비 우선 탐색
-- DFS(Depth First Search) : 깊이 우선 탐색
+
+### **exhaustive search (brute-force search) : 완전 탐색**
+
+무차별 대입(brute-force) 의미로 문제해결에 가능한 모든 경우의 수를 열거하고 검사하는 알고리즘. 완전검색은 구현 하기 쉽고 솔루션이있는 경우 항상 찾을 수 있지만 비용은 후보 솔루션 수에 비례한다.
+
+- Brute Force : for문과 if문을 이용하여 처음부터 끝까지 탐색
+- 비트마스크(BitMask) : 정수를 이진수 형태로 표현하여 비트연산을 활용하는 방법
+- 재귀함수
+- 순열 : 서로 다른 n개의 원소에서 r개의 중복을 허용하지 않고 순서대로 늘어 놓은 수
+- 백트래킹 : 현재상태에서 가능한 모든 후보군을 따라 들어가며 탐색
+  - DFS(Depth First Search) : 깊이 우선 탐색
+  - BFS(Breadth First Search) : 너비 우선 탐색
+  - 최선우선탐색(Best First Search)
+
+### **다이나믹 프로그래밍**
+
+- 다이나믹 프로그래밍은 메모리를 적절히 수행 시간을 비약적으로 증가시키는 방법입니다.
+- 이미 계산된 결과(작은 문제)느느 별도의 메모리 영역에 저장하여 다시 계산하지 않도록 합니다
+- 다이나믹 프로그래밍의 구현은 일반적으로 두 가지 방식(탑다운, 바텀업)으로 구성됩니다
+
+### Object 와 Array
+
+- Object : 객체
+
+```ts
+let zero = {
+	// key : value
+	name: { firstName: 'Zero', lastName: 'Cho' },
+	// value : any,  () => 일 경우 method
+	nameChange: (b) => {
+		zero.name.lastName = b;
+	},
+	deleteLastName: () => {
+		delete zero.name.lastName;
+	},
+};
+
+let zeroOne = new zero();
+
+console.log(zero.name);
+zero.nameChange('onepiece');
+console.log(zero.name);
+zero.deleteLastName();
+console.log(zero.name);
+```
+
+- Array : 배열
+
+```ts
+let zero = ['Zero', 'Cho'];
+
+console.log(zero[0]);
+let zero = [
+	['firstName', 'Zero'],
+	['lastName', 'Cho'],
+];
+
+console.log(zero[1][1]);
+```
