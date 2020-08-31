@@ -86,33 +86,6 @@ console.log(!isNaN('s'));
 console.log(!isNaN('#'));
 ```
 
-- arr.push() : 뒤에넣기
-- arr.pop() : 뒤에빼기
-
-- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
-- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 복사본 반환
-- [arr.splice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열 요소 삭제, 교체, 새 요소 추가
-- [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
-- [arr.filter()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : callback 후 새로운 배열 생성
-- [arr.reduce()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
-- [arr.sort()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-
-```sh
-// - 오름차순
-answerMap.sort(function (a, b) {
-  return a - b;
-}
-
-- 내림차순
-answerMap.sort(function (a, b) {
-  return b - a;
-}
-```
-
-- forEach, map
-
-- Queue
-
 ### **exhaustive search (brute-force search) : 완전 탐색**
 
 무차별 대입(brute-force) 의미로 문제해결에 가능한 모든 경우의 수를 열거하고 검사하는 알고리즘. 완전검색은 구현 하기 쉽고 솔루션이있는 경우 항상 찾을 수 있지만 비용은 후보 솔루션 수에 비례한다.
@@ -126,11 +99,14 @@ answerMap.sort(function (a, b) {
   - BFS(Breadth First Search) : 너비 우선 탐색
   - 최선우선탐색(Best First Search)
 
-### **다이나믹 프로그래밍**
+### **DP(Dynamic Programming) : 동적 계획법**
 
 - 다이나믹 프로그래밍은 메모리를 적절히 수행 시간을 비약적으로 증가시키는 방법입니다.
-- 이미 계산된 결과(작은 문제)느느 별도의 메모리 영역에 저장하여 다시 계산하지 않도록 합니다
 - 다이나믹 프로그래밍의 구현은 일반적으로 두 가지 방식(탑다운, 바텀업)으로 구성됩니다
+- 계산된 결과를 저장하여 같은 계산을 반복하지 않도록 하는것.
+- 2가지를 만족하여야한다
+  - 1. 최적부분구조(Optimal Substructure) : 작은문제의 답을 모아 큰문제를 해결
+  - 2. 중복되는 부분(Overlapping Subproblem) : 동일한 작은 문제 반복
 
 ### Object 와 Array
 
@@ -161,6 +137,13 @@ console.log(zero.name);
 - Array : 배열
 
 ```ts
+Array 생성자
+new Array(2)
+Array(k).fill(0); : 0으로 채워 넣은 배열
+
+k x k 2중 배열
+Array.from(Array(k), () => Array(k).fill(0));
+
 let zero = ['Zero', 'Cho'];
 
 console.log(zero[0]);
@@ -170,4 +153,51 @@ let zero = [
 ];
 
 console.log(zero[1][1]);
+```
+
+### Array.function()
+
+- arr.push() : 뒤에넣기
+- arr.pop() : 뒤에빼기
+
+- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
+- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 복사본 반환
+- [arr.splice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열 요소 삭제, 교체, 새 요소 추가
+- [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+- [arr.filter()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : callback 후 새로운 배열 생성
+- [arr.reduce()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
+- [arr.sort()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
+- [arr.includes()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
+- [arr.forEach()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
+
+```sh
+// - 오름차순
+answerMap.sort(function (a, b) {
+  return a - b;
+}
+
+- 내림차순
+answerMap.sort(function (a, b) {
+  return b - a;
+}
+```
+
+- [arr.reduce()]()
+
+- forEach, map
+- Queue
+
+- for...in
+
+```ts
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+	console.log(`${property}: ${object[property]}`);
+}
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
 ```

@@ -151,3 +151,35 @@
 
 // filter(callback): function : callback 처리후 새로운 배열을 반환
 // find(): function : callback을 만족하는 첫번째 요소를 반환
+
+// 큰 수 만들기
+
+// n 에서 k개를 제거했을때 가장 큰 숫자 구하기
+
+// const solution = (number, k) => {
+
+//   let stack = []; // b : 최종 글자들이 저장될 스택 (숫자가 큰!)
+// 	for (var i = 0; i < number.length; i++) {
+// 		// 모든 숫자 비교
+// 		var now = number[i]; // 현재 인덱스 숫자. 처음에는 그냥 push
+// 		console.log('now : ' + now);
+// 		// 무조건 push 하고 다음 for 문에서 이전인덱스 숫자와 나랑 비교해서 현재인덱스가 이전인덱스보다 크면 pop하고 넣어줌. 제거하는 숫자인 (k)를 1 감소
+// 		// 제거할 숫자를 다 채웠으면 그냥 넣음
+// 		while (k > 0 && stack[stack.length - 1] < now) {
+// 			stack.pop();
+// 			console.log(stack);
+// 			k--;
+// 		}
+// 		stack.push(now);
+// 	}
+// 	// k가 0일 경우 스택은 그대로,
+// 	// but k가 남아있으면 뒤에서부터 제거해준다. (ex. 1010,2 -> 11)
+// 	stack.splice(stack.length - k, k);
+// 	var answer = stack.join('');
+
+// 	return answer;
+// };
+
+// console.log(solution('1924', 2));
+// console.log(solution('1231234', 3));
+// console.log(solution('4177252841', 4));
