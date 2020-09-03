@@ -1,4 +1,4 @@
-// DP(Dynamic Programming) : 동적 계획법
+// * DP(Dynamic Programming) : 동적 계획법
 
 // DP는 메모리를 적절히 사용하여 수행 시간을 비약적으로 증가시키는 방법.
 // 작은 문제 결과를 저장하여 같은 계산을 반복하지 않도록 하는 방법.
@@ -38,37 +38,37 @@
 // DP의 전형적인 형태는 BottomUp => 결과 저장용 리스트는 DP Table
 // Memorization은 이전의 결과를 일시적으로 기록해 놓는 넓은 개념을 의미
 
-// // TopDown 예시
-// // Memorization 하기 위한 DP Table : cache
-// let d = Array(100).fill(0);
-// // Fibonacci Function을 재귀함수로 구현
-// const fiboMemo = (x) => {
-// 	if (x == 1 || x == 2) {
-// 		// 종료 조건
-// 		return 1;
-// 	} else if (d[x] !== 0) {
-// 		// 계산한적이 있는지 여부
-// 		return d[x];
-// 	} else {
-// 		// 계산한적이 없다면 점화식
-// 		d[x] = fiboMemo(x - 1) + fiboMemo(x - 2);
-// 		return d[x];
-// 	}
-// };
+// TopDown 예시
+// Memorization 하기 위한 DP Table : cache
+let d = Array(100).fill(0);
+// Fibonacci Function을 재귀함수로 구현
+const fiboMemo = (x) => {
+	if (x == 1 || x == 2) {
+		// 종료 조건
+		return 1;
+	} else if (d[x] !== 0) {
+		// 계산한적이 있는지 여부
+		return d[x];
+	} else {
+		// 계산한적이 없다면 점화식
+		d[x] = fiboMemo(x - 1) + fiboMemo(x - 2);
+		return d[x];
+	}
+};
 
-// console.log(fiboMemo(99));
+console.log(fiboMemo(99));
 
-// // BottomUp 예시
+// BottomUp 예시
 // DP Table
-// d = Array(100).fill(0);
+d = Array(100).fill(0);
 
-// d[1] = 1;
-// d[2] = 1;
-// let n = 99;
+d[1] = 1;
+d[2] = 1;
+let n = 99;
 
-// for (let i = 3; i < n + 1; i++) {
-// 	d[i] = d[i - 1] + d[i - 2];
-// }
+for (let i = 3; i < n + 1; i++) {
+	d[i] = d[i - 1] + d[i - 2];
+}
 
 // console.log(d[50]);
 
@@ -81,13 +81,13 @@
 // 분할 정복
 // 퀵 정렬 - 기준 원소(Pivot)의 변경된 위치는 바뀌지않는다
 
-// * 주어진 문제가 DP 유형임을 파악하는것이 중요.
+//! 주어진 문제가 DP 유형임을 파악하는것이 중요.
 // 가장 먼저 그리디, 구현, 완전 탐색등의 아이디어로 문제를 해결할수 있는지 검토
 // 다른 알고리즘으로 풀이 방법이 떠오르지 않으면 DP를 고려
 // 일단 재귀 함수로 비효율적인 완전탐색프로그램을 작성한뒤 작은 문제에서 구한 답이 큰 문제에서
 // 그대로 사용될수 있으면, 코드를 개선하는 방법을 사용할수 있다.
 
-// 문제 : 개미 전사
+//* 문제 : 개미 전사
 
 // 개미 전사는 일직선으로 이어져있는 메뚜기 마을의 창고를 습격
 // 각 식량 창고에는 정해진 수의 식량창고를 선택하여 약탈
@@ -106,28 +106,28 @@
 // f(i) : i번째 까지 식량창고의 최적의 해
 // k(i) : i번째 식량창고에 있는 식량의 양
 
-// const ant = (arr) => {
-// 	// 식량창고의 개수
-// 	let n = arr.length;
+const ant = (arr) => {
+	// 식량창고의 개수
+	let n = arr.length;
 
-// 	// DP Table
-// 	let d = Array(100).fill(0);
-// 	// DP - BottomUp
-//   d[0] = arr[0];
-// 	d[1] = Math.max(arr[0], arr[1]);
-// 	for (let i = 2; i < n; i++) {
-// 		d[i] = Math.max(d[i - 1], d[i - 2] + arr[i]);
-// 	}
+	// DP Table
+	let d = Array(100).fill(0);
+	// DP - BottomUp
+	d[0] = arr[0];
+	d[1] = Math.max(arr[0], arr[1]);
+	for (let i = 2; i < n; i++) {
+		d[i] = Math.max(d[i - 1], d[i - 2] + arr[i]);
+	}
 
-// 	return d[n - 1];
-// };
+	return d[n - 1];
+};
 
 // console.log(ant([1, 3, 1, 5, 4, 4, 1, 4, 4]));
-// console.log(ant([1,2,3,4,5]))
+// console.log(ant([1, 2, 3, 4, 5]));
 
-// DP는 점화식을 세우는것이 가장 핵심이다.
+//! DP는 점화식을 세우는것이 가장 핵심이다.
 
-// 문제 : 1로 만들기
+//*  문제 : 1로 만들기
 
 // 주어진 정수 X 에 다음 4가지 연산을 사용해 값을 1로 만들고자 한다.
 // 1. X가 5로 나누어 떨어 지면 , 5로 나눕니다.
@@ -142,31 +142,31 @@
 // f(i) : i 를 1로 만들기 위한 최소 연산 횟수
 // 점화식 : f(i) = Math.min[f(i-1), f(i/2), f(i/3), f(i/5)] + 1
 
-// const one = (X) => {
-// 	let d = Array(30001).fill(0);
-// 	for (let i = 2; i <= X; i++) {
-// 		// 현재의 수에서 1을 빼는 경우
-// 		d[i] = d[i - 1] + 1;
-// 		// 현재의 수가 2로 나누어 떨어지는 경우
-// 		if (i % 2 == 0) {
-// 			d[i] = Math.min(d[i], d[i / 2] + 1);
-// 		}
-// 		// 현재의 수가 3로 나누어 떨어지는 경우
-// 		if (i % 3 == 0) {
-// 			d[i] = Math.min(d[i], d[i / 3] + 1);
-// 		}
-// 		// 현재의 수가 5로 나누어 떨어지는 경우
-// 		if (i % 5 == 0) {
-// 			d[i] = Math.min(d[i], d[i / 5] + 1);
-// 		}
-// 	}
+const one = (X) => {
+	let d = Array(30001).fill(0);
+	for (let i = 2; i <= X; i++) {
+		// 현재의 수에서 1을 빼는 경우
+		d[i] = d[i - 1] + 1;
+		// 현재의 수가 2로 나누어 떨어지는 경우
+		if (i % 2 == 0) {
+			d[i] = Math.min(d[i], d[i / 2] + 1);
+		}
+		// 현재의 수가 3로 나누어 떨어지는 경우
+		if (i % 3 == 0) {
+			d[i] = Math.min(d[i], d[i / 3] + 1);
+		}
+		// 현재의 수가 5로 나누어 떨어지는 경우
+		if (i % 5 == 0) {
+			d[i] = Math.min(d[i], d[i / 5] + 1);
+		}
+	}
 
-// 	return d[X];
-// };
+	return d[X];
+};
 
-// console.log(one(26));
+console.log(one(26));
 
-// 문제 : 효율적인 화폐 구성
+// *  문제 : 효율적인 화폐 구성
 
 // N가지 종류의 화폐중 개수를 최소한으로 이용해서 그 가치의 합이 M원이 되도록 한다.
 // input : [2, 3] , 15  => 3원 5개로 15를 만드는것이 최소의 화폐개수
@@ -179,23 +179,23 @@
 // f(i-k)를 만드는 방법이 존재하는 경우  f(i) = Math.min(f(i), f(i-k) +1)
 //  f(i-k)를 만드는 방법이 존재하지 않는 경우  f(i) = INF(구할수 없는 값)
 
-// const money = (arr, m) => {
-// 	// 나올수 있는 최대 숫자가 10000 => 나올수없는 숫자로 채워 넣는다 -> 이경우 -1을 리턴하게
-//   let d = Array(m + 1).fill(10001);
+const money = (arr, m) => {
+	// 나올수 있는 최대 숫자가 10000 => 나올수없는 숫자로 채워 넣는다 -> 이경우 -1을 리턴하게
+	let d = Array(m + 1).fill(10001);
 
-// 	d[0] = 0;
+	d[0] = 0;
 
-// 	for (let i = 0; i < arr.length; i++) {
-// 		for (let j = arr[i]; j <= m; j++) {
-// 			if (d[j - arr[i]] != 10001) {
-// 				d[j] = Math.min(d[j], d[j - arr[i]] + 1);
-// 			}
-// 		}
-// 	}
+	for (let i = 0; i < arr.length; i++) {
+		for (let j = arr[i]; j <= m; j++) {
+			if (d[j - arr[i]] != 10001) {
+				d[j] = Math.min(d[j], d[j - arr[i]] + 1);
+			}
+		}
+	}
 
-// 	if (d[m] == 10001) return -1;
-// 	else return d[m];
-// };
+	if (d[m] == 10001) return -1;
+	else return d[m];
+};
 
 // console.log(money([2, 3, 5], 15)); // 5
 // console.log(money([3, 5, 7], 4)); // -1
@@ -207,3 +207,123 @@
 // [ 0 : 0, 1 : 10001, 2 : 1, 3 : 1, 4 :  2 , 5 : 2 ,6 : 2, 7 :3 ,8 : 3, 9 : 3, 10 : 5 ...]
 // step 2 : 화폐가 5인 경우
 // [ 0 : 0, 1 : 10001, 2 : 1, 3 : 1, 4 :  2 , 5 : 1 ,6 : 2, 7 :2 ,8 : 2, 9 : 3, 10 : 2  ...]
+
+//* 문제 : 금광
+// n x m 크기의 금광 각칸에는 특정한 크기의 금이존재
+// 1열 선택한 행에서 출발. 다음 열에서 같은 행 또는 1칸 위아래 행 이동 하여
+// 마지막 열까지 도착했을때 채굴자가 얻을수 있는 금의 최대 크기를 출력하는 프로그램
+
+//! ㅡ 행 | 열
+
+// 1 3 3 2
+// 2 1 4 1    => 2 + 6 + 4 + 7 = 19
+// 0 6 4 7
+
+// arr[i][j] : i행j열 금 크기
+// dp[i][j] : i행 j열까지 얻을수 있는 최대 크기의 금
+// dp[i][j] = arr[i][j] + Math.max[dp[i-1][j-1], dp[i][j-1], dp[i+1][j-1]]
+
+const mine = (arr) => {
+	let n = arr.length;
+	let m = arr[0].length;
+
+	for (let j = 1; j < m; j++) {
+		for (let i = 0; i < n; i++) {
+			let left_up;
+			let left_down;
+			let left;
+
+			// 왼쪽 위에서 오는 경우
+			if (i == 0) {
+				left_up = 0;
+			} else {
+				left_up = arr[i - 1][j - 1];
+			}
+			// 왼쪽 아래에서 오는 경우
+			if (i == n - 1) {
+				left_down = 0;
+			} else {
+				left_down = arr[i + 1][j - 1];
+			}
+			// 왼쪽에서 오는 경우
+			left = arr[i][j - 1];
+
+			arr[i][j] = arr[i][j] + Math.max(left_up, left_down, left);
+		}
+	}
+
+	let result = 0;
+	for (let i = 0; i < n; i++) {
+		result = Math.max(result, arr[i][m - 1]);
+	}
+
+	return result;
+};
+
+// console.log(
+// 	mine([
+// 		[1, 3, 3, 2],
+// 		[2, 1, 4, 1],
+// 		[0, 6, 4, 7],
+// 	])
+// );
+
+// ! LIS(Longest Increasing Subsequence) : 최장 증가 수열
+// DP 중 특별 케이스
+// 배열중 몇개의 수를 제거하여 부분수열을 만들때
+// 오름차순으로 정렬된 가장 긴 수열: 최장 증가 수열
+
+// [3, 5, 7, 9, 2, 1, 4, 8]
+// [3, 7, 9, 1, 4, 8] (5, 2 제거)
+// [7, 9, 1, 8] (3, 5, 2, 4 제거)
+// [3, 5, 7, 8] (9, 2, 1, 4 제거) : 오른 차순 : LIS
+// [1, 4, 8] (3, 5, 7, 9, 2 제거) : 오름 차순
+
+// arr[i] : i번째 원소
+// dp[i] : arr[i]번째 수를 마지막 원소로 가지는 LIS의 길이
+// dp[i] = if(arr[j] < arr[i]) Math.max(dp[i], dp[j]+1)
+
+const LIS = (arr) => {
+	let n = arr.length;
+	let dp = Array(n).fill(1);
+
+	for (let i = 1; i < n; i++) {
+		for (let j = 0; j < i; j++) {
+			if (arr[j] < arr[i]) {
+				dp[i] = Math.max(dp[i], dp[j] + 1);
+			}
+		}
+	}
+
+	return Math.max.apply(null, dp);
+};
+
+// console.log(LIS([10, 20, 40, 25, 20, 50, 30, 70, 85]));
+
+// * 문제 : 병사 배치하기
+
+// 무작위로 배치된 병사들중 열외를 통해 맨 앞 병사가 전투력이
+// 가장 높은 내림차순을 만들때 배치된 병사의 수가 최대인 경우
+// 열외자의 수를 구하여라
+
+// [15, 11, 4, 8, 5, 2, 4] : 3,6번을 열외
+// [15, 11, 8, 5, 4] => 5명
+
+const out = (arr) => {
+	let n = arr.length;
+	let dp = Array(n).fill(1);
+
+	arr = arr.reverse();
+
+	for (let i = 1; i < n; i++) {
+		for (let j = 0; j < i; j++) {
+			if (arr[j] < arr[i]) {
+				dp[i] = Math.max(dp[i], dp[j] + 1);
+			}
+		}
+	}
+
+	return n - Math.max.apply(null, dp);
+};
+
+// console.log(out([15, 11, 4, 8, 5, 2, 4]));
