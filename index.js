@@ -1,100 +1,156 @@
-//* 구현 : 시뮬레이션 과 완전탐색
-// 머릿속에 있는 알고리즘을 소스코드로 바꾸는 과정
-// problem - thinking - solution
+//* 알고리즘 성능 평가
 
-// 구현 유형 : 풀이를 떠올리는것은 쉽지만 소스코드로 옮기기 어려운 문제
-// 1. 알고리즘 은 간단한데 코드가 지나칠만큼 길어지는 문제
-// 2. 실수 연산을 다루고 특정 소수점까지 출력해야하는 문제
-// 3. 문자열을 특정한 기준에 따라서 끊어 처리하는 문제
-// 4. 적절한 라이브러리를 찾아 사용해야하는 문제
+//* Complexity : 복잡도
+// 1. 시간 복잡도 : 수행 시간 분석
+// 2. 공간 복잡도 : 메모리 사용량 분석
+// 복잡도가 낮을수록 좋은 알고리즘
 
-//? 문제 : 뉴스 클러스터링
+//* Big-O Notation : 빅오 표기법
+// 차수가 큰것을 고려
+// ex) 3N^3 + 5N^2 + 10000000  => O(N^3)
 
-// 자카드 유사도 J(A, B) = (A ∩ B) / (A U B)
+// O(1) : 상수 시간
+// O(logN) : 로그 시간
+// O(N) : 선형 시간
+// O(NlogN) : 로그 선형 시간
+// O(N^2) : 이차 시간
+// O(N^3) : 삼차 시간
+// O(2^N) : 지수 시간
 
-// A = {1, 2, 3},B = {2, 3, 4}
-// A ∩ B = {2, 3} = 2
-// A U B = {1,2,3,4} = 4
-// J(A, B) = {2, 3} / {1,2,3,4} = 2/4 = 0.5
+// N의 범위
+// 500 => O(N^3)
+// 2,000 => O(N^2)
+// 100,000 => O(NlogN)
+// 10,000,000 => O(N)
 
-// A ∩ B = {} => J(A, B) = 1
+//* 알고리즘 문제 해결 과정
+// 1. 지문 읽기 및 컴퓨터적 사고
+// 2. 요구사항(복잡도) 분석
+// 3. 문제 해결을 위한 아이디어 찾기
+// 4. 소스코드 설계 및 코딩
 
-// A = {1,1,1}, B = {1,1,1,1,1} => A ∩ B = min(3,5) = 3
-// A = {1,1,1}, B = {1,1,1,1,1} => A U B = max(3,5) = 5
+//! 출제자는 핵심 아이디어를 캐치한다면 간결하게 소스코드를 작성할수있는 형태로 출제
 
-const newsClustering = (str1, str2) => {
-	let answer = 1;
-	let eng = /^[A-Z]*$/;
+//* DFS / BFS : 그래프 탐색 알고리즘
 
-	// 대소문자 통일
-	let STR1 = str1.toUpperCase().split('');
-	let STR2 = str2.toUpperCase().split('');
+// Stack 자료구조 : 나중에 들어온 data가 먼저 나가는 구조
 
-	let strMap1 = new Map();
-	let strMap2 = new Map();
+let stack = [];
+stack.push(5);
+stack.push(2);
+stack.push(3);
+stack.push(7);
+stack.pop();
+stack.push(1);
+stack.push(4);
+stack.pop();
+// console.log(stack);
+// console.log(stack.reverse());
 
-	for (let i = 0; i < STR1.length - 1; i++) {
-		if (eng.test(STR1[i]) && eng.test(STR1[i + 1])) {
-			if (strMap1.get(STR1[i] + STR1[i + 1]) == undefined) {
-				strMap1.set(STR1[i] + STR1[i + 1], 1);
-			} else {
-				strMap1.set(
-					STR1[i] + STR1[i + 1],
-					strMap1.get(STR1[i] + STR1[i + 1]) + 1
-				);
-			}
-		}
+// arr.push() : 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환
+// arr.pop() : 배열의 마지막 요소를 제거하고 그 요소를 반환
+// arr.reverse() : 배열의 요소 순서를 반전
+
+// Queue 자료구조 : 먼저 들어온 data가 먼저 나가는 구조
+
+let queue = [];
+queue.push(5);
+queue.push(2);
+queue.push(3);
+queue.push(7);
+queue.shift();
+queue.push(1);
+queue.push(4);
+queue.shift();
+// console.log(queue);
+// console.log(queue.reverse());
+
+// arr.shift() : 배열에서 첫 번째 요소를 삭제하고 그 요소를 반환.
+
+//* Recursive Function : 재귀 함수
+// 자기 자신을 다시 호출하는 함수를 의미한다.
+
+const recursive = (i) => {
+	// 종료 조건 암시
+	if (i == 5) {
+		return;
 	}
 
-	for (let i = 0; i < STR2.length - 1; i++) {
-		if (eng.test(STR2[i]) && eng.test(STR2[i + 1])) {
-			if (strMap2.get(STR2[i] + STR2[i + 1]) == undefined) {
-				strMap2.set(STR2[i] + STR2[i + 1], 1);
-			} else {
-				strMap2.set(
-					STR2[i] + STR2[i + 1],
-					strMap2.get(STR2[i] + STR2[i + 1]) + 1
-				);
-			}
-		}
-	}
-
-	// 교집합
-	let Intersection = 0;
-	// 합집합
-	let union = 0;
-	2;
-
-	for (let [key, value] of strMap1) {
-		// 두 배열의 같은 문자 확인
-		if (strMap2.has(key)) {
-			// A = {1,1,1}, B = {1,1,1,1,1} => A ∩ B = min(3,5) = 3
-			// A = {1,1,1}, B = {1,1,1,1,1} => A U B = max(3,5) = 5
-			union += Math.max(value, strMap2.get(key));
-			Intersection += Math.min(value, strMap2.get(key));
-		} else {
-			union += value;
-		}
-	}
-
-	// 순수한 B 원소
-	for (let [key, value] of strMap2) {
-		if (!strMap1.has(key)) {
-			union += value;
-		}
-	}
-
-	if (Intersection !== 0 || union !== 0) {
-		answer = Intersection / union;
-	}
-
-	// 유사도는 0~1 사이의 실수 이므로 65536 곱하고 정수부만 출력
-	return parseInt(answer * 65536);
+	console.log(i, '재귀 함수에서 ', i + 1, '번째 재귀함수를 호출');
+	recursive(i + 1);
+	console.log(i, '번째 재귀함수 종료');
 };
 
-console.log(newsClustering('FRANCE', 'french')); // 16384;
-console.log(newsClustering('handshake', 'shake hands')); //65536
-console.log(newsClustering('aa1+aa2', 'AAAA12')); //43690
-console.log(newsClustering('E=M*C^2', 'e=m*c^2')); // 65536
+// recursive(1);
 
-// 각 문자열의 길이는 2 이상, 1,000 이하이다.
+//? 문제 : 팩토리얼 구현
+// n! = 1 x 2 x 3 x ... x (n-1) x n
+// 0! = 1! = 1
+
+// 반복문으로 구현
+const factorial_iterative = (num) => {
+	let result = 1;
+
+	for (let i = 1; i < num + 1; i++) {
+		result *= i;
+	}
+
+	return result;
+};
+// console.log(factorial_iterative(4));
+
+// 점화식을 이용해 재귀적으로 구현
+const factorial_recursive = (num) => {
+	if (num > 1) {
+		return num * factorial_recursive(num - 1);
+	} else {
+		return 1;
+	}
+};
+
+// console.log(factorial_recursive(4));
+
+//* DFS(Depth-First Search) : 깊이 우선 탐색
+// DFS는 Stack 자료구조를 이용.
+// 1. 탐색 시작 노드를 stack에 삽입하고 방문처리
+// 2. stack의 최상단 노드에 방문하지 않은 인접한 노드가 하나라도 있으면
+// 그 노드를 스택에 넣고 방문 처리. 없다면 스택에서 최상단 노드를 꺼낸다
+// 3. 더 이상 2. 과정을 수행할수 없을 때 까지 반복.
+
+//! 수학적으로 반복문으로 작성했을때와 종료조건이 명시된 재귀함수로 작성했을때 시간복잡도는 동일
+//! 그러나 기계연산구조상  stack 구조를 사용하지 않는, 반복문이 재귀함수보다 빠르게 동작한다.
+//! DFS(stack-재귀), BFS(반복문) 모두 풀수있다면 BFS로 푸는것이 빠르게 동작한다.
+
+//? 문제 : target number
+
+// 사용할 수 있는 숫자가 담긴 배열 numbers,
+// 타겟 넘버 target이 매개변수로 주어질 때 숫자를 적절히 더하고 빼서
+// 타깃 넘버를 만드는 방법의 수를 return
+
+function solution(numbers, target) {
+	var answer = 0;
+	let sum = 0;
+
+	const dfs = (numbers, target, node) => {
+		if (node === numbers.length) {
+			console.log(numbers);
+			sum = 0;
+			for (let num of numbers) {
+				sum += num;
+			}
+			if (sum === target) {
+				return answer++;
+			}
+		} else {
+			numbers[node] *= 1;
+			dfs(numbers, target, node + 1);
+
+			numbers[node] *= -1;
+			dfs(numbers, target, node + 1);
+		}
+	};
+	dfs(numbers, target, 0);
+	return answer;
+}
+
+// console.log(solution([1, 1, 1, 1, 1], 3));

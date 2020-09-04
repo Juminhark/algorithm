@@ -1,4 +1,4 @@
-// recursion 재귀
+//* recursion 재귀 : 자신을 다시 호출
 
 // pow(x, n):function 을 구현하는 2가지 방법
 
