@@ -13,6 +13,7 @@
 - level 1. 실패율 : failure_rate.js
 - level 2. 수식 최대화 : maximize.js
 - level 2. 문자열 압축 : string_array.js
+- level 2. [1차]프렌즈4블록 : friend_block.js
 
 ### !!
 
@@ -245,3 +246,24 @@ re.test(t); // true : 모든 a 와 대응
 t = 'cndy';
 re.test(t); // false
 ```
+
+## javascript 자료형
+
+- 동적 타이핑 : 변수 타입을 미리 선언하지않아도된다.
+
+```ts
+let foo = 42; // foo는 Number형
+foo = 'bar'; // foo는 String형
+foo = true; // foo는 Boolean형
+```
+
+- data type
+  - 최신 ECMAScript 표준 : 7가지 자료형
+    - Primitive : 기본자료형
+      - Boolean
+      - Null
+      - Undefined
+      - Number
+      - String
+      - Symbol (ES6에 추가)
+    - Object
