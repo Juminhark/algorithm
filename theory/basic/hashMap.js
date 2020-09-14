@@ -464,3 +464,137 @@ const best1 = (genres, plays) => {
 // 		[500, 600, 150, 800, 2500, 700, 400]
 // 	)
 // );
+
+//* Map() : 객체를 key-value 쌍으로 저장하며 각 쌍의 삽입순서도 기억하는 콜렉션
+//* key, value 는 객체와 원시값 모두 가능.
+
+//* Object 와 Map 비교
+//* Map 내장전에 Object를 사용. Map에 유용한 기능들이 추가.
+
+//* 1. 의도치 않은 키
+//* 2. key 자료형
+//* 3. key 순서
+//* 4. 크기
+//* 5. 순회
+//* 6. 성능
+
+//! object로 풀었던 문제를 map으로 해보기
+//? 문제 : 베스트 앨범
+
+// 가장 많이 플레이된 노래 2개씩 모아 베스트 앨범 출시
+// 가장 많이 플레이된 장르 먼저 출력
+
+const bestObject = (genres, plays) => {
+	let resultMap = {};
+	for (let unit in genres) {
+		if (resultMap[genres[unit]] == undefined) {
+			// 선언
+			resultMap[genres[unit]] = [];
+			resultMap[genres[unit]].push([plays[unit], unit]);
+		} else {
+			resultMap[genres[unit]].push([plays[unit], unit]);
+			resultMap[genres[unit]].sort((a, b) => {
+				return b[0] - a[0];
+			});
+		}
+	}
+
+	console.log(resultMap);
+	// 장르별 재생 횟수 비교.
+	let genresMap = Object.keys(resultMap);
+	console.log(genresMap);
+
+	let result = [];
+	for (let unit of genresMap) {
+		let count = resultMap[unit].reduce((total, item) => {
+			return item[0] + total;
+		}, 0);
+		result.push([count, unit]);
+	}
+
+	result.sort((a, b) => {
+		return b[0] - a[0];
+	});
+	console.log(result);
+
+	let answer = [];
+
+	for (let i = 0; i < result.length; i++) {
+		for (let j = 0; j < 2; j++) {
+			console.log(j);
+			if (resultMap[result[i][1]][j] !== undefined) {
+				answer.push(Number(resultMap[result[i][1]][j][1]));
+			}
+		}
+	}
+
+	return answer;
+};
+
+console.log(
+	bestObject(['classic', 'pop', 'classic', 'classic'], [500, 600, 150, 800])
+);
+
+// console.log(
+// 	bestObject(
+// 		['classic', 'pop', 'classic', 'classic', 'pop', 'jazz', 'jazz'],
+// 		[500, 600, 150, 800, 2500, 700, 400]
+// 	)
+// );
+
+const bestMap = (genres, plays) => {
+	let resultMap = new Map();
+	for (let unit in genres) {
+		if (resultMap.get(genres[unit]) == undefined) {
+			// 선언
+			resultMap.set(genres[unit], []);
+
+			resultMap.get(genres[unit]).push([plays[unit], unit]);
+		} else {
+			resultMap.get(genres[unit]).push([plays[unit], unit]);
+			resultMap.get(genres[unit]).sort((a, b) => {
+				return b[0] - a[0];
+			});
+		}
+	}
+
+	console.log(resultMap);
+	// 장르별 재생 횟수 비교.
+	let genresMap = resultMap.keys();
+	console.log(genresMap);
+
+	let result = [];
+	resultMap.forEach((value, key, map) => {
+		let count = value.reduce((total, item) => {
+			return item[0] + total;
+		}, 0);
+		result.push([count, key]);
+	});
+
+	result.sort((a, b) => {
+		return b[0] - a[0];
+	});
+	console.log(result);
+
+	let answer = [];
+
+	for (let i = 0; i < result.length; i++) {
+		for (let j = 0; j < 2; j++) {
+			if (resultMap.get(result[i][1])[j] !== undefined) {
+				answer.push(Number(resultMap.get(result[i][1])[j][1]));
+			}
+		}
+	}
+
+	return answer;
+};
+
+console.log(
+	bestMap(['classic', 'pop', 'classic', 'classic'], [500, 600, 150, 800])
+);
+
+// console.log(
+// 	bestMap(
+// 		['classic', 'pop', 'classic', 'classic', 'pop', 'jazz', 'jazz'],
+// 		[500, 600, 150, 800, 2500, 700, 400]
+// 	)

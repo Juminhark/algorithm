@@ -64,7 +64,7 @@ const factorial_iterative = (num) => {
 
 	return result;
 };
-// console.log(factorial_iterative(4));
+console.log(factorial_iterative(4));
 
 // 점화식을 이용해 재귀적으로 구현
 const factorial_recursive = (num) => {
@@ -75,7 +75,7 @@ const factorial_recursive = (num) => {
 	}
 };
 
-// console.log(factorial_recursive(4));
+console.log(factorial_recursive(4));
 
 //* DFS(Depth-First Search) : 깊이 우선 탐색
 // DFS는 Stack 자료구조를 이용.

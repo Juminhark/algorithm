@@ -8,7 +8,7 @@
 // 1. 최적부분구조(Optimal Substructure) : 작은문제의 답을 모아 큰문제를 해결
 // 2. 중복되는 부분(Overlapping Subproblem) : 동일한 작은 문제 반복
 
-// * 피보나치 수열
+// * 대표적 예제 : 피보나치 수열
 
 // 1, 1, 2, 3, 5, 8, 13, 21, ...
 // 점화식 : 인접한 항들 사이의 괸계식
@@ -16,11 +16,11 @@
 // f(n) = f(n-1) + f(n-2); *점화식
 // f(1) = 1, f(2) = 1;
 
-// const fibo = (n) => {
-// 	return n == 1 || n == 2 ? 1 : fibo(n - 1) + fibo(n - 2);
-// };
+const fibo = (n) => {
+	return n == 1 || n == 2 ? 1 : fibo(n - 1) + fibo(n - 2);
+};
 
-// console.log(fibo(4));
+console.log(fibo(4));
 
 // recursion으로 피보나치를 해결하면 지수 시간 복잡도를 가지게 된다.
 // 같은 값이 중복되서 호출된다. => 이 문제를 해결하기 위한것이 DP
@@ -29,12 +29,14 @@
 // 1. f(4) = f(3) + f(2)
 // 2. f(n) = f(n-1) + f(n-2) 의 반복
 
+// 해결 => 이미 나온 함수의 결과를 기록해서 다른곳에서 연산하지 않도록 설정.
+
 // Memorization : DP의 구현 방법중 하나
 // 한번 계산한 결과를 메모리 공간에 메모.
 // 같은 문제를 다시 호풀하면 메모했던 결과를 가져온다.
 // 값을 기록해 놓는다는점에서 Caching이라고도 한다.
 
-// TopDown(Memorization) vs BottomUp
+// TopDown vs BottomUp
 // DP의 전형적인 형태는 BottomUp => 결과 저장용 리스트는 DP Table
 // Memorization은 이전의 결과를 일시적으로 기록해 놓는 넓은 개념을 의미
 
@@ -56,7 +58,7 @@ const fiboMemo = (x) => {
 	}
 };
 
-console.log(fiboMemo(99));
+console.log(fiboMemo(50));
 
 // BottomUp 예시
 // DP Table
@@ -70,7 +72,7 @@ for (let i = 3; i < n + 1; i++) {
 	d[i] = d[i - 1] + d[i - 2];
 }
 
-// console.log(d[50]);
+console.log(d[50]);
 
 // TopDown은 재귀, BottomUp은 반복문, 일반적인 경우 효율성은 비슷하기때문에 손에 익는걸 사용.
 

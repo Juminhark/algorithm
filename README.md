@@ -51,13 +51,20 @@ console.log(Math.pow(2, 2));
 console.log(Math.sqrt(4));
 ```
 
-- !isNaN(string) : string 이 숫자이면 true
+- !isNaN(string) : 주어진 값이 NaN 인지 판별
 
 ```sh
-console.log(!isNaN('1'));
-console.log(!isNaN('9'));
-console.log(!isNaN('s'));
-console.log(!isNaN('#'));
+console.log(!isNaN('1')); // true
+console.log(!isNaN('9')); // true
+console.log(!isNaN('s')); // false
+console.log(!isNaN('#')); // false
+
+//* NaN : Not a Number
+// 1. 숫자로서 읽을 수 없음 (parseInt("어쩌구"), Number(undefined))
+// 2. 결과가 허수인 수학 계산식 (Math.sqrt(-1))
+// 3. 피연산자가 NaN (7 ** NaN)
+// 4. 정의할 수 없는 계산식 (0 * Infinity)
+// 5. 문자열을 포함하면서 덧셈이 아닌 계산식 ("가" / 3)
 ```
 
 ### **exhaustive search (brute-force search) : 완전 탐색**

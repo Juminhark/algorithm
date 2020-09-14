@@ -1,327 +1,291 @@
-// https://github.com/trekhleb/javascript-algorithms
+//? 문제 : 아이디 생성
 
-//? 문제 : 후보키
+// 아이디 생성
+// 입력되 아이디가 규칙에 맞지 않을때 입력된 아이디와 비슷하면서 규칙에 맞는것을 추천
 
-// const candidateKey = (arr) => {
-// 	let count = 0;
-// 	let index = [0, 1, 2, 3];
+// 아이디의 길이는 3자 이상 15자 이하여야 합니다.
+// 아이디는 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.) 문자만 사용할 수 있습니다.
+// 단, 마침표(.)는 처음과 끝에 사용할 없으며 또한 연속으로 사용할 수 없습니다.
 
-// 	const combinations = (arr, k) => {
-// 		let combs = [];
-// 		let head = 0;
-// 		let tailCombs = 0;
+const id = (new_id) => {
+	// 배열화
+	let arr = new_id.split('');
+	// console.log(arr);
 
-// 		if (k > arr.length || k <= 0) {
-// 			return [];
-// 		}
-
-// 		if (k == arr.length) {
-// 			return [arr];
-// 		}
-
-// 		if (k == 1) {
-// 			combs = [];
-// 			for (i = 0; i < arr.length; i++) {
-// 				combs.push([arr[i]]);
-// 			}
-// 			return combs;
-// 		}
-
-// 		for (let i = 0; i < arr.length - k + 1; i++) {
-// 			head = arr.slice(i, i + 1); // start , end (end미포함)
-// 			tailCombs = combinations(arr.slice(i + 1), k - 1);
-// 			for (let j = 0; j < tailCombs.length; j++) {
-// 				combs.push(head.concat(tailCombs[j]));
-// 			}
-// 		}
-
-// 		return combs;
-// 	};
-
-// 	console.log(combinations(index, 2));
-// 	// unit 인것을 찾으면 index에서 제거.
-
-// 	const arrayCompareOneUnit = (arr) => {
-// 		for (let i = 0; i < arr.length; i++) {
-// 			let t = arr.slice();
-// 			let a = arr[i][0]; // 비교대상
-// 			console.log('a : ' + a);
-// 			t.splice(i, 1); // 비교대상을 제외한 나머지
-// 			console.log(t);
-
-// 			if (
-// 				t.every((item) => {
-// 					console.log('item[0] : ' + item[0]);
-// 					return item[0] !== a;
-// 				})
-// 			) {
-// 				// 배열안에 모든원소가 다를때
-// 				console.log('다르다');
-// 			} else {
-// 				console.log('같은것이 있다.');
-// 				break;
-// 			}
-// 		}
-// 	};
-
-// 	let compare = [];
-
-// 	for (let j = 1; j < 4; j++) {
-// 		let resultMap = combinations(index, j);
-
-// 		for (let unit of resultMap) {
-// 			console.log(unit);
-// 			for (let i = 0; i < arr.length; i++) {
-// 				let temp = [];
-// 				// console.log(i);
-// 				for (let u of unit) {
-// 					// console.log(u);
-// 					temp.push(arr[i][u]);
-// 				}
-// 				compare.push(temp);
-// 			}
-// 			console.log(compare);
-// 			// 2중 배열안에 배열의 중복 여부
-// 			console.log(arrayCompareOneUnit(compare));
-
-// 			compare = [];
-// 		}
-// 	}
-
-// 	// return count;
-// };
-
-// console.log(
-// 	candidateKey([
-// 		['100', 'ryan', 'music', '2'],
-// 		['200', 'apeach', 'math', '2'],
-// 		['300', 'tube', 'computer', '3'],
-// 		['400', 'con', 'computer', '4'],
-// 		['500', 'muzi', 'music', '3'],
-// 		['600', 'apeach', 'music', '2'],
-// 	])
-// );
-
-//======================================================
-
-//* Map() : 객체를 key-value 쌍으로 저장하며 각 쌍의 삽입순서도 기억하는 콜렉션
-//* key, value 는 객체와 원시값 모두 가능.
-
-//* Object 와 Map 비교
-//* Map 내장전에 Object를 사용. Map에 유용한 기능들이 추가.
-
-//* 1. 의도치 않은 키
-//* 2. key 자료형
-//* 3. key 순서
-//* 4. 크기
-//* 5. 순회
-//* 6. 성능
-
-//! object로 풀었던 문제를 map으로 해보기
-//? 문제 : 베스트 앨범
-
-// 가장 많이 플레이된 노래 2개씩 모아 베스트 앨범 출시
-// 가장 많이 플레이된 장르 먼저 출력
-
-const bestObject = (genres, plays) => {
-	let resultMap = {};
-	for (let unit in genres) {
-		if (resultMap[genres[unit]] == undefined) {
-			// 선언
-			resultMap[genres[unit]] = [];
-			resultMap[genres[unit]].push([plays[unit], unit]);
-		} else {
-			resultMap[genres[unit]].push([plays[unit], unit]);
-			resultMap[genres[unit]].sort((a, b) => {
-				return b[0] - a[0];
-			});
+	// 1. 대소문자 바꾸기 - 정규식
+	let re = /^[A-Z]$/;
+	for (let i = 0; i < arr.length; i++) {
+		if (re.test(arr[i])) {
+			arr[i] = arr[i].toLowerCase();
 		}
 	}
+	// console.log(arr);
 
-	console.log(resultMap);
-	// 장르별 재생 횟수 비교.
-	let genresMap = Object.keys(resultMap);
-	console.log(genresMap);
-
-	let result = [];
-	for (let unit of genresMap) {
-		let count = resultMap[unit].reduce((total, item) => {
-			return item[0] + total;
-		}, 0);
-		result.push([count, unit]);
-	}
-
-	result.sort((a, b) => {
-		return b[0] - a[0];
-	});
-	console.log(result);
-
-	let answer = [];
-
-	for (let i = 0; i < result.length; i++) {
-		for (let j = 0; j < 2; j++) {
-			console.log(j);
-			if (resultMap[result[i][1]][j] !== undefined) {
-				answer.push(Number(resultMap[result[i][1]][j][1]));
-			}
+	// 2. 특수 문자 제거
+	re = /^[a-z0-9-_.]$/;
+	let remove = []; // 제거할 번호 목록
+	for (let i = 0; i < arr.length; i++) {
+		if (!re.test(arr[i])) {
+			remove.push(i);
+			// 3. 반복되는 . 제거
 		}
 	}
-
-	return answer;
-};
-
-console.log(
-	bestObject(['classic', 'pop', 'classic', 'classic'], [500, 600, 150, 800])
-);
-
-// console.log(
-// 	bestObject(
-// 		['classic', 'pop', 'classic', 'classic', 'pop', 'jazz', 'jazz'],
-// 		[500, 600, 150, 800, 2500, 700, 400]
-// 	)
-// );
-
-const bestMap = (genres, plays) => {
-	let resultMap = new Map();
-	for (let unit in genres) {
-		if (resultMap.get(genres[unit]) == undefined) {
-			// 선언
-			resultMap.set(genres[unit], []);
-
-			resultMap.get(genres[unit]).push([plays[unit], unit]);
-		} else {
-			resultMap.get(genres[unit]).push([plays[unit], unit]);
-			resultMap.get(genres[unit]).sort((a, b) => {
-				return b[0] - a[0];
-			});
-		}
+	while (remove.length !== 0) {
+		let r = remove.pop();
+		arr.splice(r, 1);
 	}
-
-	console.log(resultMap);
-	// 장르별 재생 횟수 비교.
-	let genresMap = resultMap.keys();
-	console.log(genresMap);
-
-	let result = [];
-	resultMap.forEach((value, key, map) => {
-		let count = value.reduce((total, item) => {
-			return item[0] + total;
-		}, 0);
-		result.push([count, key]);
-	});
-
-	result.sort((a, b) => {
-		return b[0] - a[0];
-	});
-	console.log(result);
-
-	let answer = [];
-
-	for (let i = 0; i < result.length; i++) {
-		for (let j = 0; j < 2; j++) {
-			if (resultMap.get(result[i][1])[j] !== undefined) {
-				answer.push(Number(resultMap.get(result[i][1])[j][1]));
-			}
-		}
-	}
-
-	return answer;
-};
-
-console.log(
-	bestMap(['classic', 'pop', 'classic', 'classic'], [500, 600, 150, 800])
-);
-
-// console.log(
-// 	bestMap(
-// 		['classic', 'pop', 'classic', 'classic', 'pop', 'jazz', 'jazz'],
-// 		[500, 600, 150, 800, 2500, 700, 400]
-// 	)
-// );
-
-/////////////////////////////////////////////////////////////
-
-//* Heap : 특정한 규칙을 가지는 트리로, 힙을 이용해 우선순위 큐를 구현
-
-// 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)
-// A가 B의 부모노드(parent node) 이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다
-// 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 '최대 힙', 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 '최소 힙'
-// 우선순위를 가진 노드 즉 부모노드가 항상 뿌리에 오게 하는 특징.
-
-// 대부분의 경우는 자식노드의 개수가 최대 2개인 이진 힙(binary heap)
-
-// javscript
-
-// 1번 작업중       [4 5 8 2 3]  => 우선순위를 결정하는것이 heap
-
-// 우선순위 작업
-
-// 중요도가 높은것이 상단으로
-// 8
-// 5       4
-// 3  2
-// [8, 5, 4, 3, 2]
-
-//? 문제 : 디스크 컨트롤러
-
-// [[0, 3], [1, 9], [2, 6]] : 해야될 작업들
-// [시작시점, 작업시간]
-// 작업별 평균소요 시간이 가장 작은것을 return
-
-//  [0, 3] 이후 [1, 9] 먼저하면
-// 0초부터 3초 흐른 시점에 작업 종료
-// (0초 요청부터 3초 종료까지 3ms)
-// 1번째 작업이 종료되는 3초부터 9초가 흐린 12초 시점에 2번째 작업종료
-// (1초에 요청부터 12초 종료까지 11ms)
-// 2번째 작업이 종료되는 12초부터 6초가 흐른 18초 시점에 3번째 작업 종료
-// (2초 요청부터 18초 종료까지 16ms)
-// 평균 : (3+11+16)/ 3 = 10ms
-
-//  [0, 3] 이후 [2, 6] 먼저하면
-// 0초부터 3초 흐른 시점에 작업 종료
-// (0초 요청부터 3초 종료까지 3ms)
-// 1번째 작업이 종료되는 3초부터 6초가 흐린 9초 시점에 2번째 작업종료
-// (2초에 요청부터 9초 종료까지 7ms)
-// 2번째 작업이 종료되는 9초부터 9초가 흐른 18초 시점에 3번째 작업 종료
-// (1초 요청부터 18초 종료까지 17ms)
-// 평균 : (3+7+17)/ 3 = 9ms
-
-// 9
-
-const diskController = (arr) => {
-	arr.sort((a, b) => {
-		return a[0] - b[0];
-	});
-
 	console.log(arr);
 
-	let sec = 0;
-	// sec ++ 시간 흐르게 하면서 하나씩 처리
-	// 1번째 작업 동안 시작되는것을 대기 목록에 넣는다.
-	// 1번째 작업이 끝나면 요청 시점부터 종료시점의 차이를 기록.
+	for (let i = 0; i < arr.length; i++) {
+		if (i > 0 && arr[i] == '.' && arr[i - 1] == '.') {
+			remove.push(i);
+		}
+	}
+	while (remove.length !== 0) {
+		let r = remove.pop();
+		arr.splice(r, 1);
+	}
+	console.log(arr);
+
+	// 4. 지울거 지우고 나서도 시작이 .로 시작하면
+	while (arr[0] == '.') {
+		arr.shift();
+	}
+
+	// 4. 지울거 지우고 나서도 마지막이 .로 끝나면
+	while (arr[arr.length - 1] == '.') {
+		arr.pop();
+	}
+	// console.log(arr);
+
+	// 5. 빈 문자열이면 a대입
+	if (arr.length == 0) {
+		arr.push('a');
+	}
+
+	// 6. 길이가 16이상이면
+	if (arr.length > 15) {
+		arr = arr.slice(0, 15);
+	}
+	// console.log(arr);
+	//지울거 지우고 나서도 마지막이 .로 끝나면
+	while (arr[arr.length - 1] == '.') {
+		arr.pop();
+	}
+
+	// 길이가 3 이하면 마지막 반복
+	while (arr.length < 3) {
+		arr.push(arr[arr.length - 1]);
+	}
+
+	// console.log(arr);
+
+	return arr.join('');
+};
+
+// console.log(id('...!@BaT#*..y.abcdefghijklm.'));
+// console.log(id('z-+.^.'));
+// console.log(id('=.='));
+// console.log(id('123_.def'));
+// console.log(id('abcdefghijklmn.p'));
+// console.log(id('ads..$.>.#$SD342'));
+
+//? 문제 : 레스토랑
+
+// 메뉴를 새로 구성
+// 단품을 조합해서 코스 요리
+// 코스는 가장 많이 주문한 단품메뉴
+// 코스요리에는 최소 2개
+// 2명 이상 손님에게 주문된 단품메뉴의 조합으로 후보
+
+const restaurant = (orders, course) => {
+	// 조합
+	const combinations = (set, k) => {
+		var i, j, combs, head, tailCombs;
+
+		if (k > set.length || k <= 0) {
+			return [];
+		}
+
+		if (k == set.length) {
+			return [set];
+		}
+
+		if (k == 1) {
+			combs = [];
+			for (i = 0; i < set.length; i++) {
+				combs.push([set[i]]);
+			}
+			return combs;
+		}
+
+		combs = [];
+		for (i = 0; i < set.length - k + 1; i++) {
+			head = set.slice(i, i + 1);
+			tailCombs = combinations(set.slice(i + 1), k - 1);
+			for (j = 0; j < tailCombs.length; j++) {
+				combs.push(head.concat(tailCombs[j]));
+			}
+		}
+		return combs;
+	};
+
+	// 각 손님의 조합
+	let resultMap = new Map();
+	let resultMax = new Map();
+
+	for (let unit of orders) {
+		// 각 손님 주문
+		let com = unit.split('');
+		if (com.length > 1) {
+			for (let c of course) {
+				let result = combinations(com, c);
+				let max = 0;
+				while (result.length !== 0) {
+					let save = result.shift();
+					save.sort();
+					let saveJoin = save.join('');
+					console.log(saveJoin);
+					if (resultMap.get(saveJoin) == undefined) {
+						// 선언
+						resultMap.set(saveJoin, [c, 1]);
+					} else {
+						max = resultMap.get(saveJoin)[1] + 1;
+						resultMap.set(saveJoin, [c, max]);
+					}
+					if (max !== 0) {
+						if (resultMax.get(c) == undefined) {
+							resultMax.set(c, max);
+						} else {
+							if (resultMax.get(c) < max) {
+								resultMax.set(c, max);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	console.log(resultMap);
+	console.log(resultMax);
+
+	// 1번 주문 된것은 지운다.
+	let deleteKey = [];
+	resultMap.forEach((value, key) => {
+		if (value[1] == 1) {
+			deleteKey.push(key);
+		}
+	});
+
+	while (deleteKey.length !== 0) {
+		resultMap.delete(deleteKey.pop());
+	}
+	// console.log(resultMap);
+
+	let answer = [];
+	for (let [key, value] of resultMap.entries()) {
+		if (resultMax.get(value[0]) == value[1]) {
+			answer.push(key);
+		}
+	}
+
+	return answer.sort();
 };
 
 // console.log(
-// 	diskController([
-// 		[0, 3],
-// 		[1, 9],
-// 		[2, 6],
-// 	])
-// ); // 9
-
+// 	restaurant(['ABCFG', 'AC', 'CDE', 'ACDE', 'BCFG', 'ACDEH'], [2, 3, 4])
+// );
 // console.log(
-// 	diskController([
-// 		[0, 3],
-// 		[2, 6],
-// 		[1, 9],
-// 	])
-// ); // 9
+// 	restaurant(['ABCDE', 'AB', 'CD', 'ADE', 'XYZ', 'XYZ', 'ACD'], [2, 3, 5])
+// );
+// console.log(restaurant(['XYZ', 'XWY', 'WXA'], [2, 3, 4]));
 
-// console.log(
-// 	diskController([
-// 		[0, 5],
-// 		[2, 6],
-// 		[1, 4],
-// 		[3, 7],
-// 	])
-// ); // 9
+//? 문제 : 채용
+
+// 코딩테스트 참여 개발언어 항목에 cpp, java, python 중 하나를 선택
+// 지원 직군 항목에 backend와 frontend 중 하나를 선택
+// 지원 경력구분 항목에 junior와 senior 중 하나를 선택
+// 선호하는 소울푸드로 chicken과 pizza 중 하나를 선택
+
+// info : 정보 , query : 선택할 정보, return : 각query를 만족하는 인원의 배열
+
+//! 효율성 => 시간초과
+const solution = (info, query) => {
+	let answer = [];
+	let infoArr = [];
+	let queryArr = [];
+	// 정보 재단
+	for (let unit of info) {
+		infoArr.push(unit.split(' '));
+	}
+	for (let unit of query) {
+		queryArr.push(unit.split(' and '));
+	}
+
+	for (let unit in queryArr) {
+		let add = queryArr[unit].pop().split(' ');
+		for (let a of add) {
+			queryArr[unit].push(a);
+		}
+	}
+	console.log(infoArr);
+	console.log(queryArr);
+
+	// 비교군에서 조건을 만족하지않은면 삭제
+	let target = Array(info.length).fill());
+	
+
+	// 조건들
+	for (let unit of queryArr) {
+		for (let u in unit) {
+			if (unit[u] == '-') {
+				for (let n in target) {
+					target[n] += 1;
+				}
+			} else {
+				infoArr.forEach((item, i) => {
+					if (Number(u) !== 4) {
+						if (unit[u] == item[u]) {
+							target[i] += 1;
+						}
+					} else {
+						if (Number(item[u]) >= Number(unit[u])) {
+							target[i] += 1;
+						}
+					}
+				});
+			}
+		}
+		let count = 0;
+		for (let u of target) {
+			if (u == unit.length) {
+				count++;
+			}
+		}
+
+		answer.push(count);
+	}
+
+	return answer;
+};
+
+console.log(
+	solution(
+		[
+			'java backend junior pizza 150',
+			'python frontend senior chicken 210',
+			'python frontend senior chicken 150',
+			'cpp backend senior pizza 260',
+			'java backend junior chicken 80',
+			'python backend senior chicken 50',
+		],
+		[
+			'java and backend and junior and pizza 100',
+			'python and frontend and senior and chicken 200',
+			'cpp and - and senior and pizza 250',
+			'- and backend and senior and - 150',
+			'- and - and - and chicken 100',
+			'- and - and - and - 150',
+		]
+	)
+);
