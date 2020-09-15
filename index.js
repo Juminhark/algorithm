@@ -27,7 +27,6 @@ const id = (new_id) => {
 	for (let i = 0; i < arr.length; i++) {
 		if (!re.test(arr[i])) {
 			remove.push(i);
-			// 3. 반복되는 . 제거
 		}
 	}
 	while (remove.length !== 0) {
@@ -36,6 +35,7 @@ const id = (new_id) => {
 	}
 	console.log(arr);
 
+	// 3. 반복되는 . 제거
 	for (let i = 0; i < arr.length; i++) {
 		if (i > 0 && arr[i] == '.' && arr[i - 1] == '.') {
 			remove.push(i);
@@ -145,7 +145,6 @@ const restaurant = (orders, course) => {
 					let save = result.shift();
 					save.sort();
 					let saveJoin = save.join('');
-					console.log(saveJoin);
 					if (resultMap.get(saveJoin) == undefined) {
 						// 선언
 						resultMap.set(saveJoin, [c, 1]);
@@ -180,7 +179,7 @@ const restaurant = (orders, course) => {
 	while (deleteKey.length !== 0) {
 		resultMap.delete(deleteKey.pop());
 	}
-	// console.log(resultMap);
+	console.log(resultMap);
 
 	let answer = [];
 	for (let [key, value] of resultMap.entries()) {
@@ -210,67 +209,76 @@ const restaurant = (orders, course) => {
 // info : 정보 , query : 선택할 정보, return : 각query를 만족하는 인원의 배열
 
 //! 효율성 => 시간초과
-const solution = (info, query) => {
+const hire = (info, query) => {
+	const isNumeric = (data) => {
+		return !isNaN(Number(data));
+	};
+
 	let answer = [];
-	let infoArr = [];
+	let target = new Map();
 	let queryArr = [];
-	// 정보 재단
-	for (let unit of info) {
-		infoArr.push(unit.split(' '));
+
+	// 지원자 정보 재단 == 비교군
+	for (let unit in info) {
+		target.set(Number(unit) + 1, info[unit].split(' '));
 	}
+	console.log(target);
+
+	// 각 부서의 조건들
 	for (let unit of query) {
 		queryArr.push(unit.split(' and '));
 	}
-
 	for (let unit in queryArr) {
 		let add = queryArr[unit].pop().split(' ');
 		for (let a of add) {
 			queryArr[unit].push(a);
 		}
 	}
-	console.log(infoArr);
 	console.log(queryArr);
-
-	// 비교군에서 조건을 만족하지않은면 삭제
-	let target = Array(info.length).fill());
-	
+	let check = [];
+	for (let i = 1; i <= target.size; i++) {
+		check.push(i);
+	}
+	console.log(check);
 
 	// 조건들
 	for (let unit of queryArr) {
+		console.log(unit); // unit : [ 'java', 'backend', 'junior', 'pizza', '100' ]
+		let checkArr = check.slice(0); // 복사본
+		// 비교군에서 조건을 만족하지않은면 복사본에서 제거
 		for (let u in unit) {
-			if (unit[u] == '-') {
-				for (let n in target) {
-					target[n] += 1;
-				}
-			} else {
-				infoArr.forEach((item, i) => {
-					if (Number(u) !== 4) {
-						if (unit[u] == item[u]) {
-							target[i] += 1;
-						}
-					} else {
-						if (Number(item[u]) >= Number(unit[u])) {
-							target[i] += 1;
-						}
+			// u : 0, 1 ,2, 3, 4 : 각 조건
+			let remove = [];
+			console.log(checkArr);
+			for (let uni of checkArr) {
+				if (isNumeric(unit[u])) {
+					// 숫자일때
+					if (Number(target.get(uni)[u]) < Number(unit[u])) {
+						remove.push(uni);
 					}
-				});
+				} else {
+					// 문자일때
+					if (target.get(uni)[u] !== unit[u] && unit[u] !== '-') {
+						remove.push(uni);
+					}
+				}
 			}
-		}
-		let count = 0;
-		for (let u of target) {
-			if (u == unit.length) {
-				count++;
-			}
-		}
 
-		answer.push(count);
+			console.log('remove : ' + remove);
+
+			while (remove.length !== 0) {
+				let r = remove.shift();
+				checkArr.splice(checkArr.indexOf(r), 1);
+			}
+		}
+		answer.push(checkArr.length);
 	}
 
 	return answer;
 };
 
 console.log(
-	solution(
+	hire(
 		[
 			'java backend junior pizza 150',
 			'python frontend senior chicken 210',
