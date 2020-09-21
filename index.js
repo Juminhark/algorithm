@@ -1,299 +1,297 @@
-//? 문제 : 아이디 생성
+//* Heap : 특정한 규칙을 가지는 트리로, 힙을 이용해 우선순위 큐를 구현
 
-// 아이디 생성
-// 입력되 아이디가 규칙에 맞지 않을때 입력된 아이디와 비슷하면서 규칙에 맞는것을 추천
+// 최댓값 및 최솟값을 찾아내는 연산을 빠르게 하기 위해 고안된 완전이진트리(complete binary tree)를 기본으로 한 자료구조(tree-based structure)
+// A가 B의 부모노드(parent node) 이면, A의 키(key)값과 B의 키값 사이에는 대소관계가 성립한다
+// 부모노드의 키값이 자식노드의 키값보다 항상 큰 힙을 '최대 힙', 부모노드의 키값이 자식노드의 키값보다 항상 작은 힙을 '최소 힙'
+// 우선순위를 가진 노드 즉 부모노드가 항상 뿌리에 오게 하는 특징.
 
-// 아이디의 길이는 3자 이상 15자 이하여야 합니다.
-// 아이디는 알파벳 소문자, 숫자, 빼기(-), 밑줄(_), 마침표(.) 문자만 사용할 수 있습니다.
-// 단, 마침표(.)는 처음과 끝에 사용할 없으며 또한 연속으로 사용할 수 없습니다.
+// 대부분의 경우는 자식노드의 개수가 최대 2개인 이진 힙(binary heap)
 
-const id = (new_id) => {
-	// 배열화
-	let arr = new_id.split('');
-	// console.log(arr);
+// 1번 작업중       [4 5 8 2 3]  => 우선순위를 결정하는것이 heap
 
-	// 1. 대소문자 바꾸기 - 정규식
-	let re = /^[A-Z]$/;
-	for (let i = 0; i < arr.length; i++) {
-		if (re.test(arr[i])) {
-			arr[i] = arr[i].toLowerCase();
-		}
-	}
-	// console.log(arr);
+// 우선순위 작업
 
-	// 2. 특수 문자 제거
-	re = /^[a-z0-9-_.]$/;
-	let remove = []; // 제거할 번호 목록
-	for (let i = 0; i < arr.length; i++) {
-		if (!re.test(arr[i])) {
-			remove.push(i);
-		}
-	}
-	while (remove.length !== 0) {
-		let r = remove.pop();
-		arr.splice(r, 1);
-	}
-	console.log(arr);
+// 중요도가 높은것이 상단으로
+// 				8
+// 		5       4
+// 3    2
+// [8, 5, 4, 3, 2]
 
-	// 3. 반복되는 . 제거
-	for (let i = 0; i < arr.length; i++) {
-		if (i > 0 && arr[i] == '.' && arr[i - 1] == '.') {
-			remove.push(i);
-		}
-	}
-	while (remove.length !== 0) {
-		let r = remove.pop();
-		arr.splice(r, 1);
-	}
-	console.log(arr);
+//? 문제 : 더 맵게
 
-	// 4. 지울거 지우고 나서도 시작이 .로 시작하면
-	while (arr[0] == '.') {
-		arr.shift();
+// scoville 배열 안에 모든 값을 K 이상으로 만든다.
+// 배열안에 가장 낮은 두개의 음식을 아래와 같이 섞는다
+// 가장 맵지않은 음식 + (두번째로 맵지않은 음식 * 2)
+// 모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.
+
+const spicy = (scoville, k) => {
+	let count = 0;
+
+	// 오름차순으로 정렬
+	scoville.sort((a, b) => {
+		return a - b;
+	});
+	// console.log(scoville);
+
+	// 가장 맵지않은 음식의 스코빌 지수가 k 이상일때까지 반복
+	while (scoville[0] < k && !isNaN(scoville[0])) {
+		// 가장 맵지않은 음식
+		let food1 = scoville.shift();
+		let food2 = scoville.shift();
+
+		let newFood = food1 + food2 * 2;
+		scoville.unshift(newFood);
+
+		//! 큐. 맵지않은 음식을 배열에서 다룰수있도록 오름차순으로 정렬.
+		scoville.sort((a, b) => {
+			return a - b;
+		});
+		count++;
+		console.log(scoville);
 	}
 
-	// 4. 지울거 지우고 나서도 마지막이 .로 끝나면
-	while (arr[arr.length - 1] == '.') {
-		arr.pop();
-	}
-	// console.log(arr);
-
-	// 5. 빈 문자열이면 a대입
-	if (arr.length == 0) {
-		arr.push('a');
+	// 모두 k 이상으로 만들수 없는 경우
+	// 2개를 꺼내 작업할때 2번째로 꺼내진것이 undefined 가 됨으로
+	// 연산 결과값이 NaN이 된다. 이 경우 -1 return
+	if (isNaN(scoville[0])) {
+		return -1;
 	}
 
-	// 6. 길이가 16이상이면
-	if (arr.length > 15) {
-		arr = arr.slice(0, 15);
-	}
-	// console.log(arr);
-	//지울거 지우고 나서도 마지막이 .로 끝나면
-	while (arr[arr.length - 1] == '.') {
-		arr.pop();
-	}
-
-	// 길이가 3 이하면 마지막 반복
-	while (arr.length < 3) {
-		arr.push(arr[arr.length - 1]);
-	}
-
-	// console.log(arr);
-
-	return arr.join('');
+	return count;
 };
 
-// console.log(id('...!@BaT#*..y.abcdefghijklm.'));
-// console.log(id('z-+.^.'));
-// console.log(id('=.='));
-// console.log(id('123_.def'));
-// console.log(id('abcdefghijklmn.p'));
-// console.log(id('ads..$.>.#$SD342'));
+// console.log(spicy([1, 2, 3, 9, 10, 12], 7));
+// console.log(spicy([1, 2], 3));
+// console.log(spicy([1, 1, 1, 1, 1], 7));
+// console.log(spicy([1, 2, 3, 9, 10, 12], 110)); // 예외상황
 
-//? 문제 : 레스토랑
+//? 문제 : 디스크 컨트롤러
 
-// 메뉴를 새로 구성
-// 단품을 조합해서 코스 요리
-// 코스는 가장 많이 주문한 단품메뉴
-// 코스요리에는 최소 2개
-// 2명 이상 손님에게 주문된 단품메뉴의 조합으로 후보
+// [[0, 3], [1, 9], [2, 6]] : 해야될 작업들
+// [시작시점, 작업시간]
+// 작업별 평균소요 시간이 가장 작은것을 return
 
-const restaurant = (orders, course) => {
-	// 조합
-	const combinations = (set, k) => {
-		var i, j, combs, head, tailCombs;
+//  [0, 3] 이후 [1, 9] 먼저하면
+// 0초부터 3초 흐른 시점에 작업 종료
+// (0초 요청부터 3초 종료까지 3ms)
+// 1번째 작업이 종료되는 3초부터 9초가 흐린 12초 시점에 2번째 작업종료
+// (1초에 요청부터 12초 종료까지 11ms)
+// 2번째 작업이 종료되는 12초부터 6초가 흐른 18초 시점에 3번째 작업 종료
+// (2초 요청부터 18초 종료까지 16ms)
+// 평균 : (3+11+16)/ 3 = 10ms
 
-		if (k > set.length || k <= 0) {
-			return [];
-		}
+//  [0, 3] 이후 [2, 6] 먼저하면
+// 0초부터 3초 흐른 시점에 작업 종료
+// (0초 요청부터 3초 종료까지 3ms)
+// 1번째 작업이 종료되는 3초부터 6초가 흐린 9초 시점에 2번째 작업종료
+// (2초에 요청부터 9초 종료까지 7ms)
+// 2번째 작업이 종료되는 9초부터 9초가 흐른 18초 시점에 3번째 작업 종료
+// (1초 요청부터 18초 종료까지 17ms)
+// 평균 : (3+7+17)/ 3 = 9ms
 
-		if (k == set.length) {
-			return [set];
-		}
+const diskController = (arr) => {
+	let answer = 0;
+	let all = 0;
+	let process = 0;
+	let sec = 0;
 
-		if (k == 1) {
-			combs = [];
-			for (i = 0; i < set.length; i++) {
-				combs.push([set[i]]);
-			}
-			return combs;
-		}
-
-		combs = [];
-		for (i = 0; i < set.length - k + 1; i++) {
-			head = set.slice(i, i + 1);
-			tailCombs = combinations(set.slice(i + 1), k - 1);
-			for (j = 0; j < tailCombs.length; j++) {
-				combs.push(head.concat(tailCombs[j]));
-			}
-		}
-		return combs;
-	};
-
-	// 각 손님의 조합
-	let resultMap = new Map();
-	let resultMax = new Map();
-
-	for (let unit of orders) {
-		// 각 손님 주문
-		let com = unit.split('');
-		if (com.length > 1) {
-			for (let c of course) {
-				let result = combinations(com, c);
-				let max = 0;
-				while (result.length !== 0) {
-					let save = result.shift();
-					save.sort();
-					let saveJoin = save.join('');
-					if (resultMap.get(saveJoin) == undefined) {
-						// 선언
-						resultMap.set(saveJoin, [c, 1]);
-					} else {
-						max = resultMap.get(saveJoin)[1] + 1;
-						resultMap.set(saveJoin, [c, max]);
-					}
-					if (max !== 0) {
-						if (resultMax.get(c) == undefined) {
-							resultMax.set(c, max);
-						} else {
-							if (resultMax.get(c) < max) {
-								resultMax.set(c, max);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	console.log(resultMap);
-	console.log(resultMax);
-
-	// 1번 주문 된것은 지운다.
-	let deleteKey = [];
-	resultMap.forEach((value, key) => {
-		if (value[1] == 1) {
-			deleteKey.push(key);
-		}
+	// 오름차순 정렬
+	arr.sort((a, b) => {
+		return a[0] - b[0];
 	});
 
-	while (deleteKey.length !== 0) {
-		resultMap.delete(deleteKey.pop());
-	}
-	console.log(resultMap);
+	let wait = []; // 우선순위 큐
+	// 모든 작업이 완료되면 종료 =>
+	while (process < arr.length || wait.length !== 0) {
+		// 작업한 갯수 process.
+		// sec는 현재 작업중은 process의 종료 시점.
+		if (arr.length > process && sec >= arr[process][0]) {
+			wait.push(arr[process++]);
 
-	let answer = [];
-	for (let [key, value] of resultMap.entries()) {
-		if (resultMax.get(value[0]) == value[1]) {
-			answer.push(key);
+			//! 우선순위 큐.
+			//! 중요한것은 대기시간을 줄이는것.
+			//! 각 요청 시점으로부터 작업량이 작은것.
+			//! 위 조건을 만족하려면 대기중인것중에 작업량이 작은것 우선으로 진행.
+			wait.sort((a, b) => {
+				return a[1] - b[1];
+			});
+			continue;
+		}
+		console.log(wait);
+		if (wait.length !== 0) {
+			sec += wait[0][1];
+			all += sec - wait[0][0];
+			wait.shift();
+		} else {
+			sec = arr[process][0];
 		}
 	}
 
-	return answer.sort();
+	answer = parseInt(all / arr.length);
+	return answer;
 };
 
 // console.log(
-// 	restaurant(['ABCFG', 'AC', 'CDE', 'ACDE', 'BCFG', 'ACDEH'], [2, 3, 4])
-// );
+// 	diskController([
+// 		[0, 3],
+// 		[1, 9],
+// 		[2, 6],
+// 	])
+// ); // 9
+
 // console.log(
-// 	restaurant(['ABCDE', 'AB', 'CD', 'ADE', 'XYZ', 'XYZ', 'ACD'], [2, 3, 5])
-// );
-// console.log(restaurant(['XYZ', 'XWY', 'WXA'], [2, 3, 4]));
+// 	diskController([
+// 		[0, 3],
+// 		[2, 6],
+// 		[1, 9],
+// 	])
+// ); // 9
 
-//? 문제 : 채용
+// console.log(
+// 	diskController([
+// 		[0, 5],
+// 		[2, 6],
+// 		[1, 4],
+// 		[3, 7],
+// 	])
+// ); // 9
 
-// 코딩테스트 참여 개발언어 항목에 cpp, java, python 중 하나를 선택
-// 지원 직군 항목에 backend와 frontend 중 하나를 선택
-// 지원 경력구분 항목에 junior와 senior 중 하나를 선택
-// 선호하는 소울푸드로 chicken과 pizza 중 하나를 선택
+//? 문제 : 이중우선순위 큐
 
-// info : 정보 , query : 선택할 정보, return : 각query를 만족하는 인원의 배열
+// I 숫자 : 큐에 주어진 숫자를 삽입
+// D 1 : 큐에서 최댓값을삭제
+// D -1 : 큐에서 최솟값을 삭제
 
-//! 효율성 => 시간초과
-const hire = (info, query) => {
-	const isNumeric = (data) => {
-		return !isNaN(Number(data));
-	};
-
+const dualPriorityQueue = (operations) => {
+	let operationArr = [];
 	let answer = [];
-	let target = new Map();
-	let queryArr = [];
+	while (operations.length !== 0) {
+		let unit = operations.shift();
+		operationArr.push(unit.split(' '));
+	}
 
-	// 지원자 정보 재단 == 비교군
-	for (let unit in info) {
-		target.set(Number(unit) + 1, info[unit].split(' '));
-	}
-	console.log(target);
+	console.log(operationArr);
 
-	// 각 부서의 조건들
-	for (let unit of query) {
-		queryArr.push(unit.split(' and '));
-	}
-	for (let unit in queryArr) {
-		let add = queryArr[unit].pop().split(' ');
-		for (let a of add) {
-			queryArr[unit].push(a);
-		}
-	}
-	console.log(queryArr);
-	let check = [];
-	for (let i = 1; i <= target.size; i++) {
-		check.push(i);
-	}
-	console.log(check);
-
-	// 조건들
-	for (let unit of queryArr) {
-		console.log(unit); // unit : [ 'java', 'backend', 'junior', 'pizza', '100' ]
-		let checkArr = check.slice(0); // 복사본
-		// 비교군에서 조건을 만족하지않은면 복사본에서 제거
-		for (let u in unit) {
-			// u : 0, 1 ,2, 3, 4 : 각 조건
-			let remove = [];
-			console.log(checkArr);
-			for (let uni of checkArr) {
-				if (isNumeric(unit[u])) {
-					// 숫자일때
-					if (Number(target.get(uni)[u]) < Number(unit[u])) {
-						remove.push(uni);
-					}
-				} else {
-					// 문자일때
-					if (target.get(uni)[u] !== unit[u] && unit[u] !== '-') {
-						remove.push(uni);
-					}
+	while (operationArr.length !== 0) {
+		let unit = operationArr.shift();
+		switch (unit[0]) {
+			case 'I':
+				answer.push(unit[1]);
+				// 오름차순 정렬
+				answer.sort((a, b) => {
+					return a - b;
+				});
+				console.log(answer);
+				break;
+			case 'D':
+				switch (Number(unit[1])) {
+					case 1:
+						answer.pop();
+						break;
+					case -1:
+						answer.shift();
+						break;
 				}
-			}
-
-			console.log('remove : ' + remove);
-
-			while (remove.length !== 0) {
-				let r = remove.shift();
-				checkArr.splice(checkArr.indexOf(r), 1);
-			}
+				break;
 		}
-		answer.push(checkArr.length);
 	}
 
+	if (answer.length == 0) {
+		return [0, 0];
+	} else {
+		let min = answer[0];
+		let max = answer[answer.length - 1];
+		return [Number(max), Number(min)];
+	}
+};
+
+// const dualPriorityQueue2 = (operations) => {
+// 	let list = [];
+// 	operations.forEach((t) => {
+// 		if (t[0] === 'I') {
+// 			list.push(+t.split(' ')[1]);
+// 		} else {
+// 			if (!list.length) return;
+
+// 			var val = (t[2] === '-' ? Math.min : Math.max)(...list);
+// 			var delIndex = list.findIndex((t) => t === val);
+
+// 			list.splice(delIndex, 1);
+// 		}
+// 	});
+
+// 	return list.length ? [Math.max(...list), Math.min(...list)] : [0, 0];
+// };
+
+// console.log(dualPriorityQueue(['I 16', 'D 1']));
+// console.log(dualPriorityQueue(['I 7', 'I 5', 'I -5', 'D -1']));
+// console.log(dualPriorityQueue(['I 7', 'I 5', 'I -5', 'D -1', 'D 1']));
+// console.log(dualPriorityQueue([]));
+
+/////////////////////////////////////////////////////////////////////////
+
+//* Sorting : 정렬
+
+//? 문제 : 오름차순
+// 다음 숫자들을 오른차순으로 정렬
+
+const ascendingOrder = (str) => {
+	let result = str.split(' ').sort((a, b) => {
+		return a - b;
+	});
+
+	console.log(result);
+	let answer = '';
+	for (let i = 0; i < result.length; i++) {
+		if (answer == '') {
+			answer += result[i];
+		} else {
+			answer += ' ' + result[i];
+		}
+	}
+	return answer;
+};
+
+// console.log(ascendingOrder('1 10 5 8 7 6 4 3 2 9'));
+
+//? 문제 : K번째 수
+
+// command : [a, b, c], arr에서 a번째부터 b번째까지 자른 것을 정렬했을때 c번째 원소
+// command들의 결과값을 모은 배열을 return
+
+const k = (arr, commands) => {
+	let answer = [];
+	while (commands.length !== 0) {
+		let u = commands.shift();
+
+		let unit = arr.slice(u[0] - 1, u[1]);
+		// 오름차순
+		unit.sort((a, b) => {
+			return a - b;
+		});
+		console.log(unit);
+
+		answer.push(unit[u[2] - 1]);
+	}
 	return answer;
 };
 
 console.log(
-	hire(
+	k(
+		[1, 5, 2, 6, 3, 7, 4],
 		[
-			'java backend junior pizza 150',
-			'python frontend senior chicken 210',
-			'python frontend senior chicken 150',
-			'cpp backend senior pizza 260',
-			'java backend junior chicken 80',
-			'python backend senior chicken 50',
-		],
-		[
-			'java and backend and junior and pizza 100',
-			'python and frontend and senior and chicken 200',
-			'cpp and - and senior and pizza 250',
-			'- and backend and senior and - 150',
-			'- and - and - and chicken 100',
-			'- and - and - and - 150',
+			[2, 5, 3],
+			[4, 4, 1],
+			[1, 7, 3],
 		]
 	)
 );
+
+//? 문제 : 가장 큰수
+
+//
+
+const largestNumber = (numbers) => {};
+
+// console.log(largestNumber([6, 10, 2]));
+// console.log(largestNumber([3, 30, 34, 5, 9]));
