@@ -1,6 +1,8 @@
 //* recursion 재귀 : 자신을 다시 호출
 
-// pow(x, n):function 을 구현하는 2가지 방법
+//? 예시 : 거듭제곱 (밑^지수)
+
+// Math.pow(x, n) : 거듭제곱(x^n) 을 구현하는 2가지 방법
 
 // 1. 반복적인 사고를 통한 방법: for 루프
 const powFor = (x, n) => {
@@ -13,26 +15,52 @@ const powFor = (x, n) => {
 };
 
 // 2. 재귀적인 사고를 통한 방법: 작업을 단순화하고 자기 자신을 호출함
-const pow = (x, n) => {
+const powRecursion = (x, n) => {
 	if (n == 1) {
 		return x;
 	} else {
-		return x * pow(x, n - 1);
+		return x * powRecursion(x, n - 1);
 	}
 };
 
 console.log(powFor(2, 2)); // 4
-console.log(pow(2, 3)); // 8
-console.log(pow(2, 4)); //16
+console.log(powRecursion(2, 3)); // 8
 
 // 재귀를 사용하면 코드가 짧아진다
 const powShort = (x, n) => {
 	// 조건문 ? true : false
-	return n == 1 ? x : x * pow(x, n - 1);
+	return n == 1 ? x : x * powShort(x, n - 1);
 };
 
+console.log(powShort(2, 2)); // 4
+console.log(powShort(2, 3)); // 8
+
+// javascript에서의 구현.
+// Math.pow || ** : 지수 연산자
+console.log(2 ** -1); // 0.5
+console.log(Math.pow(2, -1)); // 0.5
+console.log(2 ** 4); // 16
+console.log(Math.pow(2, 4)); // 16
+
+//? 문제 : 팩토리얼 : n! => 1 x 2 x ... x (n-1) x n
+
+const factorial = (n) => {
+	return n == 1 ? 1 : n * factorial(n - 1);
+};
+
+console.log(factorial(4)); // 1 x 2 x 3 x 4 = 24
+
+//? 문제 : 피보나치수열
+
+const fibonacci = (n) => {
+	return n == 1 || n == 2 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+console.log(fibonacci(7)); // 1 1 2 3 5 8 [13]
+
+//? 문제 : 급여
+// 임직원의 모든 급여를 더한 값을 구하여라
 // 재귀는 재귀적 순회 (recursive traversal)를 구현할 때 사용하면 좋다
-// ? 임직원의 급여를 더한 값
 
 let company = {
 	sales: [
@@ -66,9 +94,4 @@ const sumSalaries = (department) => {
 
 console.log(sumSalaries(company)); //7700
 
-// arr.reduce(callback, [initialValue])
-// callback(acc, cur, [idx], [src])
-// accumulator : initial있으면 initial값, 누산기
-// currentValue : 처리할 요소
-// [currentIndex] : 처리할 요소의 인덱스
-// [array(src)] :원본배열
+//! arr.reduce(callback, [initialValue])
