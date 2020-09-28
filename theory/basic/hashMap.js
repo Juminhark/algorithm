@@ -1,5 +1,9 @@
 //* Hash(해시) Table : key-value쌍으로 데이터를 저장하는 자료구조
 
+//* 해시함수(hash function)는 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수입니다.
+//* 이 때 매핑 전 원래 데이터의 값을 키(key), 매핑 후 데이터의 값을 해시값(hash value),
+//* 매핑하는 과정을 해싱(hashing)이라고 합니다.
+
 // key - hash function - hash code - index
 // index에 접근할때 hash code로 바로 접근 하기 때문에 검색이 빠르다.
 //! 전체 index에서 찾는것이 아니기 때문에

@@ -1,21 +1,26 @@
-## hash
+# Data Structure(자료구조) : Efficient access and modification
 
-- 해쉬는 key-value 쌍으로 데이터를 저장하는 자료구조
-- 해시함수(hash function)는 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수입니다. 이 때 매핑 전 원래 데이터의 값을 키(key), 매핑 후 데이터의 값을 해시값(hash value), 매핑하는 과정을 해싱(hashing)이라고 합니다.
+- 자료구조는 서비스나 어플리케이션에서 필요한 데이터를 메모리에 어떻게 구조적으로 정리해서 담아두고 관리하고
+- 최종적으로 가장 효율적인 방식으로 필요한 데이터에 빠르게 접근하고 필요한 수정 삽입 삭제를 할수있도록 도와준다
 
-### 카카오
+- 효율적으로 data를 다루기 위해 기능에 적합한 자료구조를 쓰는것이 중요.
+- 대표적으로 배열, 단일연결리스트, 이중연결 리스트, 스택, 해쉬테이블 등.
 
-- 예선테스트. 직사각형 : rectangle.js
-- level 1. 키패드 누르기 : keypad.js
-- level 1. 비밀지도 : treasure_map.js
-- level 1. 크레인 인형뽑기 게임 : crane_game.js
-- level 1. 다트게임 : dart_game.js
-- level 1. 실패율 : failure_rate.js
-- level 2. 수식 최대화 : maximize.js
-- level 2. 문자열 압축 : string_array.js
-- level 2. [1차]프렌즈4블록 : friend_block.js
+- 자료구조의 키 포인트는
+- 1. Order : 자료구조안에서 데이터의 순서 보장 여부
+- 2. Unique : 중복된 데이터 값을 가질수 있는지 여부
+- 3. Search : 검색의 효율성
+- 4. Modification : 데이터 수정의 효율성
+-
 
-### !!
+# Algorithm(알고리즘) : Data Processing within a finite amount of apace and time
+
+- 알고리즘의 키 포인트는
+- 1. Big-O Notation for Input Size : 주어진 데이터에 따른 Big-O 변화
+- 2. Space & Time Complexity : 공간, 시간 복잡도
+- 3. Data Structure : 이용하는 자료구조의 종류
+
+### function
 
 - eval() : function
 
@@ -250,7 +255,7 @@ foo = true; // foo는 Boolean형
 
 ## 컴퓨터와 수학
 
-#### 대수학의 수체계
+### 대수학의 수체계
 
 ```ts
 
@@ -284,7 +289,7 @@ foo = true; // foo는 Boolean형
 - 대수학 기본 정리 = 복소수를 계수로 갖는 1차 이상의 다항식은, 반드시 복소수 근을 갖는다.
 - => 복소수 이상의 수의 확장은 없다.
 
-#### 컴퓨터의 수체계
+### 컴퓨터의 수체계
 
 - int 는 정수형을 처리하기 위한 변수.
 - 과거 컴퓨터는 cpu는 16bit(2byte)씩 연산
