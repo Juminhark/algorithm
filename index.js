@@ -1,3 +1,5 @@
+// Linked-list
+
 const list = {
 	head: {
 		value: 6,
@@ -16,4 +18,26 @@ const list = {
 
 console.log(list);
 
-6 - 10 - 3 - 30 - 12 - 10 - 8;
+// tree
+
+// graph
+// directed, unweighted graph
+const graph1 = {
+	data1: {
+		value: 'data1',
+		from: [],
+		to: ['data2', 'data3'],
+	},
+	date2: {
+		value: 'data2',
+		from: ['data1'],
+		to: ['data3'],
+	},
+	date3: {
+		value: 'data3',
+		from: ['data2', 'data1'],
+		to: ['data1'],
+	},
+};
+
+//

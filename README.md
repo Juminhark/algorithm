@@ -498,4 +498,25 @@ const binarySearch = (k, arr, s, e) => {
 
 - 6. Graphs
 
+  - 관계 기반 데이터 구조.
+  - 그래프에서 호출되는 각 노드 또는 정점에는 제목 (A, B, C 등), 내부에 포함 된 값 및 다른 정점과의 링크 목록(edges))이 있습니다.
+  - 관계 : Undirected(양방통행), Directed(방향성)
+  - 처음에는 시각화하기 어렵지만, 이 구조는 회로에서 훈련 네트워크에 이르기까지 관계 차트를 텍스트 형식으로 전달하는 데 매우 중요합니다.
+
+- vertex(정점) 혹은 node, edge(간선)
+- adjacent vertex(인접정점) : edge로 연결된 vertex
+- degree(차수-등급-계급)
+  - 1.  undirected graph 에서는 연결된 edge의 수
+  - 2.  directed graph 에서는 vertex 기준.
+    - in-degree : 입력차수 : vertex가 방향의 대상이 되는 edge의 수
+    - out-degree : 출력차수 : vertex가 시작의 대상이 되는 edge의 수
+- cycle : vertex가 경로의 출발임과 동시에 도착의 대상이 될 경우
+- complete graph : 모든 vertex가 서로 direct하게 adjacent vertex 인 경우
+
+- **weighted graph** : edge에 가중치가 존재할경우
+
+- 장점 : 텍스트를 통해 시각적으로 빠르게 전달, 많은 정보를 포함하고 있는 관계형 구조를 표현해야하는 주제에 적합
+- 단점 : 높은 수준에서는 텍스트를 이미지화 하기 어렵다.
+- 활용 : 네트워크 표현
+
 - 7. Hash Tables (Map)
