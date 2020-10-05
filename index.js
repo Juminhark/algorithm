@@ -1,43 +1,16 @@
-// Linked-list
+// 개발자 => js (전방위에서 활용) => front, backend
+// c++ : 기계친화적(메모리관리, 최적화)
+// python : 인공지능 (대규모 데이터 활용)
 
-const list = {
-	head: {
-		value: 6,
-		next: {
-			value: 10,
-			next: {
-				value: 12,
-				next: {
-					value: 3,
-					next: null,
-				},
-			},
-		},
-	},
-};
+// c++ => js
+// 비디오개발자들을 대거 채용해서 스페이스X 소프트웨어 제작
 
-console.log(list);
+// 웹. 앱 서비스 => 여행 컨텐츠 웹. 앱 서비스
+// 웹서비스 : 무신사 => 커뮤니티화(비지니스모델 채용)
+// 여행 커뮤니티화. => 네이버, 다음 카페
 
-// tree
+// 여행 가기전 : 여행 계획 => 트리플 => 앱.웹 => 숙박, 비행
+// 여행 중 : 여행지 정보 => 트리플
+// 여행 후 : 여행 후기 => 여행 가기전
 
-// graph
-// directed, unweighted graph
-const graph1 = {
-	data1: {
-		value: 'data1',
-		from: [],
-		to: ['data2', 'data3'],
-	},
-	date2: {
-		value: 'data2',
-		from: ['data1'],
-		to: ['data3'],
-	},
-	date3: {
-		value: 'data3',
-		from: ['data2', 'data1'],
-		to: ['data1'],
-	},
-};
-
-//
+// 지출 왕복 비행, 숙박 => 호텔 트리바고, 부킹닷컴, 컴바인, 에어비앤비

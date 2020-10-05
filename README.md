@@ -45,17 +45,6 @@ console.log('ab'.padStart(5))   // "   ab"
 console.log('ab'.padStart(5, "#"))   // "###ab"
 ```
 
-- Math.abs() : 절대값
-- Math.pow() : 거듭제곱
-- Math.sqrt() : 제곱근
-
-```sh
-// 거듭제곱 : Math.pow([대상 숫자], [거듭제곱 횟수]);
-// 제곱근 : Math.sqrt([대상 숫자]);
-console.log(Math.pow(2, 2));
-console.log(Math.sqrt(4));
-```
-
 - !isNaN(string) : 주어진 값이 NaN 인지 판별
 
 ```sh

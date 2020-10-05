@@ -100,5 +100,3 @@ const combinations = (set, k) => {
 
 // 중복순열 : permutationWithRepetitions
 // 중복조합 : combinationWithRepetitions
-
-//! 언어 자료형 정리
