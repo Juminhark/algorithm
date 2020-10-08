@@ -492,7 +492,8 @@ const binarySearch = (k, arr, s, e) => {
   - 관계 : Undirected(양방통행), Directed(방향성)
   - 처음에는 시각화하기 어렵지만, 이 구조는 회로에서 훈련 네트워크에 이르기까지 관계 차트를 텍스트 형식으로 전달하는 데 매우 중요합니다.
 
-- vertex(정점) 혹은 node, edge(간선)
+- 꼭짓점, 정점 : vertex(vertices), node(nodes)
+- 변, 간선 : edge
 - adjacent vertex(인접정점) : edge로 연결된 vertex
 - degree(차수-등급-계급)
   - 1.  undirected graph 에서는 연결된 edge의 수
