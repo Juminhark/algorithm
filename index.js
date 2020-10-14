@@ -1,109 +1,134 @@
-// 개발자 => js (전방위에서 활용) => front, backend
-// c++ : 기계친화적(메모리관리, 최적화)
-// python : 인공지능 (대규모 데이터 활용)
+//* asymptotic notation(점근적 표기법)
 
-// c++ => js
-// 비디오개발자들을 대거 채용해서 스페이스X 소프트웨어 제작
+//* 알고리즘의 실행시간
+//* 1. 입력값의 크기에 따른 알고리즘의 실행 시간
+//* 2. 입력값의 크기에 따라 이함수가 얼마마 빨리 커지는지 => 실행 시간의 성장률(rate of growth)
 
-// 웹. 앱 서비스 => 여행 컨텐츠 웹. 앱 서비스
-// 웹서비스 : 무신사 => 커뮤니티화(비지니스모델 채용)
-// 여행 커뮤니티화. => 네이버, 다음 카페
+//* 6n^2 + 1000n + 3000 에서 기하급수적으로 늘어나는 n^2에 비해
+//* 나머지 항목은 증가률에 기여하는바가 작다.
 
-// 여행 가기전 : 여행 계획 => 트리플 => 앱.웹 => 숙박, 비행
-// 여행 중 : 여행지 정보 => 트리플
-// 여행 후 : 여행 후기 => 여행 가기전
+//* 상수 계수와 중요하지 않은 항목을 제거한것이 점근적 표기법(asymptotic notation)
+//* big-Θ(Theta) 표기법, big-O 표기법, big-Ω(Omega) 표기법
 
-// 지출 왕복 비행, 숙박 => 호텔 트리바고, 부킹닷컴, 컴바인, 에어비앤비
+//* big-Θ(Theta) 표기법
 
-//* graph theory
+//* example : 선형검색
+const doLinearSearch = (array, targetValue) => {
+	for (let guess = 0; guess < array.length; guess++) {
+		if (array[guess] === targetValue) {
+			return guess; // 찾은 경우
+		}
+	}
+	return -1; // 찾지 못한 경우
+};
+//* 이 경우 array.length = n 만큼의 수 안에서 찾아내기 때문에 for문은 최대 n번 반복.
+//* for문안에서 수행은 다음과 같다.
+//* 1. guess와 array.length를 비교합니다
+//* 2. array[guess]와 targetValue를 비교합니다
+//* 3. 가능하다면 guess의 값을 반환합니다
+//* 4. guess를 증가시킵니다
+//* 위의 수행을 for문안에서 반복하기 때문에  c1(임의의 상수) * n 만큼의 계산 시간이 필요.
+//* 여기에 추가적으로 초기화에 필요한 계산이 있기때문에 c1 * n + c2
 
-//* 꼭짓점, 정점 : vertex  , 교점 : node
-//* 변, 간선 : edge, link, line
-//* 방향성 : directed, undirected
-//* 연결 : incident
-//* 인접 : adjacent, neighbors
-//* 차수 : degree
+//* 실제 계산 시간은 c1의 최솟값 k1, c1의 최대값 k2 안에 존재.
+//* 중요 항목에 집중하면
+//* k1 * n <= c1 * n <= k2 * n
+//* 이러한 경우 Θ(n) 으로 표시 한다.
+//* Ω(n), O(n) => Θ(n)
 
-//* 경로 : path
-//* 최단경로 : shortest path
+//* 일반식으로 만들면 어떤 함수 f(n)에 대하여 실행 시간이 Θ(f(n))
+//! big-Θ표기법을 사용하는 것은 실행 시간에 대해 점근적으로 근접한 한계값. 점진적 상한선, 하한선이 존재
 
-//* 순환 : cycle
-//* 방향성 비순환 그래프 : directed acyclic graph(dag)
+//* big-O 표기법
+//! big-O표기법을 사용하는 것은 실행 시간에 대해 위에 점근적으로 근접한 한계값. 점진적 상한선.
 
-//* 가중치 : weight
-//* 가중그래프 : weighted graph
-//* 가중 방향 그래프 : weighted directed graph
+//* 이진검색 실행 최악의 경우는 Θ(log2(n)) 이지만 첫번째 추측에 맞추면 Θ(1) 이다.
 
-//* directed graph 용어
-//* 입력차수 : in-degree
-//* 출력차수 : out-degree
+//* big-Ω(Omega) 표기법
+//! big-Ω표기법을 사용하는 것은 실행 시간에 대해 아래에 점근적으로 근접한 한계값. 점진적 하한선.
 
-//* 주기 : cycle 안에 시작이외에 반복되는 edge나 node가 없을 때
+//* 정렬
 
-//* 표현 방법
-//* 1. 연결선 리스트(Edge lists)
-//! E(변) 만큼의 공간 필요.
-//! 특정 E를 찾으려면 선형 검색
-//? 변을 찾는데 O(logE)시간 내에 찾으려면 연결선 리스트를 어떻게 구성해야하는가
-const edgeList = [
-	[0, 1],
-	[0, 6],
-	[0, 8],
-	[1, 4],
-	[1, 6],
-	[1, 9],
-	[2, 4],
-	[2, 6],
-	[3, 4],
-	[3, 5],
-	[3, 8],
-	[4, 5],
-	[4, 9],
-	[7, 8],
-	[7, 9],
-];
+//? swap 함수 구현
+const swap = (array, firstIndex, secondIndex) => {
+	let temp = array[firstIndex];
+	array[firstIndex] = array[secondIndex];
+	array[secondIndex] = temp;
+};
 
-//* 2. 인접 행렬(Adjacent Matrix)
-//! V(정점)^2 만큼의 공간 필요.
-//! 비방향 그래프는 대칭.
-//! 탐색은 O(1)
-const UndirectedAdjMatrix = [
-	[0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
-	[1, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-	[0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
-	[0, 0, 0, 0, 1, 1, 0, 0, 1, 0],
-	[0, 1, 1, 1, 0, 1, 0, 0, 0, 1],
-	[0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-	[1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-	[1, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-	[0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
-];
+let testArray = [7, 9, 4];
 
-const weightedAdjMatrix = [
-	[0, 8, 0, 0, 0, 0, 10, 0, 4, 0],
-	[10, 0, 0, 0, 2, 0, 3, 0, 0, 1],
-	[0, 0, 0, 0, 1, 0, 8, 0, 0, 0],
-	[0, 0, 0, 0, 4, 3, 0, 0, 2, 0],
-	[0, 1, 2, 3, 0, 7, 0, 0, 0, 6],
-	[0, 0, 0, 4, 1, 0, 0, 0, 0, 0],
-	[5, 4, 1, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 8, 9],
-	[1, 0, 0, 8, 0, 0, 0, 5, 0, 0],
-	[0, 7, 0, 0, 7, 0, 0, 2, 0, 0],
-];
+swap(testArray, 0, 1);
+// console.log(testArray); //[9, 7, 4]
+swap(testArray, 1, 2);
+// console.log(testArray); //[9, 4, 7]
+swap(testArray, 0, 2);
+// console.log(testArray); //[7, 4, 9]
 
-//* 3. 인접 리스트(Adjacent List)
-//! E 탐색에 d(degree)만큼 걸린다. => 인접리스트의 길이.
-const adjList = [
-	[1, 6, 8],
-	[0, 4, 6, 9],
-	[4, 6],
-	[4, 5, 8],
-	[1, 2, 3, 5, 9],
-	[3, 4],
-	[0, 1, 2],
-	[8, 9],
-	[0, 3, 7],
-	[1, 4, 7],
-];
+//* 선택 정렬 : 가장 작은 원소를 선택하여 순차적으로 배치
+
+//? 하위 배열에서 최솟값 찾기
+const indexOfMinimum = (array, startIndex) => {
+	let minValue = array[startIndex];
+	let minIndex = startIndex;
+
+	for (let unitIndex = minIndex + 1; unitIndex < array.length; unitIndex++) {
+		if (array[unitIndex] < array[minIndex]) {
+			minIndex = unitIndex;
+			minValue = array[unitIndex];
+		}
+	}
+
+	return minIndex;
+};
+
+let array = [18, 6, 66, 44, 9, 22, 14];
+// console.log(indexOfMinimum(array, 2)); // 4
+// console.log(indexOfMinimum(array, 0)); // 1
+// console.log(indexOfMinimum(array, 5)); // 6
+
+//? 선택 정렬 구현
+const selectionSort = (array) => {
+	let minIndex;
+	for (let i = 0; i < array.length; i++) {
+		minIndex = indexOfMinimum(array, i);
+		swap(array, i, minIndex);
+	}
+};
+
+let array1 = [2, 12, 9, 8, 4, 1, 5];
+selectionSort(array1);
+// console.log(array1);
+
+//* 선택정렬 분석하기
+
+//* 선택 정렬은 배열의 인덱스(n)만큼 indexOfMinimum, swap function을 호출 한다.
+//* swap : n => Θ(n)
+//* indexOfMinimum : Σ(1~n) x 만큼 => 1 + 2 + ...+ n-1 + n => (n+1)(n/2) => 1/2n^2 + 1/2n => Θ(n^2)
+
+//* selectionSort => Θ(n^2)
+
+//* 삽입 정렬 : 앞의 원소부터 차레대로 진행하여 원소 앞의 이미 정렬된 배열에 자신의 위치를 삽입
+
+const insert = (array, rightIndex, value) => {
+	// Compare values between array[rightIndex] and value.
+	// if value is smaller than array[rightIndex], that array's value will be copied to array[rightIndex+1].
+	// This work keep going until finding value is bigger than array[i]("for" loop)
+	// if find smaller array value or i reach 0, loop will be end and value will be copied to array[i+1]
+	let i;
+	for (i = rightIndex; i >= 0 && array[i] > value; i--) {
+		array[i + 1] = array[i];
+	}
+	array[i + 1] = value;
+};
+
+let array2 = [3, 5, 7, 11, 13, 2, 9, 6];
+
+insert(array2, 4, 2);
+console.log(array2); // [2, 3, 5, 7, 11, 13, 9, 6];
+
+insert(array2, 5, 9);
+console.log(array2); // [2, 3, 5, 7, 9, 11, 13, 6];
+
+insert(array2, 6, 6);
+console.log(array2); // [2, 3, 5, 6, 7, 9, 11, 13];
