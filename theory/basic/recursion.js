@@ -1,7 +1,6 @@
 //* recursion 재귀 : 자신을 다시 호출
 
-//? 예시 : 거듭제곱 (밑^지수)
-
+//? 문제 : 거듭제곱 (밑^지수)
 // Math.pow(x, n) : 거듭제곱(x^n) 을 구현하는 2가지 방법
 
 // 1. 반복적인 사고를 통한 방법: for 루프
@@ -22,6 +21,7 @@ const powRecursion = (x, n) => {
 		return x * powRecursion(x, n - 1);
 	}
 };
+x ^ 2;
 
 console.log(powFor(2, 2)); // 4
 console.log(powRecursion(2, 3)); // 8
@@ -44,11 +44,23 @@ console.log(Math.pow(2, 4)); // 16
 
 //? 문제 : 팩토리얼 : n! => 1 x 2 x ... x (n-1) x n
 
-const factorial = (n) => {
-	return n == 1 ? 1 : n * factorial(n - 1);
+// for문
+const factorialFor = (n) => {
+	let result = 1;
+
+	for (let i = 1; i <= n; i++) {
+		result *= i;
+	}
+	return result;
 };
 
-console.log(factorial(4)); // 1 x 2 x 3 x 4 = 24
+// 재귀
+const factorialRecursion = (n) => {
+	return n == 1 ? 1 : n * factorialRecursion(n - 1);
+};
+
+console.log(factorialFor(4)); // 1 x 2 x 3 x 4 = 24
+console.log(factorialRecursion(4)); // 1 x 2 x 3 x 4 = 24
 
 //? 문제 : 피보나치수열
 
@@ -75,6 +87,7 @@ let company = {
 		internals: [{ name: 'Jack', salary: 1300 }],
 	},
 };
+1000 + 1600 + (2000 + 1800) + 1300;
 
 // 급여 합계를 구해주는 함수
 const sumSalaries = (department) => {
