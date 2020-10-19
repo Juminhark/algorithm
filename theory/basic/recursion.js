@@ -21,7 +21,6 @@ const powRecursion = (x, n) => {
 		return x * powRecursion(x, n - 1);
 	}
 };
-x ^ 2;
 
 console.log(powFor(2, 2)); // 4
 console.log(powRecursion(2, 3)); // 8
