@@ -1,6 +1,26 @@
 //* Sorting : 정렬
 
-//* Bubble Sort(거품정렬) : 서로 인접한 두원소를 검사하여 순서에 맞지않은 경우 위치를 바꾼다 : O(n**2)
+//* 선택정렬
+//* 최대 실행 시간 : Θ(n^2)
+//* 최소 실행 시간 : Θ(n^2)
+//* 평균 실행 시간 : Θ(n^2)
+
+//* 삽입정렬
+//* 최대 실행 시간 : Θ(n^2)
+//* 최소 실행 시간 : Θ(n)
+//* 평균 실행 시간 : Θ(n^2)
+
+//* 병합정렬
+//* 최대 실행 시간 : Θ(nlgn)
+//* 최소 실행 시간 : Θ(nlgn)
+//* 평균 실행 시간 : Θ(nlgn)
+
+//* 빠른정렬
+//* 최대 실행 시간 : Θ(n^2)
+//* 최소 실행 시간 : Θ(nlgn)
+//* 평균 실행 시간 : Θ(nlgn)
+
+//* Bubble Sort(거품정렬) : 서로 인접한 두원소를 검사하여 순서에 맞지않은 경우 위치를 바꾼다 : O(n^2)
 
 const bubble_sort = (arr) => {
 	let temp;
@@ -210,6 +230,172 @@ const merge_sort = (arr) => {
 // } else {
 // 	console.log('!0');
 // }
+
+// * 분할 정복(Divide-and-conquer)
+// * 한 문제를 탈출조건에 만족할때까지 하위 문제로 나누어 해결
+// * 재귀 알고리즘 설계 패러다임에서 살펴본 위의 방법을 분할 정복이라 통칭한다.
+// * 병합 정렬, 빠른 정렬 : 분할정복의 예.
+
+// * Merge Sort (병합 정렬) : 배열을 더이상 나눠질수없는 배열로 나누어 배열 단위로 정렬
+// * array 배열의 시작 인덱스 p 부터 끝 인덱스 r에 대하여
+// * 1. 분할 : 중간 인덱스 q = Math.floor((p + r) / 2) 를 기점으로 하위 배열로 분할
+// * 2. 정복 : 가장 작은 단위까지 분할된 하위 배열을 재귀적으로 정렬
+// * 3. 결합 : 분할단계에서 재귀적으로 호출되어 나뉜 하위 배열을 정렬하며 결합.
+// * 탈출 조건 : p >= r 인 경우.
+//!  실제로 정렬이 진행되는 곳은 바로 결합 단계
+
+const merge = (array, p, q, r) => {
+	// p : 배열 시작, r : 배열 끝, q : 하위 배열 중간
+	let lowHalf = [];
+	let highHalf = [];
+
+	let k = p;
+	let i;
+	let j;
+
+	// 왼쪽 하위 배열  k : p ~ q
+	for (i = 0; k <= q; i++, k++) {
+		lowHalf[i] = array[k];
+	}
+
+	// 오른쪽 하위 배열 k : q ~ r
+	for (j = 0; k <= r; j++, k++) {
+		highHalf[j] = array[k];
+	}
+	// 초기화
+	k = p;
+	i = 0;
+	j = 0;
+	console.log(lowHalf);
+	console.log(highHalf);
+
+	// 배열 병합
+	while (i < lowHalf.length && j < highHalf.length) {
+		if (lowHalf[i] < highHalf[j]) {
+			array[k] = lowHalf[i];
+			i++;
+		} else {
+			array[k] = highHalf[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < lowHalf.length) {
+		array[k] = lowHalf[i];
+		i++;
+		k++;
+	}
+	while (j < highHalf.length) {
+		array[k] = highHalf[j];
+		j++;
+		k++;
+	}
+};
+
+const mergeSort = (array, p, r) => {
+	if (p < r) {
+		let q = Math.floor((p + r) / 2);
+		console.log(q);
+		mergeSort(array, p, q);
+		mergeSort(array, q + 1, r);
+		merge(array, p, q, r);
+		console.log(array);
+	}
+};
+
+let array = [14, 0, 3, -2, 9, -1, 6, 2];
+// mergeSort(array, 0, array.length - 1);
+// console.log(array); // [-2, -1, 0,  2, 3,  6, 9, 14]
+
+//* 병합정렬 분석하기
+//* merge 안에서 n개를 다룰때 모든원소에 접근하여 highHalf 와 lowHalf에 지정을 해주고
+//* 다시 highHalf 와 lowHalf 모든원소에 접근하여 array에 재배열을 해주기 때문에
+//* c * n 만큼의 시간복잡도를 갖게 된다.
+
+//* n array => c * n
+//* n/2 subArray => c * n/2 * 2개 => c * n
+//* n/4개 subArray => c * n/4 * 4개 => c * n
+//* n/8개 subArray => c * n/8 * 8개 => c * n
+
+//* 즉 차수 만큼 위의 행동을 반복하게 되는데 n개의 array의 실행 차수는 log2 n + 1 이 된다.
+//* c * n (log2 n + 1) => cn * log2 n + c * n => Θ(n * log2 n)
+
+//* Quick Sort (빠른 정렬) : 기준값을 두어 작으면 왼쪽, 크면 오른쪽으로 배치를 반복하여 정렬
+//* 1. 배열안의 임의의 피벗을 기준으로 피벗보다 작으면 왼쪽, 크면 오른쪽 으로 정렬.
+//* 2. 첫번째 피벗을 기준으로 정렬된 하위 배열에서 다시 피벗을 설정하여 1. 반복.
+
+//? 피벗을 가장 오른쪽 원소로 지정할때 예제.
+array = [9, 7, 5, 11, 12, 2, 14, 3, 10, 6];
+//? 위와 같을때 피벗은 가장 오른쪽 원소 6 이되고
+//? 6을 기준으로 작은값을 왼쪽과 큰값을 오른쪽으로 나누면
+const subArray = (array) => {
+	let left = [];
+	let right = [];
+
+	let pivot = array.pop(); // 6
+
+	// [5, 2, 3, 6, 9, 7 ,11, 12, 14 ,10]
+
+	while (array.length) {
+		let unit = array.shift();
+		if (unit <= pivot) {
+			left.push(unit);
+		} else {
+			right.push(unit);
+		}
+	}
+
+	left.push(pivot);
+
+	array = left.concat(right);
+
+	return array;
+};
+
+console.log(subArray(array));
+
+const swap = (array, firstIndex, secondIndex) => {
+	let temp = array[firstIndex];
+	array[firstIndex] = array[secondIndex];
+	array[secondIndex] = temp;
+};
+
+const partition = (array, p, r) => {
+	//! pivot == array[r]. 가장 오른쪽 원소.
+	let storeIndex = p;
+	for (let i = p; i < r; i++) {
+		if (array[i] <= array[r]) {
+			swap(array, storeIndex, i);
+			storeIndex++;
+			4;
+		}
+	}
+	//! for이 종료되면 (작은것)(큰것)(pivot) 으로 정렬
+	//! pivot을 가운데 위치
+	swap(array, r, storeIndex);
+	return storeIndex;
+};
+
+const quickSort = (array, p, r) => {
+	if (p < r) {
+		var pivot = partition(array, p, r);
+		quickSort(array, p, pivot - 1);
+		quickSort(array, pivot + 1, r);
+	}
+};
+
+array = [9, 7, 5, 11, 12, 2, 14, 3, 10, 6];
+quickSort(array, 0, array.length - 1);
+console.log(array); // [ 2,  3,  5,  6,  7, 9, 10, 11, 12, 14 ]
+
+array = [14, 0, 3, -2, 9, -1, 6, 2];
+quickSort(array, 0, array.length - 1);
+console.log(array); //[ -2, -1, 0,  2, 3,  6, 9, 14]
+
+//* 빠른 정렬은 제자리에서 수행.
+//* 최악의 경우 : Θ(n ** 2) => 매번 선택한 pivot이 가장 크거나 작을경우 선택정렬, 삽입정렬과 같은수준.
+//* 평균수행 시간 : Θ(n * log2 n)
+//* 일반적으로 병합정렬, 선택정렬, 삽입정렬보다 성능이 좋다
 
 //* Quick Sort(퀵 정렬) : 기준값을 두어 작으면 왼쪽, 크면 오른쪽으로 배치를 반복하여 정렬
 // 배열이 순열(이미 정렬됨)이거나 역순으로 정렬되었을 경우의 시간복잡도 : O(n**2)
