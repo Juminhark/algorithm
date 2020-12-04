@@ -33,3 +33,311 @@
 //* complete binary tree(완전 이진 트리) : 마지막 레벨을 제외하고 모든 레벨이 완전히 채워져 있으며, 마지막 레벨의 모든 노드는 가능한 한 가장 왼쪽에 있다.
 //* balanced binary tree(균형 이진 트리) : 잎 노드에 대해 가능한 한 최대의 최소 높이, 모든 노드의 왼쪽과 오른쪽의 하위 트리와의 높이가 1 이상 차이가 나지 않는 이진 트리 구조
 //* degenerate tree : 각 부모 노드는 오직 한 개의 연관 자식 노드를 갖는다. 이는 성능 면에서 트리가 linked list 데이터 구조처럼 동작한다는 것을 의미
+
+// var Tree = (value) => {
+// 	var newTree = Object.create(treeMethods);
+// 	newTree.value = value;
+
+// 	newTree.children = [];
+
+// 	return newTree;
+// };
+
+// var treeMethods = {};
+
+// treeMethods.addChild = (value) => {
+// 	let node = new Tree(value);
+// 	this.children.push(node);
+// };
+
+// treeMethods.contains = (target) => {
+// 	let result = false;
+
+// 	var recursion = (element) => {
+// 		if (element.value === target) {
+// 			result = true;
+// 			return;
+// 		}
+// 		for (let i = 0; i < element.children.length; i++) {
+// 			recursion(element.children[i]);
+// 		}
+// 	};
+// 	recursion(this);
+// 	return result;
+// };
+
+// function Node(data) {
+// 	this.data = data;
+// 	this.children = [];
+// }
+
+// class Tree {
+// 	constructor() {
+// 		this.root = null;
+// 	}
+
+// 	add(data, toNodeData) {
+// 		const node = new Node(data);
+
+// 		const parent = toNodeData ? this.findBFS(toNodeData) : null;
+
+// 		if (parent) parent.children.push(node);
+// 		else if (!this.root) this.root = node;
+// 		else return 'Tried to store node at root when root already exists.';
+// 	}
+
+// 	findBFS(data) {
+// 		const queue = [this.root];
+// 		let _node = null;
+
+// 		this.traverseBFS((node) => {
+// 			if (node.data == data) _node = node;
+// 		});
+
+// 		return _node;
+// 	}
+
+// 	traverseBFS(cb) {
+// 		const queue = [this.root];
+
+// 		if (cb)
+// 			while (queue.length) {
+// 				const node = queue.shift();
+
+// 				cb(node);
+
+// 				for (const child of node.children) queue.push(child);
+// 			}
+// 	}
+// }
+
+// (function test() {
+// 	let tree = new Tree();
+
+// 	tree.add('Node1');
+// 	tree.add('Node2', 'Node1');
+// 	tree.add('Node3', 'Node1');
+
+// 	tree.add('Node4', 'Node2');
+// 	tree.add('Node5', 'Node3');
+
+// 	tree.traverseBFS((node) => {
+// 		console.log('Current node: ', node);
+// 	});
+// })();
+
+//* Binary Search Trees / [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
+
+class Node {
+	constructor(value) {
+		this.value = value;
+		this.left = null;
+		this.right = null;
+	}
+}
+
+class BST {
+	constructor(value) {
+		this.root = new Node(value);
+		this.count = 1;
+	}
+
+	size() {
+		return this.count;
+	}
+
+	insert(value) {
+		this.count++;
+
+		let newNode = new Node(value);
+
+		const searchTree = (node) => {
+			// if value < node.value, go left
+			if (value < node.value) {
+				// if no left child, append new node
+				if (!node.left) {
+					node.left = newNode;
+				}
+				// if left child, look left again
+				else {
+					searchTree(node.left);
+				}
+			}
+			// if value > node.value, go right
+			else if (value > node.value) {
+				// if no right child, append new node
+				if (!node.right) {
+					node.right = newNode;
+				}
+				// if right child, look right again
+				else {
+					searchTree(node.right);
+				}
+			}
+		};
+
+		searchTree(this.root);
+	}
+
+	min() {
+		let currentNode = this.root;
+
+		// continue traversing left until no more children
+		while (currentNode.left) {
+			currentNode = currentNode.left;
+		}
+
+		return currentNode.value;
+	}
+
+	max() {
+		let currentNode = this.root;
+
+		// continue traversing left until no more children
+		while (currentNode.right) {
+			currentNode = currentNode.right;
+		}
+
+		return currentNode.value;
+	}
+
+	contains(value) {
+		let currentNode = this.root;
+
+		while (currentNode) {
+			if (value === currentNode.value) {
+				return true;
+			}
+			if (value < currentNode.value) {
+				currentNode = currentNode.left;
+			} else {
+				currentNode = currentNode.right;
+			}
+		}
+
+		return false;
+	}
+
+	//* depth first search - branch by branch
+
+	// in-order
+	// left, root, right
+	// 2, 3, 12, 15, 28, 36, 39
+	dfsInOrder() {
+		let result = [];
+
+		const traverse = (node) => {
+			// if left child exists, go left again
+			if (node.left) traverse(node.left);
+			// capture root node value
+			result.push(node.value);
+			// if right child exists, go right again
+			if (node.right) traverse(node.right);
+		};
+
+		traverse(this.root);
+
+		return result;
+	}
+
+	// pre-order
+	// root, left, right
+	// 15, 3, 2, 12, 36, 28, 39
+	dfsPreOrder() {
+		let result = [];
+
+		const traverse = (node) => {
+			// capture root node value
+			result.push(node.value);
+			// if left child exists, go left again
+			if (node.left) traverse(node.left);
+			// if right child exists, go right again
+			if (node.right) traverse(node.right);
+		};
+
+		traverse(this.root);
+
+		return result;
+	}
+
+	// post-order
+	// left, right, root
+	// 2, 12, 3, 28, 39, 36, 15
+	dfsPostOrder() {
+		let result = [];
+
+		const traverse = (node) => {
+			// if left child exists, go left again
+			if (node.left) traverse(node.left);
+			// if right child exists, go right again
+			if (node.right) traverse(node.right);
+			// capture root node value
+			result.push(node.value);
+		};
+
+		traverse(this.root);
+
+		return result;
+	}
+
+	//* breadth first search - level by level
+
+	//use a queue!
+	// 15, 3, 36, 2, 12, 28, 39
+	bfs() {
+		let result = [];
+		let queue = [];
+
+		queue.push(this.root);
+
+		while (queue.length) {
+			let currentNode = queue.shift();
+
+			result.push(currentNode.value);
+
+			if (currentNode.left) {
+				queue.push(currentNode.left);
+			}
+			if (currentNode.right) {
+				queue.push(currentNode.right);
+			}
+		}
+
+		return result;
+	}
+}
+
+//       15
+//   3        36
+// 2   12  28   39
+
+const bst = new BST(15);
+bst.insert(3);
+bst.insert(36);
+bst.insert(2);
+bst.insert(12);
+bst.insert(28);
+bst.insert(39);
+
+console.log(bst);
+
+console.log(bst.size()); // 7
+
+console.log(bst.min()); // 2
+console.log(bst.max()); // 39
+
+console.log(bst.contains(12)); // true
+console.log(bst.contains(11)); // false
+
+//* DFS!!!
+//* in-order
+console.log(bst.dfsInOrder()); // 2, 3, 12, 15, 28, 36, 39
+
+//* pre-order
+console.log(bst.dfsPreOrder()); // 15, 3, 2, 12, 36, 28, 39
+
+//* post-order
+console.log(bst.dfsPostOrder()); // 2, 12, 3, 28, 39, 36, 15
+
+//* BFS!!!
+console.log(bst.bfs()); // 15, 3, 36, 2, 12, 28, 39

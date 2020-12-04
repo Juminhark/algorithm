@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"dependencies": {
 		"fs": "0.0.1-security",
-		"nodemon": "^2.0.4"
+		"nodemon": "^2.0.6"
 	},
 	"devDependencies": {},
 	"scripts": {
