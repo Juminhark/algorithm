@@ -96,7 +96,7 @@ class Tree {
 	});
 })();
 
-//* Binary Search Trees / [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
+//* Binary Search Trees
 
 class BinaryNode {
 	constructor(value) {

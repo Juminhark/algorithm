@@ -1,20 +1,3 @@
-- 개발자 => js (전방위에서 활용) => front, backend
-- c++ : 기계친화적(메모리관리, 최적화)
-- python : 인공지능 (대규모 데이터 활용)
-
-- c++ => js
-- 비디오개발자들을 대거 채용해서 스페이스X 소프트웨어 제작
-
-- 웹. 앱 서비스 => 여행 컨텐츠 웹. 앱 서비스
-- 웹서비스 : 무신사 => 커뮤니티화(비지니스모델 채용)
-- 여행 커뮤니티화. => 네이버, 다음 카페
-
-- 여행 가기전 : 여행 계획 => 트리플 => 앱.웹 => 숙박, 비행
-- 여행 중 : 여행지 정보 => 트리플
-- 여행 후 : 여행 후기 => 여행 가기전
-
-- 지출 왕복 비행, 숙박 => 호텔 트리바고, 부킹닷컴, 컴바인, 에어비앤비
-
 # Algorithm(알고리즘) : Data Processing within a finite amount of apace and time
 
 - 알고리즘의 키 포인트는
@@ -530,3 +513,7 @@ re.test(t); // false
 - short: 16비트 정수형
 - int: 32비트 정수형
 - long long: 64비트 정수형
+
+## Reference
+
+- [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
