@@ -1,116 +1,15 @@
-# Algorithm(알고리즘) : Data Processing within a finite amount of apace and time
-
-- 알고리즘의 키 포인트는
-- 1. Big-O Notation for Input Size : 주어진 데이터에 따른 Big-O 변화
-- 2. Space & Time Complexity : 공간, 시간 복잡도
-- 3. Data Structure : 이용하는 자료구조의 종류
-
-## [Big-O 표기법](https://malonmiming.tistory.com/104)
-
-- Mathematical notation that describes algorithm efficiency : 알고리즘의 효율성을 묘사하는 수학적 표기법
-- Time & Space complexity : 시간 & 공간 복잡도
-- Describes the growth rate of algorithms : 알고리즘의 성장률(입력 크기가 커짐에 따라 알고리즘의 비용이 증가하는 속도) - 실제 러닝타임의 표시 보다는 data나 user의 증가율에 따른 알고리즘의 성능을 예측하는것.
-
-- 처리속도의 증가율을 고려하기 때문에 상수값을 제외한 가장 큰 차수로 표기.
-
-### O(1) : constant time
-
-```ts
-const one = (arr) => {
-	return arr[0] == 0 ? true : false;
-};
-```
-
-- 입력데이터의 크기와 상관없이 언제나 일정한 시간 소요.
-- 데이터가 증가함에 따라 성능의 차이가 없다.
-
-### O(n) : liner(1차) time
-
-```ts
-const n = (arr) => {
-	for (let unit of arr) {
-		console.log(unit);
-	}
-};
-```
-
-- 입력데이터의 크기와 비례해서 처리 시간이 증가
-
-### O(n^2) : quadratic(2차) time
-
-```ts
-const n = (arr) => {
-	for (let i of arr) {
-		for (let j of arr) {
-			console.log(i + j);
-		}
-	}
-};
-```
-
-### O(nm) : quadratic(2차) time
-
-```ts
-const n = (arr1, arr2) => {
-	for (let i of arr1) {
-		for (let j of arr2) {
-			console.log(i + j);
-		}
-	}
-};
-```
-
-### O(n^3) : polynomial(다항) / cubic(직육면체 - 3차원) time
-
-```ts
-const n = (arr) => {
-	for (let i of arr) {
-		for (let j of arr) {
-			for (let k of arr) {
-				console.log(i + j + k);
-			}
-		}
-	}
-};
-```
-
-### O(2^n) : exponential(지수) time
-
-```ts
-const fibonacci = (n) => {
-	if (n <= 0) return 0;
-	return n == 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
-};
-```
-
-### O(m^n) : exponential(지수) time
-
-### O(log n ) : log time
-
-```ts
-const binarySearch = (k, arr, s, e) => {
-	// 오름차순 배열안에서 찾을 구간의 첫번째 값 s, 마지막 값 e
-	if (s > e) return -1;
-	let m = (s + e) / 2; // 중간 값
-	if (arr[m] == k) return m;
-	else if (arr[m] > k) return binarySearch(k, arr, s, m - 1);
-	else return binarySearch(k, arr, m + 1, e);
-};
-```
-
-### O(sqrt(n)) : square root **time**
-
 # Data Structure(자료구조) : Efficient access and modification
 
-- 자료구조는 서비스나 어플리케이션에서 필요한 데이터를 메모리에 어떻게 구조적으로 정리해서 담아두고 관리하고
-- 최종적으로 가장 효율적인 방식으로 필요한 데이터에 빠르게 접근하고 필요한 수정 삽입 삭제를 할수있도록 도와준다
-- 서비스에서 client에게 data를 제공하거나 application에서 사용자에게 필요한 data를 보여주거나 수정할때
-- 효율적으로 이를 처리하기 위해서는 기능에 적합한 자료구조를 쓰는것이 중요.
-- 어떠한 자료구조를 사용함에 따라 사용자가 원하는 기능을 수행하는데 속도의 차이가 날수있다.
+- 효율적으로 사용하기 위해서 구조화된 data set
+- 구조화된 data set은 service, application 에서 메모리가 data를 효율적인 방식으로 빠르게 접근, 수정, 삽입, 삭제 할수있도록 한다.
+- 목적과 필요한 기능에 따라 적합한 data structure가 존재한다.
+  - service에서 client에게 data를 제공 => access, search 에 중점.
+  - application에서 user에게 필요한 data를 보여주거나 수정 => access, modification에 중점
+- data structure 마다 사용자가 원하는 기능을 수행하는데 속도의 차이가 날수있다.
 - 대표적으로 Array, Linked-List, Double-Linked-List, Stack, Hash-Table 등.
 
-- 자료구조의 키 포인트는
-- 1. Order : 자료구조안에서 데이터의 순서 보장 여부
+- data structure **key point**
+- 1. Order : structure안에서 data 순서 보장 여부
 - 2. Unique : 중복된 데이터 값을 가질수 있는지 여부
 - 3. Search : 검색의 효율성
 - 4. Modification : 데이터 수정의 효율성
@@ -238,7 +137,109 @@ foo = true; // foo는 Boolean형
       - Symbol (ES6에 추가)
     - Object
 
-### **exhaustive search (brute-force search) : 완전 탐색**
+# Algorithm(알고리즘) : Data Processing within a finite amount of apace and time
+
+- 알고리즘의 키 포인트는
+- 1. Big-O Notation for Input Size : 주어진 데이터에 따른 Big-O 변화
+- 2. Space & Time Complexity : 공간, 시간 복잡도
+- 3. Data Structure : 이용하는 자료구조의 종류
+
+## [Big-O 표기법](https://malonmiming.tistory.com/104)
+
+- Mathematical notation that describes algorithm efficiency : 알고리즘의 효율성을 묘사하는 수학적 표기법
+- Time & Space complexity : 시간 & 공간 복잡도
+- Describes the growth rate of algorithms : 알고리즘의 성장률(입력 크기가 커짐에 따라 알고리즘의 비용이 증가하는 속도) - 실제 러닝타임의 표시 보다는 data나 user의 증가율에 따른 알고리즘의 성능을 예측하는것.
+
+- 처리속도의 증가율을 고려하기 때문에 상수값을 제외한 가장 큰 차수로 표기.
+
+### O(1) : constant time
+
+```ts
+const one = (arr) => {
+	return arr[0] == 0 ? true : false;
+};
+```
+
+- 입력데이터의 크기와 상관없이 언제나 일정한 시간 소요.
+- 데이터가 증가함에 따라 성능의 차이가 없다.
+
+### O(n) : liner(1차) time
+
+```ts
+const n = (arr) => {
+	for (let unit of arr) {
+		console.log(unit);
+	}
+};
+```
+
+- 입력데이터의 크기와 비례해서 처리 시간이 증가
+
+### O(n^2) : quadratic(2차) time
+
+```ts
+const n = (arr) => {
+	for (let i of arr) {
+		for (let j of arr) {
+			console.log(i + j);
+		}
+	}
+};
+```
+
+### O(nm) : quadratic(2차) time
+
+```ts
+const n = (arr1, arr2) => {
+	for (let i of arr1) {
+		for (let j of arr2) {
+			console.log(i + j);
+		}
+	}
+};
+```
+
+### O(n^3) : polynomial(다항) / cubic(직육면체 - 3차원) time
+
+```ts
+const n = (arr) => {
+	for (let i of arr) {
+		for (let j of arr) {
+			for (let k of arr) {
+				console.log(i + j + k);
+			}
+		}
+	}
+};
+```
+
+### O(2^n) : exponential(지수) time
+
+```ts
+const fibonacci = (n) => {
+	if (n <= 0) return 0;
+	return n == 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+};
+```
+
+### O(m^n) : exponential(지수) time
+
+### O(log n ) : log time
+
+```ts
+const binarySearch = (k, arr, s, e) => {
+	// 오름차순 배열안에서 찾을 구간의 첫번째 값 s, 마지막 값 e
+	if (s > e) return -1;
+	let m = (s + e) / 2; // 중간 값
+	if (arr[m] == k) return m;
+	else if (arr[m] > k) return binarySearch(k, arr, s, m - 1);
+	else return binarySearch(k, arr, m + 1, e);
+};
+```
+
+### O(sqrt(n)) : square root **time**
+
+## **exhaustive search (brute-force search) : 완전 탐색**
 
 무차별 대입(brute-force) 의미로 문제해결에 가능한 모든 경우의 수를 열거하고 검사하는 알고리즘. 완전검색은 구현 하기 쉽고 솔루션이있는 경우 항상 찾을 수 있지만 비용은 후보 솔루션 수에 비례한다.
 
@@ -251,7 +252,7 @@ foo = true; // foo는 Boolean형
   - BFS(Breadth First Search) : 너비 우선 탐색
   - 최선우선탐색(Best First Search)
 
-### **DP(Dynamic Programming) : 동적 계획법**
+## **DP(Dynamic Programming) : 동적 계획법**
 
 - 다이나믹 프로그래밍은 메모리를 적절히 수행 시간을 비약적으로 증가시키는 방법입니다.
 - 다이나믹 프로그래밍의 구현은 일반적으로 두 가지 방식(탑다운, 바텀업)으로 구성됩니다
