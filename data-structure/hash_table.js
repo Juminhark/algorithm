@@ -1,4 +1,20 @@
-const hash = (key, size) => {
+const hash_function =
+	'해시 함수는 임의의 길이의 데이터를 고정된 길이의 데이터로 매핑하는 함수.';
+
+const hash =
+	'해시 함수를 통해서 얻어지는 값을 해시 값, 해시 코드, 간단하게 해시라고 한다.';
+
+const hash_table = 'key : value mapping';
+
+//? javascript : objects, map을 통해 해결
+
+//! collusion(충돌) : 같은 key값을 같는 value를 저장할때
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+//* 구현
+const hash_ = (key, size) => {
 	let hashedKey = 0;
 
 	for (let i = 0; i < key.length; i++) {
@@ -19,19 +35,19 @@ class HashTable {
 	}
 
 	insert(key, value) {
-		let idx = hash(key, this.size);
+		let idx = hash_(key, this.size);
 		this.buckets[idx].set(key, value);
 	}
 
 	remove(key) {
-		let idx = hash(key, this.size);
+		let idx = hash_(key, this.size);
 		let deleted = this.buckets[idx].get(key);
 		this.buckets[idx].delete(key);
 		return deleted;
 	}
 
 	search(key) {
-		let idx = hash(key, this.size);
+		let idx = hash_(key, this.size);
 		return this.buckets[idx].get(key);
 	}
 }
@@ -47,12 +63,12 @@ hashTable.insert('darien', 'tuxedo mask');
 
 console.log(hashTable);
 
-// console.log(hashTable.search('rei'));
-// console.log(hashTable.search('lita'));
-// console.log(hashTable.search('serena'));
+console.log(hashTable.search('rei'));
+console.log(hashTable.search('lita'));
+console.log(hashTable.search('serena'));
 
-console.log(hashTable.remove('lita'));
-console.log(hashTable);
+// console.log(hashTable.remove('lita'));
+// console.log(hashTable);
 
-console.log(hashTable.remove('mina'));
-console.log(hashTable);
+// console.log(hashTable.remove('mina'));
+// console.log(hashTable);

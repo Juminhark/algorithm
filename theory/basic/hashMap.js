@@ -4,31 +4,31 @@
 //* 이 때 매핑 전 원래 데이터의 값을 키(key), 매핑 후 데이터의 값을 해시값(hash value),
 //* 매핑하는 과정을 해싱(hashing)이라고 합니다.
 
-// key - hash function - hash code - index
-// index에 접근할때 hash code로 바로 접근 하기 때문에 검색이 빠르다.
+//* key - hash function - hash code - index
+//* index에 접근할때 hash code로 바로 접근 하기 때문에 검색이 빠르다.
 //! 전체 index에서 찾는것이 아니기 때문에
 
-// 예를 들면,
-// index : k, l, p
-// 김씨인 사람은 k, 이씨인 사람은 l, 박씨인 사람은 p
-// 문제점 : 이구조안에 김씨가 많아지면 김씨안에서 또 찾아야하기 때문에
-// O(1) -> O(N) 으로 복잡도가 상승.
-// 김,이,박 성씨로 나누는것이 =>  hash algorithm
-// 같은 방에 data가 많아져서 충돌이 생기는것을 => collision
-// collision이 적을수록 hash algorithm의 효율성이 높다는 뜻.
+//* 예를 들면,
+//* index : k, l, p
+//* 김씨인 사람은 k, 이씨인 사람은 l, 박씨인 사람은 p
+//* 문제점 : 이구조안에 김씨가 많아지면 김씨안에서 또 찾아야하기 때문에
+//* O(1) -> O(N) 으로 복잡도가 상승.
+//* 김,이,박 성씨로 나누는것이 =>  hash algorithm
+//* 같은 방에 data가 많아져서 충돌이 생기는것을 => collision
+//* collision이 적을수록 hash algorithm의 효율성이 높다는 뜻.
 
-// collision
-// different keys => same hash code
-// 문자열 => 정수 처리하면서 동일 정수에 배정
-// different code => same index
-// data가 같은 방에 넣어질때
+//* collision(충돌)
+//* different keys => same hash code
+//* 문자열 => 정수 처리하면서 동일 정수에 배정
+//* different code => same index
+//* data가 같은 방에 넣어질때
 
-// 예제
+//* 예제
 const hashFunction = (key) => {
 	return key % 10;
 };
 
-// 단방향 함수 => 해쉬 함수
+//* 단방향 함수 => 해쉬 함수
 
 console.log(hashFunction(102948)); // 8
 console.log(hashFunction(191919191)); // 1
@@ -54,8 +54,8 @@ console.log(getHashCode('min')); //324
 
 // ConvertToIndex => hash code를 이용해 index를 구하여 방에 넣는다.
 
-const ConvertToIndex = (hashcode, arr) => {
-	return hashcode % arr.length;
+const ConvertToIndex = (hash_code, arr) => {
+	return hash_code % arr.length;
 };
 
 let resultIndex = [0, 1, 2];
@@ -89,7 +89,7 @@ console.log(resultMap);
 
 // 두배열에서 같은 요소를 찾아 각 배열에서 제거하는 알고리즘
 
-const maraton = (participant, completion) => {
+const marathon = (participant, completion) => {
 	// acc:누산기, cur:현재값
 	let newList = participant.reduce((acc, cur) => {
 		acc[cur] = acc[cur] ? acc[cur] + 1 : 1;
@@ -113,21 +113,23 @@ const maraton = (participant, completion) => {
 	return Object.keys(newList)[0];
 };
 
-// console.log(maraton(['leo', 'kiki', 'eden'], ['eden', 'kiki'])); //leo
+// console.log(marathon(['leo', 'kiki', 'eden'], ['eden', 'kiki'])); //leo
+
 // console.log(
-// 	maraton(
+// 	marathon(
 // 		['marina', 'josipa', 'nikola', 'vinko', 'filipa'],
 // 		['josipa', 'filipa', 'marina', 'nikola']
 // 	)
 // ); // "vinko"
+
 // console.log(
-// 	maraton(['mislav', 'stanko', 'mislav', 'ana'], ['stanko', 'ana', 'mislav'])
+// 	marathon(['mislav', 'stanko', 'mislav', 'ana'], ['stanko', 'ana', 'mislav'])
 // ); //"mislav"
 
 // 두배열에서 같은 요소를 찾아 각 배열에서 제거하는 알고리즘
 // 배열에 동일요소가 없을때
 
-const maraton2 = (participant, completion) => {
+const marathon2 = (participant, completion) => {
 	// ** participant는 completion의 모든 요소를 포함하고있다. **
 
 	// participant의 요소를 completion의 각 요소를 찾아내 제거하는 새로운 배열.
@@ -144,7 +146,7 @@ const maraton2 = (participant, completion) => {
 	return answer[0];
 };
 
-const maraton3 = (participant, completion) => {
+const marathon3 = (participant, completion) => {
 	// ** participant는 completion의 모든 요소를 포함하고있다. **
 
 	// participant의 요소를 completion의 각 요소를 찾아내 제거하는 새로운 배열.
