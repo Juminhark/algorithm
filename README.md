@@ -516,6 +516,8 @@ re.test(t); // false
 - int: 32비트 정수형
 - long long: 64비트 정수형
 
+## [javascript-challanges-series](https://github.com/john-smilga/javascript-challanges-series/blob/main/challanges/01-return-3-times.js)
+
 ## Reference
 
 - [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
