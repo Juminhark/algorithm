@@ -17,3 +17,9 @@ console.log(sum(...arr)); // 10
 ## [Array.reduce()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
 ## [String.replace()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
+## [String.substring](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
+
+- sting객체의 시작인덱스부터 종료인덱스 전 까지 부분 문자열 반환
+
+## [String.indexOf()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)

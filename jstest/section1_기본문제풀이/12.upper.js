@@ -46,3 +46,12 @@ const solution3 = (s) => {
 };
 
 console.log(solution3('ItisTimeToStudy'));
+
+//? 영상 풀이
+
+//! 내 풀이
+const solution4 = (str) => {
+  return str.toUpperCase();
+};
+
+console.log(solution4('ItisTimeToStudy'));
