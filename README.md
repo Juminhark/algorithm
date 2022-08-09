@@ -156,7 +156,7 @@ foo = true; // foo는 Boolean형
 
 ```ts
 const one = (arr) => {
-	return arr[0] == 0 ? true : false;
+  return arr[0] == 0 ? true : false;
 };
 ```
 
@@ -167,9 +167,9 @@ const one = (arr) => {
 
 ```ts
 const n = (arr) => {
-	for (let unit of arr) {
-		console.log(unit);
-	}
+  for (let unit of arr) {
+    console.log(unit);
+  }
 };
 ```
 
@@ -179,11 +179,11 @@ const n = (arr) => {
 
 ```ts
 const n = (arr) => {
-	for (let i of arr) {
-		for (let j of arr) {
-			console.log(i + j);
-		}
-	}
+  for (let i of arr) {
+    for (let j of arr) {
+      console.log(i + j);
+    }
+  }
 };
 ```
 
@@ -191,11 +191,11 @@ const n = (arr) => {
 
 ```ts
 const n = (arr1, arr2) => {
-	for (let i of arr1) {
-		for (let j of arr2) {
-			console.log(i + j);
-		}
-	}
+  for (let i of arr1) {
+    for (let j of arr2) {
+      console.log(i + j);
+    }
+  }
 };
 ```
 
@@ -203,13 +203,13 @@ const n = (arr1, arr2) => {
 
 ```ts
 const n = (arr) => {
-	for (let i of arr) {
-		for (let j of arr) {
-			for (let k of arr) {
-				console.log(i + j + k);
-			}
-		}
-	}
+  for (let i of arr) {
+    for (let j of arr) {
+      for (let k of arr) {
+        console.log(i + j + k);
+      }
+    }
+  }
 };
 ```
 
@@ -217,8 +217,8 @@ const n = (arr) => {
 
 ```ts
 const fibonacci = (n) => {
-	if (n <= 0) return 0;
-	return n == 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
+  if (n <= 0) return 0;
+  return n == 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
 };
 ```
 
@@ -228,12 +228,12 @@ const fibonacci = (n) => {
 
 ```ts
 const binarySearch = (k, arr, s, e) => {
-	// 오름차순 배열안에서 찾을 구간의 첫번째 값 s, 마지막 값 e
-	if (s > e) return -1;
-	let m = (s + e) / 2; // 중간 값
-	if (arr[m] == k) return m;
-	else if (arr[m] > k) return binarySearch(k, arr, s, m - 1);
-	else return binarySearch(k, arr, m + 1, e);
+  // 오름차순 배열안에서 찾을 구간의 첫번째 값 s, 마지막 값 e
+  if (s > e) return -1;
+  let m = (s + e) / 2; // 중간 값
+  if (arr[m] == k) return m;
+  else if (arr[m] > k) return binarySearch(k, arr, s, m - 1);
+  else return binarySearch(k, arr, m + 1, e);
 };
 ```
 
@@ -267,15 +267,15 @@ const binarySearch = (k, arr, s, e) => {
 
 ```ts
 let zero = {
-	// key : value
-	name: { firstName: 'Zero', lastName: 'Cho' },
-	// value : any,  () => 일 경우 method
-	nameChange: (b) => {
-		zero.name.lastName = b;
-	},
-	deleteLastName: () => {
-		delete zero.name.lastName;
-	},
+  // key : value
+  name: { firstName: 'Zero', lastName: 'Cho' },
+  // value : any,  () => 일 경우 method
+  nameChange: (b) => {
+    zero.name.lastName = b;
+  },
+  deleteLastName: () => {
+    delete zero.name.lastName;
+  },
 };
 
 let zeroOne = new zero();
@@ -351,10 +351,10 @@ console.log(!isNaN('#')); // false
 
 ### Array.function()
 
-- arr.push() : 뒤에넣기
-- arr.pop() : 뒤에빼기
+- arr.push() : 뒤에 넣기
+- arr.pop() : 뒤에 빼기
+- arr.shift() : 앞에 넣기
 
-- [arr.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
 - [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 복사본 반환
 - [arr.splice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열 요소 삭제, 교체, 새 요소 추가
 - [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
@@ -387,7 +387,7 @@ answerMap.sort(function (a, b) {
 const object = { a: 1, b: 2, c: 3 };
 
 for (const property in object) {
-	console.log(`${property}: ${object[property]}`);
+  console.log(`${property}: ${object[property]}`);
 }
 
 // expected output:
@@ -395,6 +395,10 @@ for (const property in object) {
 // "b: 2"
 // "c: 3"
 ```
+
+### String.function()
+
+- [String.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
 
 ### 비트 연산자
 
@@ -522,7 +526,6 @@ re.test(t); // false
 
 - [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
 
-
 ## baekjoon에서 node 사용
 
 ```js
@@ -532,11 +535,10 @@ re.test(t); // false
 let fs = require('fs');
 let input = fs.readFileSync('/dev/stdin').toString().split(' ');
 
-
 let num = Number(input);
 
-for(let i = 1; i<=num; i++) {
-  consle.log(i)
+for (let i = 1; i <= num; i++) {
+  consle.log(i);
 }
 
 //여러 줄 입력
@@ -553,7 +555,7 @@ for (let i = 1; i < input.length; i++) {
   }
 }
 
-for (let i = 0; i < numbers.length; i++){
+for (let i = 0; i < numbers.length; i++) {
   let num1 = Number(numbers[i][0]);
   let num2 = Number(numbers[i][1]);
 
