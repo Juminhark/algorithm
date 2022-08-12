@@ -9,13 +9,13 @@ let a = [10, 11, 12, 13, 14, 15];
 //! forEach()를 중간에 멈출수 없다
 a.forEach((cur, index) => console.log([cur, index, this]), [1, 2]);
 a.forEach(
-  function (cur, index) {
-    console.log([cur, index, this]);
-  },
-  [1, 2]
+	function (cur, index) {
+		console.log([cur, index, this]);
+	},
+	[1, 2]
 );
 
-//* arrow functio expression
+//* arrow function expression
 // this, super에 대한 바인딩이 없고, methods를 사용할수없다
 
 //* Array.map()
@@ -24,7 +24,7 @@ a.forEach(
 
 const map1 = a.map((x) => x * x);
 const map2 = a.map((v, i) => {
-  if (v % 2 === 0) return v;
+	if (v % 2 === 0) return v;
 });
 console.log(map1);
 console.log(map2);
@@ -34,7 +34,7 @@ console.log(map2);
 // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열을 반환
 
 const filter1 = a.filter((a) => {
-  return a % 2 === 0;
+	return a % 2 === 0;
 });
 console.log(filter1);
 
@@ -47,7 +47,7 @@ console.log(filter1);
 // ex) 배열 전체 sum
 const init = 0;
 const sum = a.reduce((acc, cur, index) => {
-  console.log(index);
-  return acc + cur;
+	console.log(index);
+	return acc + cur;
 }, init);
 console.log(sum);
