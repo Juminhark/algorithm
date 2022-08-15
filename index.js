@@ -1,36 +1,27 @@
-const solution = (arr) => {
-  let answer = [];
-  let tmp = [];
-  let lenx = arr.length; // 3
-  let leny = arr[0].length; // 4
+//? 문제 : 최대매출(Sliding Window)
 
-  // 모든 시험에서
-  for (let i = 0; i < lenx; i++) {
-    for (let j = 0; j < leny - 1; j++) {
-      for (let k = j + 1; k < leny; k++) {
-        if (arr[i][j] > arr[i][k]) tmp.push([j, k]);
-      }
-    }
-  }
+// N일동안의 매출기록중 연속된 K일동안의 최대 매출액
 
-  for (let i = 0; i < tmp.length; i++) {
-    let a = tmp[i];
-    let count = 1;
-    for (let j = i + 1; j < tmp.length; j++) {
-      if (a[0] === tmp[j][0] && a[1] === tmp[j][1]) {
-        count++;
-      }
+// K=3 , arr=[12, 14, 11 ,20, 25, 10, 20, 19, 13, 15]
+// [11, 20, 25] => 56
+
+const solution = (n, k, arr) => {
+  let answer = 0;
+
+  for (let x = 0; x <= n - k; x++) {
+    let sum = 0;
+    let check = []; //* 확인용
+    for (let y = 0; y < k; y++) {
+      sum += arr[x + y];
+      check.push(arr[x + y]); //* 확인용
     }
-    console.log(count);
-    if (count === 3) answer.push(a);
+
+    answer = Math.max(answer, sum);
+    console.log(check); //* 확인용
   }
 
   return answer;
 };
 
-let arr = [
-  [3, 4, 1, 2],
-  [4, 3, 2, 1],
-  [3, 1, 4, 2],
-];
-console.log(solution(arr));
+let arr = [12, 14, 11, 20, 25, 10, 20, 19, 13, 15];
+console.log(solution(10, 3, arr));

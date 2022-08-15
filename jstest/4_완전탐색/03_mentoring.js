@@ -13,68 +13,72 @@
 
 // EX)
 // 4 3
-// 3 4 1 2
+// 3 4 1 2 => 3번학생이 1등, 4번학생이 2등, 1번학생이 3등, 2번 학생이 4등
 // 4 3 2 1
 // 3 1 4 2
 
-//! 내 풀이 false -> 4명중 2명씩 순서있는 쌍의 모든 경우 찾는것으로 풀었다.
-const solution = (arr) => {
-	// EX) [3, 4,1 ,2]
-	// 1 -> 2 / 3 -> 4
-	// 1 -> 3 / 2 -> 4
-	// 1 -> 4 / 2 -> 3
-	// 4명일때 : 3(N-1) * 1(N-3)
-	// 5명일때 : 4(N-1) * 2(N-3)
-	// 6명일때 : 5(N-1) * 3(N-3) * 1(N-5)
+//! 내 풀이
+const solution = (m, n, arr) => {
+  let answer = [];
+  let tmp = [];
 
-	let answer = [];
+  for (let i = 0; i < n; i++) {
+    // 시험
+    for (let j = 0; j < m - 1; j++) {
+      for (let k = j + 1; k < m; k++) {
+        tmp.push([arr[i][j], arr[i][k]]);
+      }
+    }
+  }
 
-	let len = arr.length;
+  for (let i = 0; i < tmp.length; i++) {
+    let a = tmp[i];
+    let count = 1;
+    for (let j = i + 1; j < tmp.length; j++) {
+      if (a[0] === tmp[j][0] && a[1] === tmp[j][1]) {
+        count++;
+      }
+    }
+    if (count === 3) answer.push(a);
+  }
 
-	while (len > 1) {
-		len--;
-		answer.push(len);
-		len--;
-	}
-
-	return answer.reduce((a, b) => a * b);
-};
-
-// console.log(solution([3, 4, 1, 2]));
-
-//? 영상 풀이1
-const solution2 = (test) => {
-	let answer = 0,
-		tmp = [];
-	m = test.length;
-	n = test[0].length;
-
-	// 모든 2명의 학생쌍 중 첫번째 학생이 두번째 학생보다 M번의 시험에서 점수가 높은경우만 카운트
-	for (let i = 1; i <= n; i++) {
-		for (let j = 1; j <= n; j++) {
-			let cnt = 0;
-			for (let k = 0; k < m; k++) {
-				let pi = (pj = 0);
-				for (let s = 0; s < n; s++) {
-					if (test[k][s] === i) pi = s;
-					if (test[k][s] === j) pj = s;
-				}
-				if (pi < pj) cnt++;
-			}
-			if (cnt === m) {
-				tmp.push([i, j]);
-				answer++;
-			}
-		}
-	}
-	console.log(tmp);
-
-	return answer;
+  return answer.length;
 };
 
 let arr = [
-	[3, 4, 1, 2],
-	[4, 3, 2, 1],
-	[3, 1, 4, 2],
+  [3, 4, 1, 2],
+  [4, 3, 2, 1],
+  [3, 1, 4, 2],
 ];
+console.log(solution(4, 3, arr));
+
+//? 영상 풀이1
+const solution2 = (test) => {
+  let answer = 0,
+    tmp = [];
+  m = test.length;
+  n = test[0].length;
+
+  // 모든 2명의 학생쌍 중 첫번째 학생이 두번째 학생보다 M번의 시험에서 점수가 높은경우만 카운트
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= n; j++) {
+      let cnt = 0;
+      for (let k = 0; k < m; k++) {
+        let pi = (pj = 0);
+        for (let s = 0; s < n; s++) {
+          if (test[k][s] === i) pi = s;
+          if (test[k][s] === j) pj = s;
+        }
+        if (pi < pj) cnt++;
+      }
+      if (cnt === m) {
+        tmp.push([i, j]);
+        answer++;
+      }
+    }
+  }
+
+  return answer;
+};
+
 console.log(solution2(arr));
