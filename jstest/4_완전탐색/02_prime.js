@@ -13,7 +13,11 @@ const solution = (n, arr) => {
 
 	// 소수 판별 함수 생성
 	const checkPrime = (a) => {
-		if (a === 1 || a === 2) {
+		if (a === 1) {
+			return false;
+		}
+
+		if (a === 2) {
 			return true;
 		}
 
@@ -31,12 +35,12 @@ const solution = (n, arr) => {
 	while (arr.length) {
 		const unit = Number(
 			arr
-				.shift()
-				.toString()
-				.split('')
-				.reverse()
-				.reduce((a, b) => a + b)
-		);
+				.shift() // 250
+				.toString() // '250'
+				.split('') // ['2','5','0']
+				.reverse() // ['0','5','2']
+				.reduce((a, b) => a + b) // 052
+		); // 52
 
 		if (unit === 1) {
 		} else if (checkPrime(unit)) answer.push(unit);
@@ -46,7 +50,7 @@ const solution = (n, arr) => {
 };
 
 let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
-// console.log(solution(9, arr)); // [23, 2, 73, 2, 3]
+console.log(solution(9, arr)); // [23, 2, 73, 2, 3]
 
 //? 영상 풀이1
 function isPrime(num) {
@@ -59,6 +63,8 @@ function isPrime(num) {
 
 	return true;
 }
+
+console.log(isPrime(2));
 
 const solution2 = (n, arr) => {
 	let answer = [];
