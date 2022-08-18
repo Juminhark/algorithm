@@ -3,6 +3,8 @@
 // N개의 숫자가 입력되면 오름차순으로 출력
 // 정렬하는 방법은 선택정렬
 
+//* 가장 작은(큰) 원소를 선택하여 순차적으로 배치 : O(N**2)
+
 const solution = (arr) => {
   let n = arr.length;
 
@@ -24,10 +26,6 @@ const solution = (arr) => {
 
 let arr = [13, 5, 11, 7, 23, 15];
 // console.log(solution(arr));
-
-//* 선택정렬
-//* 배열의 작은 인덱스에 나머지 인덱스에서 제일 작은 값을 찾아
-//* 두 인덱스의 값을 뒤바꾼다
 
 const solution2 = (arr) => {
   let answer = arr;
