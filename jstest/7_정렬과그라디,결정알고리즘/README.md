@@ -106,7 +106,12 @@ console.log(arr); // [ 1, 2, 3, 4, 5 ]
 // 왜 ^를 거듭제곱으로 알고있었지?
 ```
 
+## Array.slice()
+
+- 배열안에 다른 배열이 존재하면 얕은 복사가 되지만 다른배열이 없을경우 깊은 복사가 된다
+
 # Reference
 
 - [Bitwise XOR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR)
 - [XOR 비트연산](https://ko.khanacademy.org/computing/computer-science/cryptography/ciphers/a/xor-bitwise-operation)
+- [갚은 복사 vs 얕은 복사](https://zzang9ha.tistory.com/372)
