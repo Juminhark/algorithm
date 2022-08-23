@@ -76,7 +76,13 @@ console.log(insertion_sort(arr));
 
 ## 탐욕(Greedy algorithm)
 
-## 결정
+## 결정(Decision) - 이분탐색(Binary Search)
+
+- 정렬되어 있는 배열이 필요
+- left, right, mid
+- mid = Math.floor((lt + rt) /2)
+- target값이 mid값과 비교하여
+- target값이 크면 left = mid + 1, 작으면 right = mid - 1;
 
 ## 두 값을 바꾸는 방법 : 구조 분해 할당
 
