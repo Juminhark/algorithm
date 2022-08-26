@@ -5,6 +5,32 @@
 - 메모리 스택 영역에 함수의 호출과 관계되는 지역변수와 매개변수가 저장되는 영역
 - 함수가 호출되면 스택에는 함수의 매개변수, 호출이 끝난 뒤 돌아갈 반환 주소값, 함수에서 선언된 지역변수 등이 저장
 
+## 01. recursion
+
+- 재귀실행함수와 실행코드간의 위치에 따라
+- Stack frame에 의해 전체 순서가 반전이 될수 있다
+
+```js
+const DFS = (L) => {
+  if (L === 0) return;
+  else {
+    console.log(L);
+    DFS(L - 1);
+  }
+};
+
+const DFS = (L) => {
+  if (L === 0) return;
+  else {
+    DFS(L - 1);
+    console.log(L);
+  }
+};
+```
+
+## [04. 부분집합 구하기 (이진트리 DFS)](https://swlock.blogspot.com/2016/03/power-set.html)
+
 ## Rerference
 
 - [tcp school](http://www.tcpschool.com/c/c_memory_stackframe)
+- [부분집합구하기](https://swlock.blogspot.com/2016/03/power-set.html)

@@ -39,41 +39,41 @@ queue.shift();
 // 각 작업의 개발 속도가 적힌 정수 배열 speeds
 
 const developmentFunction = (progresses, speeds) => {
-	let result = [];
-	let answer = [];
+  let result = [];
+  let answer = [];
 
-	// 각 progresses 에 speed를 반복적으로 더해 완료 일자를 구한다
-	for (let f in progresses) {
-		let count = 0;
-		while (progresses[f] < 100) {
-			progresses[f] += speeds[f];
-			count++;
-		}
-		result.push(count);
-	}
-	console.log('기능 별 완료 일자');
-	console.log(result);
+  // 각 progresses 에 speed를 반복적으로 더해 완료 일자를 구한다
+  for (let f in progresses) {
+    let count = 0;
+    while (progresses[f] < 100) {
+      progresses[f] += speeds[f];
+      count++;
+    }
+    result.push(count);
+  }
+  console.log('기능 별 완료 일자');
+  console.log(result);
 
-	let max = result.shift();
-	let next = 1;
+  let max = result.shift();
+  let next = 1;
 
-	//! stack 자료 구조를 사용.
-	//! 이 작업을 위의 for문 안에서 해결 가능.
-	while (result.length !== 0) {
-		let a = result.shift();
-		if (max < a) {
-			max = a;
-			answer.push(next);
-			next = 1;
-		} else {
-			next++;
-		}
-		if (result.length == 0) {
-			answer.push(next);
-		}
-	}
+  //! stack 자료 구조를 사용.
+  //! 이 작업을 위의 for문 안에서 해결 가능.
+  while (result.length !== 0) {
+    let a = result.shift();
+    if (max < a) {
+      max = a;
+      answer.push(next);
+      next = 1;
+    } else {
+      next++;
+    }
+    if (result.length == 0) {
+      answer.push(next);
+    }
+  }
 
-	return answer;
+  return answer;
 };
 
 // console.log(developmentFunction([93, 30, 55], [1, 30, 5]));
@@ -87,44 +87,44 @@ console.log(developmentFunction([95, 90, 99, 99, 80, 99], [1, 1, 1, 1, 1, 1]));
 // 1초에 1씩 트럭 이동.
 
 const bridge = (bridge_length, weight, truck_weights) => {
-	let br = Array(bridge_length).fill(0);
-	let countWeight = 0;
-	let sec = 0;
-	let last = truck_weights[truck_weights.length - 1];
+  let br = Array(bridge_length).fill(0);
+  let countWeight = 0;
+  let sec = 0;
+  let last = truck_weights[truck_weights.length - 1];
 
-	// console.log(br);
-	// console.log(last);
-	let start = true;
-	while (start) {
-		let check = truck_weights[0]; // 다리로 진입할 트럭의 무게
-		countWeight -= br[0]; // 다리위를 통과할 트럭을 전체 무게에서 빼준다
-		// console.log('check : ' + check);
-		// console.log('countWeight : ' + countWeight);
+  // console.log(br);
+  // console.log(last);
+  let start = true;
+  while (start) {
+    let check = truck_weights[0]; // 다리로 진입할 트럭의 무게
+    countWeight -= br[0]; // 다리위를 통과할 트럭을 전체 무게에서 빼준다
+    // console.log('check : ' + check);
+    // console.log('countWeight : ' + countWeight);
 
-		// 다리 진행중 상황
-		if (countWeight + check <= weight) {
-			let unit = truck_weights.shift();
-			br.push(unit);
-			countWeight += unit;
-		} else {
-			br.push(0);
-		}
+    // 다리 진행중 상황
+    if (countWeight + check <= weight) {
+      let unit = truck_weights.shift();
+      br.push(unit);
+      countWeight += unit;
+    } else {
+      br.push(0);
+    }
 
-		sec += 1;
-		br.shift();
-		// console.log(br);
-		// console.log(sec);
+    sec += 1;
+    br.shift();
+    // console.log(br);
+    // console.log(sec);
 
-		let endCheck = br.every((item) => {
-			return item == 0;
-		});
+    let endCheck = br.every((item) => {
+      return item == 0;
+    });
 
-		// 종료시점
-		if (truck_weights.length == 0 && endCheck) {
-			start = false;
-		}
-	}
-	return sec;
+    // 종료시점
+    if (truck_weights.length == 0 && endCheck) {
+      start = false;
+    }
+  }
+  return sec;
 };
 
 // console.log(bridge(2, 10, [7, 4, 5, 6])); //8
@@ -139,44 +139,44 @@ const bridge = (bridge_length, weight, truck_weights) => {
 //! 문제 잘못이해
 
 const print = (priorities, location) => {
-	let result = String(Number(location) + 1);
+  let result = String(Number(location) + 1);
 
-	console.log(result);
-	// 배열 재정의
-	let importantMap = {};
-	for (let unit in priorities) {
-		importantMap[Number(unit) + 1] = priorities[unit];
-	}
-	console.log(importantMap);
+  console.log(result);
+  // 배열 재정의
+  let importantMap = {};
+  for (let unit in priorities) {
+    importantMap[Number(unit) + 1] = priorities[unit];
+  }
+  console.log(importantMap);
 
-	for (let unit in priorities) {
-		priorities[unit] = String(Number(unit) + 1);
-	}
-	console.log(priorities);
+  for (let unit in priorities) {
+    priorities[unit] = String(Number(unit) + 1);
+  }
+  console.log(priorities);
 
-	console.log(importantMap[priorities[2]]);
+  console.log(importantMap[priorities[2]]);
 
-	let start = true;
-	while (start) {
-		let check = importantMap[priorities[0]];
-		let arr = priorities.slice(1);
+  let start = true;
+  while (start) {
+    let check = importantMap[priorities[0]];
+    let arr = priorities.slice(1);
 
-		let end = arr.every((i) => {
-			return check >= importantMap[i];
-		});
+    let end = arr.every((i) => {
+      return check >= importantMap[i];
+    });
 
-		if (end) {
-			start = false;
-		} else {
-			let unit = priorities.shift();
-			priorities.push(unit);
-		}
-	}
+    if (end) {
+      start = false;
+    } else {
+      let unit = priorities.shift();
+      priorities.push(unit);
+    }
+  }
 
-	console.log(importantMap);
-	console.log(priorities);
+  console.log(importantMap);
+  console.log(priorities);
 
-	return priorities.indexOf(result) + 1;
+  return priorities.indexOf(result) + 1;
 };
 
 // console.log(print([2, 1, 3, 2], 2));
@@ -191,36 +191,36 @@ const print = (priorities, location) => {
 //! 문제 잘못이해
 
 const print2 = (priorities, location) => {
-	let resultMap = [];
+  let resultMap = [];
 
-	for (let unit in priorities) {
-		resultMap.push(unit);
-	}
-	// console.log(resultMap);
+  for (let unit in priorities) {
+    resultMap.push(unit);
+  }
+  // console.log(resultMap);
 
-	let start = true;
-	while (start) {
-		let check = priorities[0];
-		let arr = priorities.slice(1);
+  let start = true;
+  while (start) {
+    let check = priorities[0];
+    let arr = priorities.slice(1);
 
-		let end = arr.every((i) => {
-			return check >= i;
-		});
+    let end = arr.every((i) => {
+      return check >= i;
+    });
 
-		if (end) {
-			start = false;
-		} else {
-			let unit = priorities.shift();
-			priorities.push(unit);
-			let p = resultMap.shift();
-			resultMap.push(p);
-		}
-	}
+    if (end) {
+      start = false;
+    } else {
+      let unit = priorities.shift();
+      priorities.push(unit);
+      let p = resultMap.shift();
+      resultMap.push(p);
+    }
+  }
 
-	// console.log(priorities);
-	// console.log(resultMap);
+  // console.log(priorities);
+  // console.log(resultMap);
 
-	return resultMap.indexOf(String(location)) + 1;
+  return resultMap.indexOf(String(location)) + 1;
 };
 
 // console.log(print2([2, 1, 3, 2], 2));
@@ -233,48 +233,48 @@ const print2 = (priorities, location) => {
 // 프린터 될 순서의 문서가 대기 문서의 중요도 보다 낮으면 대기열 맨 뒤로 이동
 
 const print3 = (priorities, location) => {
-	let result = String(Number(location) + 1);
-	// 배열 재정의
-	let importantMap = {};
-	for (let unit in priorities) {
-		importantMap[Number(unit) + 1] = priorities[unit];
-	}
-	// console.log(importantMap);
+  let result = String(Number(location) + 1);
+  // 배열 재정의
+  let importantMap = {};
+  for (let unit in priorities) {
+    importantMap[Number(unit) + 1] = priorities[unit];
+  }
+  // console.log(importantMap);
 
-	for (let unit in priorities) {
-		priorities[unit] = String(Number(unit) + 1);
-	}
-	// console.log(priorities);
+  for (let unit in priorities) {
+    priorities[unit] = String(Number(unit) + 1);
+  }
+  // console.log(priorities);
 
-	let start = true;
-	let resultMap = [];
-	while (start) {
-		let check = importantMap[priorities[0]];
-		let arr = priorities.slice(1);
+  let start = true;
+  let resultMap = [];
+  while (start) {
+    let check = importantMap[priorities[0]];
+    let arr = priorities.slice(1);
 
-		// 종료시점
-		let end = arr.every((i) => {
-			return check >= importantMap[i];
-		});
+    // 종료시점
+    let end = arr.every((i) => {
+      return check >= importantMap[i];
+    });
 
-		if (end) {
-			if (priorities.length == 0) {
-				start = false;
-			} else {
-				let unit = priorities.shift();
-				resultMap.push(unit);
-			}
-		} else {
-			let unit = priorities.shift();
-			priorities.push(unit);
-		}
-	}
+    if (end) {
+      if (priorities.length == 0) {
+        start = false;
+      } else {
+        let unit = priorities.shift();
+        resultMap.push(unit);
+      }
+    } else {
+      let unit = priorities.shift();
+      priorities.push(unit);
+    }
+  }
 
-	// console.log(importantMap);
-	// console.log(priorities);
-	// console.log(result);
+  // console.log(importantMap);
+  // console.log(priorities);
+  // console.log(result);
 
-	return resultMap.indexOf(result) + 1;
+  return resultMap.indexOf(result) + 1;
 };
 
 // console.log(print3([2, 1, 3, 2], 2));
@@ -293,26 +293,26 @@ const print3 = (priorities, location) => {
 // [4,3,1,1,0]
 
 const price = (arr) => {
-	let result = [];
-	for (let unit in arr) {
-		let compareList = arr.slice(Number(unit) + 1);
-		let i = 0;
-		// 마지막날
-		if (Number(unit) === arr.length - 1) {
-			result.push(0);
-		} else {
-			while (arr[unit] <= compareList[i]) {
-				i++;
-				console.log(i);
-			}
-			if (i == 0) {
-				result.push(1);
-			} else {
-				result.push(i);
-			}
-		}
-	}
-	return result;
+  let result = [];
+  for (let unit in arr) {
+    let compareList = arr.slice(Number(unit) + 1);
+    let i = 0;
+    // 마지막날
+    if (Number(unit) === arr.length - 1) {
+      result.push(0);
+    } else {
+      while (arr[unit] <= compareList[i]) {
+        i++;
+        console.log(i);
+      }
+      if (i == 0) {
+        result.push(1);
+      } else {
+        result.push(i);
+      }
+    }
+  }
+  return result;
 };
 
 console.log(price([1, 2, 3, 2, 3])); // [4,3,1,1,0]
