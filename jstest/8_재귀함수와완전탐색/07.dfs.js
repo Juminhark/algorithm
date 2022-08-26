@@ -25,7 +25,7 @@ const solution = (s, scores, times) => {
 
 let ps = [10, 25, 15, 6, 7]; // 점수
 let pt = [5, 12, 8, 3, 4]; // 시간
-// console.log(solution(20, ps, pt)); //
+// console.log(solution(20, ps, pt)); // 41
 
 //? 영상 풀이
 const solution2 = (m, scores, times) => {
@@ -46,4 +46,4 @@ const solution2 = (m, scores, times) => {
 
   return answer;
 };
-console.log(solution2(20, ps, pt)); //
+console.log(solution2(20, ps, pt)); // 41
