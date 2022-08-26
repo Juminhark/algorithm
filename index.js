@@ -1,120 +1,32 @@
-// //? 문제 : 마구간 정하기(결정 알고리즘)
+//? 문제 : 재귀함수
 
-// // N개의 마구간은 x1, x2,..., xN의 좌표를 가지며, 좌표가 중복되지 않는다
-// // 가장 가까운 두말의 거리가 최대가 되도록 C마리의 말을 각 마구간에 넣을 때
-// // 가장 가까운 두말의 거리를 출력
+// 자연수 N이 입력되면 재귀함수를 이용하여 1부터 N까지 출력
 
-// //* 1,2,4,8,9로 정렬되고
-// //* 두말사이 거리는 lt = 1, rt =9 보다 작다
-// //* mid = Math.floor((1+9) /2) = 5 : 두말사이의 최소거리로 추정해놓고
-// //* arr[0] = 1에 첫번째 말이 들어가 있을 때
-// //* arr[1] = 2, arr[2] = 4 : 최소거리 불만족
-// //* arr[3] = 8에 두번째 말이 들어가나
-// //* arr[4] = 9에 세번째 말이 들어갈수없으므로
-// //* rt = mid - 1 = 5 - 1  = 4
-// //* mid = Math.floor((1 + 4)/2) = 2
+const solution = (n) => {
+  const DFS = (L) => {
+    if (L === 0) return;
+    else {
+      console.log(L);
+      DFS(L - 1);
+    }
+  };
 
-// const solution = (c, arr) => {
-//   let answer, mid, ep, count;
-//   let lt = arr[1] - arr[0];
-//   let rt = arr[arr.length - 1] - arr[0];
-
-//   arr.sort((a, b) => a - b);
-
-//   while (lt <= rt) {
-//     count = 1;
-//     ep = arr[0];
-//     mid = Math.floor((lt + rt) / 2);
-
-//     for (let x of arr) {
-//       if (arr[x] - ep >= mid) {
-//         count++;
-//         ep = arr[x];
-//       }
-//     }
-
-//     //* +1 ,-1 을 하는 의미 여기가 햇갈린 포인트
-//     if (count >= c) lt = mid + 1;
-//     else rt = mid - 1;
-
-//     answer = mid;
-//   }
-
-//   return answer;
-// };
-
-// let arr = [1, 2, 8, 4, 9];
-// console.log(solution(3, arr)); // 3
-
-// const count = (stable, dist) => {
-//   let cnt = 1,
-//     ep = stable[0];
-//   for (let i = 1; i < stable.length; i++) {
-//     if (stable[i] - ep >= dist) {
-//       cnt++;
-//       ep = stable[i];
-//     }
-//   }
-
-//   return cnt;
-// };
-
-// const solution2 = (c, stable) => {
-//   let answer;
-//   stable.sort((a, b) => a - b);
-//   let lt = 1;
-//   let rt = stable[stable.length - 1];
-
-//   while (lt <= rt) {
-//     let mid = Math.floor((lt + rt) / 2);
-//     if (count(stable, mid) >= c) {
-//       answer = mid;
-//       lt = mid + 1;
-//     } else rt = mid - 1;
-//   }
-
-//   return answer;
-// };
-
-// arr = [1, 2, 8, 4, 9];
-// console.log(solution2(3, arr)); // 3
-
-//? 문제 : 랜선 자르기
-
-//? K개의 랜선이 있다
-//? 랜선을 동일한 길이로 잘라 총 N개 이상의 랜선을 만들어야 하는 문제
-//? 300cm 랜선에서 140cm 랜선 두개를 자르면 나머지 20cm 랜선은 버린다.
-//? 조건을 만적하는 최대 랜선 길이는?
-
-const count = (arr, mid) => {
-  let count = 0;
-
-  for (let x of arr) {
-    count += Math.floor(x / mid);
-  }
-
-  return count;
+  DFS(n);
 };
 
-const solution = (n, arr) => {
-  let answer;
+solution(3);
 
-  arr.sort((a, b) => a - b);
+//? 아래는 거꾸로 출력됨 => function stack에 의해 실행순서가 바뀐다
+const solution2 = (n) => {
+  const DFS = (L) => {
+    if (L === 0) return;
+    else {
+      DFS(L - 1);
+      console.log(L);
+    }
+  };
 
-  let lt = 1;
-  let rt = arr[arr.length - 1];
-
-  while (lt <= rt) {
-    let mid = Math.floor((lt + rt) / 2);
-
-    if (count(arr, mid) >= n) {
-      answer = mid;
-      lt = mid + 1;
-    } else rt = mid - 1;
-  }
-
-  return answer;
+  DFS(n);
 };
 
-let arr = [802, 743, 457, 539];
-console.log(solution(11, arr));
+solution2(3);

@@ -84,6 +84,28 @@ console.log(insertion_sort(arr));
 - target값이 mid값과 비교하여
 - target값이 크면 left = mid + 1, 작으면 right = mid - 1;
 
+```js
+const solution = (c, arr) => {
+  let answer;
+
+  arr.sort((a, b) => a - b);
+
+  let left = arr[0];
+  let right = arr.reduce((a, b) => a + b, 0);
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (count(arr, mid) <= c) {
+      answer = mid;
+      right = mid - 1;
+    } else left = mid + 1;
+  }
+
+  return answer;
+};
+```
+
 ## 두 값을 바꾸는 방법 : 구조 분해 할당
 
 ```js

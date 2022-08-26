@@ -4,10 +4,25 @@
 
 - 시간복잡도 : O(logN)
 
+## 풀이 핵심
+
+- 입력조건 범위에 0 ~ 10억 이면 이분탐색일 가능성이 매우 높다
+- 구하려는 값이 무엇인가?
+- target값과 mid값 을 비교 하여 left = mid +1, right = mid -1 으로 하는 조건
+
 ## 햇갈리는점
 
 - 1. lt, rt 값을 어떻게 정할것인가?
+- - 구하고자하는 값의 최소 값 : lt , 최대값 : rt
 - 2. target값과 mid값을 비교하여 left, right에 mid값을 어떻게 반영할것인가?
+- - target이 mid값보다 크면 left = mid + 1
+- - target이 mid값보다 작으면 right = mid - 1
+
+## [01.백준 1654](https://www.acmicpc.net/problem/1654)
+
+## [02.백준 2343](https://www.acmicpc.net/problem/2343)
+
+## [03.백준 2110](https://www.acmicpc.net/problem/2110)
 
 ## Reference
 
