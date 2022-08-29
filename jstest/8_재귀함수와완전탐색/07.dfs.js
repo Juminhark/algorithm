@@ -4,17 +4,19 @@
 //? 제한시간 M안에 얻을수 있는 최대점수를 출력
 
 //! 내 풀이
-const solution = (s, scores, times) => {
-  let answer = 0;
-  let n = scores.length;
+const solution = (n, scores, times) => {
+  let answer = Number.MIN_SAFE_INTEGER;
+  const len = scores.length;
 
-  const DFS = (v, sumS, sumT) => {
-    if (sumT > s) return;
-    if (v === n) {
-      answer = Math.max(answer, sumS);
+  const DFS = (i, score, time) => {
+    if (time > n) return;
+
+    if (i === len) {
+      answer = Math.max(answer, score);
     } else {
-      DFS(v + 1, sumS + scores[v], sumT + times[v]);
-      DFS(v + 1, sumS, sumT);
+      // 풀었나 안풀었나 분기점
+      DFS(i + 1, score + scores[i], time + times[i]);
+      DFS(i + 1, score, time);
     }
   };
 
@@ -25,7 +27,7 @@ const solution = (s, scores, times) => {
 
 let ps = [10, 25, 15, 6, 7]; // 점수
 let pt = [5, 12, 8, 3, 4]; // 시간
-// console.log(solution(20, ps, pt)); // 41
+console.log(solution(20, ps, pt)); // 41
 
 //? 영상 풀이
 const solution2 = (m, scores, times) => {
@@ -46,4 +48,4 @@ const solution2 = (m, scores, times) => {
 
   return answer;
 };
-console.log(solution2(20, ps, pt)); // 41
+// console.log(solution2(20, ps, pt)); // 41
