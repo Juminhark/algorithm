@@ -526,42 +526,6 @@ re.test(t); // false
 
 - [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
 
-## baekjoon에서 node 사용
-
-```js
-// fs 모듈을 이용해 제출
-
-// 한줄로 입력
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().split(' ');
-
-let num = Number(input);
-
-for (let i = 1; i <= num; i++) {
-  consle.log(i);
-}
-
-//여러 줄 입력
-
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().split('\n');
-
-let count = input[0];
-let numbers = [];
-
-for (let i = 1; i < input.length; i++) {
-  if (input[i] !== '') {
-    numbers.push(input[i].split(' '));
-  }
-}
-
-for (let i = 0; i < numbers.length; i++) {
-  let num1 = Number(numbers[i][0]);
-  let num2 = Number(numbers[i][1]);
-
-  console.log(num1 + num2);
-}
-```
 
 ## Reference
 
