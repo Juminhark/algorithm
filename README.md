@@ -562,3 +562,7 @@ for (let i = 0; i < numbers.length; i++) {
   console.log(num1 + num2);
 }
 ```
+
+## Reference
+
+- [검색 알고리즘 기초개념 - 노마드코더](https://www.youtube.com/watch?v=WjIlVlmmNqs)

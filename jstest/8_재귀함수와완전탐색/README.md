@@ -28,9 +28,7 @@ const DFS = (L) => {
 };
 ```
 
-## [04. 부분집합 구하기 (이진트리 DFS)](https://swlock.blogspot.com/2016/03/power-set.html)
-
 ## Rerference
 
-- [tcp school](http://www.tcpschool.com/c/c_memory_stackframe)
-- [부분집합구하기](https://swlock.blogspot.com/2016/03/power-set.html)
+- [stack frame - tcp school](http://www.tcpschool.com/c/c_memory_stackframe)
+- [순열, 조합 공식 - 코딩팩토리](https://coding-factory.tistory.com/606)
