@@ -1,6 +1,6 @@
 'use strict';
 
-//? ODD or EVEN
+//? 문제 : ODD or EVEN
 
 //? 각자리수를 더한 값이 홀수이면 ODD 짝수이면 EVEN
 
@@ -12,7 +12,7 @@
 //? 7 + 4 + 5 = 16
 //? 16 % 2 = 0
 
-//? solution
+//! 내 풀이
 const sum = (number) => {
 	//? 각자리값을 문자열로써 나누고
 	const sumEach = (number + '')
@@ -26,7 +26,7 @@ const sum = (number) => {
 console.log(sum(56));
 console.log(sum(745));
 
-//? answer 1
+//? 영상풀이 1
 const sumAnswer1 = (number) => {
 	const items = [...(number + '')];
 	const result = items.reduce((total, item) => {
@@ -39,7 +39,7 @@ const sumAnswer1 = (number) => {
 console.log(sumAnswer1(56));
 console.log(sumAnswer1(745));
 
-//? answer 2
+//? 영상풀이 2
 const sumAnswer2 = (number) =>
 	[...number.toString()].reduce((total, item) => total + Number(item), 0) %
 		2 ===
@@ -50,11 +50,11 @@ const sumAnswer2 = (number) =>
 console.log(sumAnswer2(56));
 console.log(sumAnswer2(745));
 
-// Number To String
-// .toString()
-// + ''
+//* Number To String
+//* .toString()
+//* + ''
 
-// String To Number
-// parseInt - for integer
-// parseFloat - for decimals
-// Number - returns NaN if not a number
+//* String To Number
+//* parseInt - for integer
+//* parseFloat - for decimals
+//* Number(value) - returns NaN if not a number
