@@ -76,7 +76,35 @@ console.log(insertion_sort(arr));
 
 ## 탐욕(Greedy algorithm)
 
-## 결정
+## 결정(Decision) - 이분탐색(Binary Search)
+
+- 정렬되어 있는 배열이 필요
+- left, right, mid
+- mid = Math.floor((lt + rt) /2)
+- target값이 mid값과 비교하여
+- target값이 크면 left = mid + 1, 작으면 right = mid - 1;
+
+```js
+const solution = (c, arr) => {
+  let answer;
+
+  arr.sort((a, b) => a - b);
+
+  let left = arr[0];
+  let right = arr.reduce((a, b) => a + b, 0);
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (count(arr, mid) <= c) {
+      answer = mid;
+      right = mid - 1;
+    } else left = mid + 1;
+  }
+
+  return answer;
+};
+```
 
 ## 두 값을 바꾸는 방법 : 구조 분해 할당
 
@@ -106,7 +134,12 @@ console.log(arr); // [ 1, 2, 3, 4, 5 ]
 // 왜 ^를 거듭제곱으로 알고있었지?
 ```
 
+## Array.slice()
+
+- 배열안에 원시형값만 있으면 깊은복사, 참조형이 있으면 반환된 복사본은 원본배열과 동일한 객체를 참조.
+
 # Reference
 
 - [Bitwise XOR](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_XOR)
 - [XOR 비트연산](https://ko.khanacademy.org/computing/computer-science/cryptography/ciphers/a/xor-bitwise-operation)
+- [갚은 복사 vs 얕은 복사](https://zzang9ha.tistory.com/372)
