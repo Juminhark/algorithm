@@ -60,3 +60,12 @@ arr = [3, 6, 9];
 console.log(solution2(2, arr));
 
 //* 순열과 조합은 방법을 외워야 한다!
+
+const solution3 = (n, m, arr) => {
+  let answer;
+  let ch = Array.from({ length: n }, 0);
+
+  console.log(ch);
+};
+
+console.log(solution3(3, 2, arr));

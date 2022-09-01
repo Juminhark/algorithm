@@ -349,53 +349,6 @@ console.log(!isNaN('#')); // false
 // 5. 문자열을 포함하면서 덧셈이 아닌 계산식 ("가" / 3)
 ```
 
-### Array.function()
-
-- arr.push() : 뒤에 넣기
-- arr.pop() : 뒤에 빼기
-- arr.shift() : 앞에 넣기
-
-- [arr.slice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) : 복사본 반환
-- [arr.splice()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) : 배열 요소 삭제, 교체, 새 요소 추가
-- [arr.find()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
-- [arr.filter()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) : callback 후 새로운 배열 생성
-- [arr.reduce()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) : 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
-- [arr.sort()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-- [arr.includes()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
-- [arr.forEach()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-
-```sh
-// - 오름차순
-answerMap.sort(function (a, b) {
-  return a - b;
-}
-
-- 내림차순
-answerMap.sort(function (a, b) {
-  return b - a;
-}
-```
-
-- [arr.reduce()]()
-
-- forEach, map
-- Queue
-
-- for...in
-
-```ts
-const object = { a: 1, b: 2, c: 3 };
-
-for (const property in object) {
-  console.log(`${property}: ${object[property]}`);
-}
-
-// expected output:
-// "a: 1"
-// "b: 2"
-// "c: 3"
-```
-
 ### String.function()
 
 - [String.split()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/split) : 문자열 나누기
@@ -520,13 +473,15 @@ re.test(t); // false
 - int: 32비트 정수형
 - long long: 64비트 정수형
 
-## [javascript-challanges-series](https://github.com/john-smilga/javascript-challanges-series/blob/main/challanges/01-return-3-times.js)
+## 조합의 경우수
 
-## Reference
-
-- [beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
-
+- nCr = n! / (n-r)! \* r!
 
 ## Reference
 
 - [검색 알고리즘 기초개념 - 노마드코더](https://www.youtube.com/watch?v=WjIlVlmmNqs)
+
+- [javascript challanges series - john-smilga](https://github.com/john-smilga/javascript-challanges-series/tree/main/challanges)
+
+-
+- [Binary Search Trees - beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
