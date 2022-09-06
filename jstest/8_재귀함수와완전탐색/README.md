@@ -39,7 +39,7 @@ const DFS = (L) => {
 
 ```js
 // n개 중에 m개를 고를 때, 순서가 상관 있으면
-const solution2 = (n, m, arr) => {
+const solution = (n, m, arr) => {
   // arr 에서 고른것을 체크
   let ch = Array.from({ length: n }, () => 0);
 
@@ -68,7 +68,7 @@ const solution2 = (n, m, arr) => {
 };
 
 let arr = [3, 6, 9];
-solution2(3, 2, arr);
+solution(3, 2, arr);
 ```
 
 ## 조합의 성질
@@ -78,6 +78,33 @@ solution2(3, 2, arr);
 - nCr = n-1Cr + n-1Cr-1
 
 ## 조합푸는 방법
+
+- combination
+
+```js
+const solution = (n, k, arr) => {
+  let answer = [];
+
+  const DFS = (L, s, tmp) => {
+    if (L === k) {
+      answer.push(tmp.slice());
+    } else {
+      for (let i = s; i < n; i++) {
+        tmp.push(arr[i]);
+        DFS(L + 1, i + 1, tmp);
+        tmp.pop();
+      }
+    }
+  };
+
+  DFS(0, 0, []);
+
+  return answer;
+};
+
+let arr = [2, 4, 5, 8, 12];
+console.log(solution(5, 3, arr, 6));
+```
 
 ## 이항계수
 
