@@ -53,5 +53,3 @@ const recursion_short = (n) => {
   return n == 1 || n == 2 ? 1 : recursion_short(n - 1) + recursion_short(n - 2);
 };
 // console.log(recursion_short(8)); // 21
-
-//* recursion으로 피보나치를 해결하면

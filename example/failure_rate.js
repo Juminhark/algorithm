@@ -74,7 +74,7 @@ const failure = (N, stages) => {
 console.log(failure(5, [2, 1, 2, 6, 2, 4, 3, 3]));
 console.log(failure(4, [4, 4, 4, 4, 4]));
 
-const failure = (N, stages) => {
+const failure2 = (N, stages) => {
 	let answer = [];
 	let allUser = stages.length;
 	console.log('전체 유저수 : ' + allUser);
