@@ -65,7 +65,11 @@ for (const a of arr) {
 - arr.sort()
 
 ```js
-let arr = [5, 7, 11, 22, 13, 42, 1, 2];
+let arr = [123, 121, 110, 151, 144, 99];
+
+//? callback함수 정의 없으면 문자 기준 정렬
+console.log(arr.sort()); // [ 110, 121, 123, 144, 151, 99 ]
+console.log(arr.sort((a, b) => a - b)); // [ 99, 110, 121, 123, 144, 151 ]
 
 //? 오름차순 : 작은것부터 큰것으로 정렬
 console.log(arr.sort((a, b) => a - b));

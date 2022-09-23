@@ -1,6 +1,6 @@
 //? 문제 : A를 #으로
 
-// 입력된 단어에 포함된 'A'를 모두 '#'으로 바꾸어 출력
+//? 입력된 단어에 포함된 'A'를 모두 '#'으로 바꾸어 출력
 
 //! 내 풀이
 const solution = (str) => {
@@ -39,3 +39,6 @@ console.log(solution3(str));
 //* String.replace()
 // 정규식 표현 : /A/i
 // 모든 문자열을 바꾸고 싶을때 : /A/g
+
+//* String method
+// String.split()
