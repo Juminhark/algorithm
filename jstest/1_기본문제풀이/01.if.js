@@ -1,6 +1,7 @@
 //? 문제 : 세 수 중 최솟값
 
-// 100이하의 자연수 A, B, C를 입력받아 가장 작은 값을 출력
+//? 100이하의 자연수 A, B, C를 입력받아 가장 작은 값을
+//? 정렬을 사용하지 않고 출력
 
 //! 내 풀이
 const solution = (arr) => {
@@ -19,7 +20,6 @@ const solution = (arr) => {
 console.log(solution([6, 5, 11]));
 
 //? 영상 풀이
-
 const solution2 = (a, b, c) => {
   let answer;
 
@@ -32,14 +32,3 @@ const solution2 = (a, b, c) => {
 };
 
 console.log(solution2(6, 5, 11));
-
-//* for in / for of 비교
-let arr = [6, 5, 1, 3, 11];
-
-for (const a in arr) {
-  console.log(typeof a + ' ' + a);
-}
-
-for (const a of arr) {
-  console.log(typeof a + ' ' + a);
-}
