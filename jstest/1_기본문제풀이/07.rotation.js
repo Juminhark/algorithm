@@ -1,18 +1,15 @@
 //? 문제 : 10부제
 
-// 번호의 일의자리 숫자와 날짜 일의 자리가 같으면 운행 금지
-// 일의 자리 숫자, 자동차 번호 끝 두자리가 주어졌을때
-// 위반하는 자동차 대수를 출력
+//? 번호의 일의자리 숫자와 날짜 일의 자리가 같으면 운행 금지
+//? 일의 자리 숫자, 자동차 번호 끝 두자리가 주어졌을때
+//? 위반하는 자동차 대수를 출력
 
 //! 내 풀이
 const solution = (n, arr) => {
   let answer = 0;
 
-  for (const i of arr) {
-    let el = i.toString().split('');
-    if (Number(el[1]) === n) {
-      answer++;
-    }
+  for (let i of arr) {
+    if (i % 10 === n) answer++;
   }
 
   return answer;

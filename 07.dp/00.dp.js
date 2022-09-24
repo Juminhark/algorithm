@@ -89,9 +89,6 @@ console.log(d[50]);
 // 일단 재귀 함수로 비효율적인 완전탐색프로그램을 작성한뒤 작은 문제에서 구한 답이 큰 문제에서
 // 그대로 사용될수 있으면, 코드를 개선하는 방법을 사용할수 있다.
 
-
-
-
 // *  문제 : 효율적인 화폐 구성
 
 // N가지 종류의 화폐중 개수를 최소한으로 이용해서 그 가치의 합이 M원이 되도록 한다.
@@ -253,3 +250,22 @@ const out = (arr) => {
 };
 
 // console.log(out([15, 11, 4, 8, 5, 2, 4]));
+
+//? 문제 : 설탕 배달
+// https://reakwon.tistory.com/126
+//? 3kg, 5kg의 설탕봉지가 있을 때,
+//? 정확히 N kg의 배달 할 수 있는 최소 봉지 수 출력
+//? 정확히 N kg을 만들수 없다면 -1 출력
+
+const solution = (n) => {
+  n;
+  let answer;
+
+  return answer;
+};
+
+console.log(solution(18)); // 4
+// console.log(solution(4)); //-1
+// console.log(solution(6)); // 2
+// console.log(solution(9)); //3
+// console.log(solution(11)); //3
