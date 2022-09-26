@@ -1,20 +1,27 @@
-//? 문제 : 자릿수 더하기
+//? reduce()
 
-//? 자연수 N이 주어지면, N의 각 자릿수를 합을 구해서 출력
-//? N = 123 => 1 + 2 + 3 = 6
+//? 배열의 각 요소에 대해 주어진 reducer 함수를 실행하고,
+//? 하나의 결과값을 반환
 
+const arr = [1, 2, 3, 4];
 
-const solution = (n) => {
-    let answer = 0;
-    while(n > 0) {
-        answer += n % 10
-        n = Math.floor(n / 10)
+const init = 0;
+const sum = arr.reduce((pre, cur) => pre + cur, init);
 
-        console.log(n)
-    }
+console.log(sum); // 10
 
-    return answer
-}
+//? reduce((acc, cur, curIndex, arr) => acc + cur, init)
 
-console.log(solution(123)) // 6
-console.log(solution(987)) // 24
+const items = [
+  { name: 'Bike', price: 100 },
+  { name: 'TV', price: 200 },
+  { name: 'Album', price: 10 },
+  { name: 'Book', price: 5 },
+  { name: 'Phone', price: 500 },
+  { name: 'Computer', price: 1000 },
+  { name: 'Keyboard', price: 25 },
+];
+
+const total = items.reduce((acc, item) => acc + item.price, 0);
+
+console.log(total); // 1840
