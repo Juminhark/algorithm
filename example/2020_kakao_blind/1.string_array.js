@@ -1,3 +1,5 @@
+//? 문제 : 문자열 압축
+
 const solution = (s) => {
 	let answer = 0;
 	let answerMap = Array(s.length).fill('');
