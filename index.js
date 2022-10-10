@@ -1,31 +1,43 @@
-//? 문제 : 겹치는 선분의 길이
+const solution = (polynomial) => {
+    let answer = '';
+    let count = [0,0];
+    let str = polynomial.split(" + ")
 
-//? 빨간색, 초록색, 파란색 선분의 x좌표의 시작과 끝이 주어질 때,
-//? 두개 이상의 선분이 겹치는 부분의 길이를 return
+    str.forEach((e) => {
+        if(e.includes('x')) {
 
-const solution = (lines) => {
-    let answer = 0;
-    let dy = Array.from({length : 200}, () => 0)
+            if(e === 'x'){
+                count[0] += 1
+            } else if(e === '-x') {
+                count[0] += -1
+            } else {
+                let tmp = e.replace('x','')
+                count[0] += Number(tmp)
+            }       
 
-    for(let e of lines) {
-
-        let [start, end] = e.sort()
-        start += 100
-        end += 100
-        
-        while(start < end){
-            dy[start]++
-            start++
+        } else {
+            count[1] += Number(e) 
         }
-    }
-
-    dy.forEach((e) => {
-        if(e > 1) answer++
     })
 
-    // answer = dy.filter(e => e >1 ).length
+    console.log(count)
 
-    return answer
+    if(count[0] === 1){
+        answer += 'x'
+    } else if (count[0] > 1) {
+        answer += count[0]
+        answer += 'x'
+    }
+
+    if(count[0] === 0 && count[1] > 0){
+        answer += count[1]
+    } else if(count[1] > 0){
+        answer += ' + '
+        answer += count[1]
+    }
+    
+    return answer;
 }
 
-console.log(solution([[1, -1], [1, 3], [9, 3]]))
+console.log(solution("x + 7 + -x"))
+// console.log(solution("x + x + x"))
