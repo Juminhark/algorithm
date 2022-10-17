@@ -55,3 +55,81 @@ console.log(
 		2
 	)
 );
+
+
+const solution = (a, b) => {
+    
+    let bb = new Set()
+
+    // 인수 분해
+    for(let i = 2; i < Math.sqrt(b); i++){
+        if( b % i  === 0) {
+            bb.add(i)
+            bb.add( b / i)
+        }
+    }
+    
+    for(let i of bb){
+
+        if( a % i === 0) {
+            bb.delete(i)
+            a = a / i
+        } else {
+            for(let e = 2; e < i; e++){
+                if(i % e === 0) {
+                    bb.delete(i)
+                } 
+            }
+        }
+
+    }
+
+    console.log(bb)
+
+    for(let e of bb) {
+        if(e !== 2 && e !== 5) return 2
+    }
+   
+    
+    return 1;
+}
+
+
+// https://mathbang.net/200
+// https://velog.io/@loocia1910/javascript%EC%97%90%EC%84%9C-%EC%86%8C%EC%88%98Prime-number-%EA%B5%AC%ED%95%98%EA%B8%B0
+
+// 아스키코드
+// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=diceworld&logNo=220175224345
+
+// 인수분해
+
+// https://datalabbit.tistory.com/m/42
+// combination : 조합
+// 순서 상관없는
+// nCk = n! / k! (n - k)!
+
+// permutation : 순열
+// 순서 상관있는
+// nPk = n! / (n - k)!
+
+// factorial
+const factorial = (n) => {
+    if(n > 1) {
+        return BigInt(n) * factorial(n-1)
+    } else {
+        return BigInt(1)
+    }
+}
+console.log(factorial(5, 1))
+
+let arr = [1,2,3]
+
+
+while(arr.length){
+    console.log(arr)
+    arr.shift()
+}
+
+console.log([123].length)
+
+console.log(BigInt(1))
