@@ -1,14 +1,11 @@
-const solution = (numbers, k) => {
-    let count = 0;
-    let len = numbers.length
-    
-    while(k--){
-        count += 3
-        if(count >= len) count -= len
-        console.log(count)
-    }
-    
-    return numbers[count];
+
+//? 소인수분해
+
+
+let dy = {
+    0: 123,
+    1: 1234,
+    2: 1235,
 }
 
-console.log(solution(	[1, 2, 3, 4, 5, 6], 5))
+console.log(dy[2])
