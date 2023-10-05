@@ -5,6 +5,17 @@
 - 2. Space & Time Complexity : 공간, 시간 복잡도
 - 3. Data Structure : 이용하는 자료구조의 종류
 
+## 15일 중급자 도전(https://programmers.co.kr/skill_checks)
+
+- 문자열
+- 구현
+- 정렬
+- 해시
+- 그리디
+- 이분탐색
+- 그래프
+- 큐
+
 ## [Big-O 표기법](https://malonmiming.tistory.com/104)
 
 - Mathematical notation that describes algorithm efficiency : 알고리즘의 효율성을 묘사하는 수학적 표기법

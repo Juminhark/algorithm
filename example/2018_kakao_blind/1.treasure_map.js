@@ -1,3 +1,5 @@
+//? 문제 : 비밀지도
+
 const solution = (n, arr1, arr2) => {
 	let answer = Array(n).fill('');
 
