@@ -5,18 +5,15 @@
 
 //! 내 풀이
 const solution = (n) => {
-  let answer = 0;
+  let answer = Math.floor(n / 12);
 
-  while (n > 0) {
-    n -= 12;
-    answer++;
-  }
-
-  return answer;
+  if (n % 12 > 0) return answer + 1;
+  else return answer;
 };
 
 console.log(solution(25)); // 3
 console.log(solution(178)); // 15
+console.log(solution(24)); // 2
 
 //? 영상 풀이
 const solution2 = (n) => {

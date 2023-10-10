@@ -5,111 +5,10 @@
 - 2. Space & Time Complexity : 공간, 시간 복잡도
 - 3. Data Structure : 이용하는 자료구조의 종류
 
-## 15일 중급자 도전(https://programmers.co.kr/skill_checks)
+## 구성
 
-- 문자열
-- 구현
-- 정렬
-- 해시
-- 그리디
-- 이분탐색
-- 그래프
-- 큐
-
-## [Big-O 표기법](https://malonmiming.tistory.com/104)
-
-- Mathematical notation that describes algorithm efficiency : 알고리즘의 효율성을 묘사하는 수학적 표기법
-- Time & Space complexity : 시간 & 공간 복잡도
-- Describes the growth rate of algorithms : 알고리즘의 성장률(입력 크기가 커짐에 따라 알고리즘의 비용이 증가하는 속도) - 실제 러닝타임의 표시 보다는 data나 user의 증가율에 따른 알고리즘의 성능을 예측하는것.
-
-- 처리속도의 증가율을 고려하기 때문에 상수값을 제외한 가장 큰 차수로 표기.
-
-### O(1) : constant time
-
-```ts
-const one = (arr) => {
-  return arr[0] == 0 ? true : false;
-};
-```
-
-- 입력데이터의 크기와 상관없이 언제나 일정한 시간 소요.
-- 데이터가 증가함에 따라 성능의 차이가 없다.
-
-### O(n) : liner(1차) time
-
-```ts
-const n = (arr) => {
-  for (let unit of arr) {
-    console.log(unit);
-  }
-};
-```
-
-- 입력데이터의 크기와 비례해서 처리 시간이 증가
-
-### O(n^2) : quadratic(2차) time
-
-```ts
-const n = (arr) => {
-  for (let i of arr) {
-    for (let j of arr) {
-      console.log(i + j);
-    }
-  }
-};
-```
-
-### O(nm) : quadratic(2차) time
-
-```ts
-const n = (arr1, arr2) => {
-  for (let i of arr1) {
-    for (let j of arr2) {
-      console.log(i + j);
-    }
-  }
-};
-```
-
-### O(n^3) : polynomial(다항) / cubic(직육면체 - 3차원) time
-
-```ts
-const n = (arr) => {
-  for (let i of arr) {
-    for (let j of arr) {
-      for (let k of arr) {
-        console.log(i + j + k);
-      }
-    }
-  }
-};
-```
-
-### O(2^n) : exponential(지수) time
-
-```ts
-const fibonacci = (n) => {
-  if (n <= 0) return 0;
-  return n == 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
-};
-```
-
-### O(m^n) : exponential(지수) time
-
-### O(log n ) : log time
-
-```ts
-const binarySearch = (k, arr, s, e) => {
-  // 오름차순 배열안에서 찾을 구간의 첫번째 값 s, 마지막 값 e
-  if (s > e) return -1;
-  let m = (s + e) / 2; // 중간 값
-  if (arr[m] == k) return m;
-  else if (arr[m] > k) return binarySearch(k, arr, s, m - 1);
-  else return binarySearch(k, arr, m + 1, e);
-};
-```
-
-### O(sqrt(n)) : square root **time**
+- Big-O
+- dp
 
 ## **exhaustive search (brute-force search) : 완전 탐색**
 
@@ -124,18 +23,10 @@ const binarySearch = (k, arr, s, e) => {
   - BFS(Breadth First Search) : 너비 우선 탐색
   - 최선우선탐색(Best First Search)
 
-## **DP(Dynamic Programming) : 동적 계획법**
-
-- 다이나믹 프로그래밍은 메모리를 적절히 수행 시간을 비약적으로 증가시키는 방법입니다.
-- 다이나믹 프로그래밍의 구현은 일반적으로 두 가지 방식(탑다운, 바텀업)으로 구성됩니다
-- 계산된 결과를 저장하여 같은 계산을 반복하지 않도록 하는것.
-- 2가지를 만족하여야한다
-  - 1. 최적부분구조(Optimal Substructure) : 작은문제의 답을 모아 큰문제를 해결
-  - 2. 중복되는 부분(Overlapping Subproblem) : 동일한 작은 문제 반복
-
 ## Reference
 
 - [검색 알고리즘 기초개념 - 노마드코더](https://www.youtube.com/watch?v=WjIlVlmmNqs)
 - [javascript challanges series - john-smilga](https://github.com/john-smilga/javascript-challanges-series/tree/main/challanges)
 - [Binary Search Trees - beiatrix](https://www.youtube.com/watch?v=6JeuJRqKJrI)
 - [이코테 2021 - 동빈나](https://youtube.com/playlist?list=PLRx0vPvlEmdAghTr5mXQxGpHjWqSz0dgC)
+- [자바스크립트 알고리즘 문제풀이 입문 - 인프런](https://www.inflearn.com/course/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4/dashboard)
