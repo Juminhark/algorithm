@@ -95,6 +95,8 @@ console.log(Math.round(7.54)); // 8
 console.log(Math.sqrt(4)); // 2
 ```
 
+## forEach, map, filter, reduce
+
 ## Reference
 
 - [spread syntax](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Spread_syntax)

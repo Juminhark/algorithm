@@ -5,26 +5,27 @@
 //? 위반하는 자동차 대수를 출력
 
 //! 내 풀이
-const solution = (n, arr) => {
+const solution = (day, arr) => {
   let answer = 0;
 
-  for (let i of arr) {
-    if (i % 10 === n) answer++;
+  for (let e of arr) {
+    let tmp = Number(e.toString().split('')[1]);
+
+    if (tmp === day) answer++;
   }
 
   return answer;
 };
 
-let arr = [25, 33, 11, 47, 53, 17, 33];
-console.log(solution(3, arr)); // 3
-let arr1 = [12, 20, 54, 30, 87, 91, 30];
-console.log(solution(0, arr1)); // 3
+console.log(solution(3, [25, 23, 11, 47, 53, 17, 33]));
+console.log(solution(0, [12, 20, 54, 30, 87, 91, 30]));
 
 //? 영상 풀이
 const solution2 = (arr) => {
   let answer = 0;
 
   for (let x of arr) {
+    //* 일의자리 관한 문제 : 10으로 나눈 나머지
     if (x % 10 === day) answer++;
   }
 
@@ -32,11 +33,3 @@ const solution2 = (arr) => {
 };
 
 console.log(solution2(3, arr));
-
-//* 일의자리 관한 문제 : 10으로 나눈 나머지
-
-//* String.function()
-// String.split()
-
-//* Number.function()
-// Number.toString()
