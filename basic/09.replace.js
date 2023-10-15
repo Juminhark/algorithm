@@ -40,5 +40,4 @@ console.log(solution3(str));
 // 정규식 표현 : /A/i
 // 모든 문자열을 바꾸고 싶을때 : /A/g
 
-//* String method
-// String.split()
+console.log(str.replaceAll('A', '#'));

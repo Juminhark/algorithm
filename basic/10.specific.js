@@ -37,3 +37,5 @@ const solution3 = (s, t) => {
 };
 
 console.log(solution3(str, 'G')); // 2
+
+//* for(let i of 문자열)

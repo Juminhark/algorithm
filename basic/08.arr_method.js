@@ -39,10 +39,11 @@ const solution2 = (arr) => {
       if (sum - (arr[i] + arr[j]) === 100) {
         arr.splice(j, 1); // 뒤에꺼 부터 지우면
         arr.splice(i, 1); // 앞에 지울때 영향 없다
+
+        return answer;
       }
     }
   }
-  return answer;
 };
 
 console.log(solution2(arr));
