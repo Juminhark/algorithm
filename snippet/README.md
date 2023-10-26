@@ -1,3 +1,5 @@
+## Prime number check
+
 ## [중앙 찾기](https://velog.io/@gagaeun/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EC%A4%91%EC%95%99%EA%B0%92-%EA%B5%AC%ED%95%98%EA%B8%B0)
 
 ```js
@@ -32,8 +34,6 @@ console.log(obj); // { '1': 1, '2': 1, '3': 1, '4': 1 }
 ## 진수 변환
 
 `toString()` 과 `paeseInt()` 를 이용해 숫자 진수들을 변환할수 있다
-
-## Prime number check
 
 ## reference
 
