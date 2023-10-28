@@ -1,19 +1,5 @@
 # [programmers 문제](https://school.programmers.co.kr/learn/challenges?order=recent&languages=javascript)
 
-# method
-
-String
-
-- String.slice()
-- String.split()
-- String.substring()
-- String.replace()
-
-Array
-
-- Array.join()
-- Array.reduce()
-
 ```js
 // dopa = "life is limited";
 // Q1: 앞에서 3개의 문자열을 뽑아내라.
