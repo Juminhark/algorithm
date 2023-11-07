@@ -35,6 +35,10 @@ console.log(obj); // { '1': 1, '2': 1, '3': 1, '4': 1 }
 
 `toString()` 과 `paeseInt()` 를 이용해 숫자 진수들을 변환할수 있다
 
+## 문자열 iterale 접근
+
+0.120834.js
+
 ## reference
 
 - [snippet - inpa](https://inpa.tistory.com/category/Snippet/JS%20%EC%8A%A4%EB%8B%88%ED%8E%AB)
